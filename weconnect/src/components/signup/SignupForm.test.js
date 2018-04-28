@@ -4,10 +4,10 @@ import ReactDOM from 'react-dom';
 import SignUpForm from './SignupForm';
 
 describe('Sign up form', () => {
-    let props = null;
-    const mockRegisterUser = jest.fn();
-    const mockInputChange = jest.fn();
-    let mountedSignUpForm;
+    let props = null,
+        mountedSignUpForm;
+    const mockRegisterUser = jest.fn(),
+        mockInputChange = jest.fn();
     const component = () => {
         if (!mountedSignUpForm){
             mountedSignUpForm = mount(
