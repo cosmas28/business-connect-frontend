@@ -6,7 +6,10 @@ import SignUpForm from './SignupForm';
 class SignUpPage extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { 'message': '' };
+        this.state = {
+            'successMessage': '',
+            'errorMessage': ''
+        };
         this.apiUrl = 'https://weconnect-v2.herokuapp.com/api/v2/auth/register';
     }
 
@@ -28,10 +31,11 @@ class SignUpPage extends React.Component {
             'username': this.state.username
         };
         axios.post(this.apiUrl, input).then(response => {
-            if (response.status === 201) {
-                this.setState({ 'message': response.data.message });
-            } else {
-                this.setState({ 'message': response.data.message });
+            this.setState({ 'successMessage': response.data.message });
+            event.target.reset();
+        }).catch((error) => {
+            if (error.response) {
+                this.setState({ 'errorMessage': error.response.data.message });
             }
         });
     };
@@ -45,7 +49,8 @@ class SignUpPage extends React.Component {
                         <SignUpForm
                             handleInputChange={this.handleInputChange}
                             handleSubmitForm={this.newUserSubmitHandler}
-                            outPutMessage={this.state.message}
+                            outPutSuccessMessage={this.state.successMessage}
+                            outPutErrorMessage={this.state.errorMessage}
                         />
                     </div>
                 </div>

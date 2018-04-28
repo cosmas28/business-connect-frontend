@@ -14,7 +14,8 @@ exports[`Sign up Page renders signup page without crashing 1`] = `
       <SignUpForm
         handleInputChange={[Function]}
         handleSubmitForm={[Function]}
-        outPutMessage=""
+        outPutErrorMessage=""
+        outPutSuccessMessage=""
       />
     </div>
   </div>

@@ -1,0 +1,122 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Sign up form renders and matches our snapshot 1`] = `
+<SignUpForm
+  handleInputChange={[MockFunction]}
+  handleSubmitForm={[MockFunction]}
+  outPutSuccessMessage={null}
+>
+  <div
+    className="col-md-6 col-sm-12 col-xs-12 offset-md-2"
+  >
+    <h2>
+      Sign up to register a business
+    </h2>
+    <form
+      onSubmit={[MockFunction]}
+    >
+      <div
+        className="row"
+      >
+        <div
+          className="col"
+        >
+          <input
+            className="test input-default form-text-input"
+            name="email"
+            onChange={[MockFunction]}
+            placeholder="Email Address"
+            required={true}
+            type="email"
+          />
+        </div>
+        <div
+          className="col"
+        >
+          <input
+            className="input-default form-text-input"
+            name="username"
+            onChange={[MockFunction]}
+            placeholder="Username"
+            required={true}
+            type="text"
+          />
+        </div>
+      </div>
+      <hr />
+      <div
+        className="row"
+      >
+        <div
+          className="col"
+        >
+          <input
+            className="input-default form-text-input"
+            name="first_name"
+            onChange={[MockFunction]}
+            placeholder="First name"
+            required={true}
+            type="text"
+          />
+        </div>
+        <div
+          className="col"
+        >
+          <input
+            className="input-default form-text-input"
+            name="last_name"
+            onChange={[MockFunction]}
+            placeholder="Last name"
+            required={true}
+            type="text"
+          />
+        </div>
+      </div>
+      <hr />
+      <div
+        className="form-input-division"
+      >
+        <input
+          className="input-default form-text-input"
+          name="password"
+          onChange={[MockFunction]}
+          placeholder="Password"
+          required={true}
+          type="password"
+        />
+      </div>
+      <div
+        className="form-input-division"
+      >
+        <input
+          className="input-default form-text-input"
+          name="confirm_password"
+          onChange={[MockFunction]}
+          placeholder="Confirm password"
+          required={true}
+          type="password"
+        />
+      </div>
+      <div
+        className="form-input-division"
+      >
+        <button
+          className="btn btn-primary input-default form-btn"
+          type="submit"
+        >
+          Sign Up
+        </button>
+      </div>
+      <div
+        className="form-input-division"
+      >
+        <a
+          href=""
+        >
+          You have an account?
+        </a>
+      </div>
+    </form>
+  </div>
+</SignUpForm>
+`;
