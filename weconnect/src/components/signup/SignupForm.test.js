@@ -4,34 +4,66 @@ import ReactDOM from 'react-dom';
 import SignUpForm from './SignupForm';
 
 describe('Sign up form', () => {
+    let props = null;
     const mockRegisterUser = jest.fn();
     const mockInputChange = jest.fn();
-    const component = shallow(
-        <SignUpForm
-            handleInputChange={mockInputChange}
-            handleSubmitForm={mockRegisterUser}
-            outPutMessage="result message"
-        />),
-        userInfo = {
-            'confirm_password': 'andela2018',
-            'email': 'cosmas@andela.com',
-            'first_name': 'augustino',
-            'last_name': 'billa',
-            'password': 'andela2018',
-            'username': 'cosmas'
+    let mountedSignUpForm;
+    const component = () => {
+        if (!mountedSignUpForm){
+            mountedSignUpForm = mount(
+                <SignUpForm {...props} />
+            );
+        }
+        return mountedSignUpForm;
+    };
+
+    beforeEach(() => {
+        props = {
+            handleInputChange: mockRegisterUser,
+            handleSubmitForm: mockInputChange,
+            outPutMessage: null
         };
+        mountedSignUpForm = undefined;
+    });
 
     it('renders and matches our snapshot', () => {
-        expect(component).toMatchSnapshot();
+        expect(component()).toMatchSnapshot();
     });
 
     it('contains the form', () => {
-        expect(component.find('input')).toHaveLength(6);
-        expect(component.find('button')).toHaveLength(1);
+        expect(component().find('input')).toHaveLength(6);
+        expect(component().find('button')).toHaveLength(1);
     });
 
-    it('should call registerUser when submit button is called', () => {
-        component.find('form').simulate('submit', { preventDefault: () => {} });
-        expect(mockRegisterUser).toBeCalled();
+    it('should call `handleSubmitForm` when submit button is called', () => {
+        component().find('form').simulate('submit');
+        expect(props.handleSubmitForm).toBeCalled();
+    });
+
+    it('should call `handleInputChange` when input field is changed', () => {
+        component().find('input.test').simulate('change');
+        expect(props.handleSubmitForm).toBeCalled();
+    });
+
+    describe('when `outPutMessage` is passed', () => {
+        beforeEach(() => {
+            props.outPutMessage = 'You have successfully created account!';
+        });
+
+        it('renders a `Alert box`', () => {
+            const alertDiv = component().find('div.alert');
+            expect(alertDiv.length).toBe(1);
+        });
+    });
+
+    describe('when `outPutMessage` is null', () => {
+        beforeEach(() => {
+            props.outPutMessage = null;
+        });
+
+        it('renders a `Alert box`', () => {
+            const alertDiv = component().find('div.alert');
+            expect(alertDiv.length).toBe(0);
+        });
     });
 });
