@@ -1,0 +1,114 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Sign up form renders and matches our snapshot 1`] = `
+<div
+  className="col-md-6 col-sm-12 col-xs-12 offset-md-2"
+>
+  <h2>
+    Sign up to register a business
+  </h2>
+  <article
+    className="alert alert-success"
+    role="alert"
+  />
+  <form
+    onSubmit={[Function]}
+  >
+    <div
+      className="row"
+    >
+      <div
+        className="col"
+      >
+        <input
+          className="input-default form-text-input"
+          onChange={[Function]}
+          placeholder="Email Address"
+          type="email"
+          value=""
+        />
+      </div>
+      <div
+        className="col"
+      >
+        <input
+          className="input-default form-text-input"
+          onChange={[Function]}
+          placeholder="Username"
+          type="text"
+          value=""
+        />
+      </div>
+    </div>
+    <hr />
+    <div
+      className="row"
+    >
+      <div
+        className="col"
+      >
+        <input
+          className="input-default form-text-input"
+          onChange={[Function]}
+          placeholder="First name"
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        className="col"
+      >
+        <input
+          className="input-default form-text-input"
+          onChange={[Function]}
+          placeholder="Last name"
+          type="text"
+          value=""
+        />
+      </div>
+    </div>
+    <hr />
+    <div
+      className="form-input-division"
+    >
+      <input
+        className="input-default form-text-input"
+        onChange={[Function]}
+        placeholder="Password"
+        type="password"
+        value=""
+      />
+    </div>
+    <div
+      className="form-input-division"
+    >
+      <input
+        className="input-default form-text-input"
+        onChange={[Function]}
+        placeholder="Confirm password"
+        type="password"
+        value=""
+      />
+    </div>
+    <div
+      className="form-input-division"
+    >
+      <button
+        className="btn btn-primary input-default form-btn"
+        type="submit"
+      >
+        Sign Up
+      </button>
+    </div>
+    <div
+      className="form-input-division"
+    >
+      <a
+        href=""
+      >
+        You have an account?
+      </a>
+    </div>
+  </form>
+</div>
+`;
