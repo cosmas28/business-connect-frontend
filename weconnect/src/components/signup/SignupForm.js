@@ -3,9 +3,16 @@ import PropTypes from 'prop-types';
 
 const SignUpForm = props => {
     let responseMessage = null;
-    if (props.outPutMessage) {
+    if (props.outPutSuccessMessage) {
         responseMessage = <div className="alert alert-success" role="alert">
-            {props.outPutMessage}
+            {props.outPutSuccessMessage}
+        </div>;
+    } else if (props.outPutErrorMessage) {
+        responseMessage = <div className="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Error</strong> {props.outPutErrorMessage}
+            <button type="button" className="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
         </div>;
     } else {
         responseMessage = null;
@@ -20,9 +27,10 @@ const SignUpForm = props => {
                     <div className="col">
                         <input type="email"
                                name="email"
-                               className="input-default form-text-input"
+                               className="test input-default form-text-input"
                                placeholder="Email Address"
                                onChange={props.handleInputChange}
+                               required
                         />
                     </div>
                     <div className="col">
@@ -31,6 +39,7 @@ const SignUpForm = props => {
                                placeholder="Username"
                                name="username"
                                onChange={props.handleInputChange}
+                               required
                         />
                     </div>
                 </div>
@@ -42,6 +51,7 @@ const SignUpForm = props => {
                                placeholder="First name"
                                name="first_name"
                                onChange={props.handleInputChange}
+                               required
                         />
                     </div>
                     <div className="col">
@@ -50,6 +60,7 @@ const SignUpForm = props => {
                                placeholder="Last name"
                                name="last_name"
                                onChange={props.handleInputChange}
+                               required
                         />
                     </div>
                 </div>
@@ -60,6 +71,7 @@ const SignUpForm = props => {
                            placeholder="Password"
                            name="password"
                            onChange={props.handleInputChange}
+                           required
                     />
                 </div>
                 <div className="form-input-division">
@@ -68,6 +80,7 @@ const SignUpForm = props => {
                            placeholder="Confirm password"
                            name="confirm_password"
                            onChange={props.handleInputChange}
+                           required
                     />
                 </div>
                 <div className="form-input-division">
@@ -84,7 +97,8 @@ const SignUpForm = props => {
 SignUpForm.propTypes = {
     'handleInputChange': PropTypes.func.isRequired,
     'handleSubmitForm': PropTypes.func.isRequired,
-    'outPutMessage': PropTypes.string.isRequired
+    'outPutErrorMessage': PropTypes.string,
+    'outPutSuccessMessage': PropTypes.string
 };
 
 export default SignUpForm;
