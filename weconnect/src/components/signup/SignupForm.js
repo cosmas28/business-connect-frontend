@@ -2,12 +2,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const SignUpForm = props => {
+    let responseMessage = null;
+    if (props.outPutMessage) {
+        responseMessage = <div className="alert alert-success" role="alert">
+            {props.outPutMessage}
+        </div>;
+    } else {
+        responseMessage = null;
+    }
+
     return (
         <div className="col-md-6 col-sm-12 col-xs-12 offset-md-2">
             <h2>Sign up to register a business</h2>
-            <article className="alert alert-success" role="alert">
-                {props.outPutMessage}
-            </article>
+            {responseMessage}
             <form onSubmit={props.handleSubmitForm}>
                 <div className="row">
                     <div className="col">
