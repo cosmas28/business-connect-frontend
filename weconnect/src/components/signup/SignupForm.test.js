@@ -5,9 +5,13 @@ import SignUpForm from './SignupForm';
 
 describe('Sign up form', () => {
     const mockRegisterUser = jest.fn();
+    const mockInputChange = jest.fn();
     const component = shallow(
-        <SignUpForm registerUser={mockRegisterUser} />
-    ),
+        <SignUpForm
+            handleInputChange={mockInputChange}
+            handleSubmitForm={mockRegisterUser}
+            outPutMessage="result message"
+        />),
         userInfo = {
             'confirm_password': 'andela2018',
             'email': 'cosmas@andela.com',
@@ -27,12 +31,6 @@ describe('Sign up form', () => {
     });
 
     it('should call registerUser when submit button is called', () => {
-        component.find('form').simulate('submit', { preventDefault: () => {} });
-        expect(mockRegisterUser).toBeCalled();
-    });
-
-    it('should register call registerUser based on the value in the state', () => {
-        component.setState({ userInfo });
         component.find('form').simulate('submit', { preventDefault: () => {} });
         expect(mockRegisterUser).toBeCalled();
     });
