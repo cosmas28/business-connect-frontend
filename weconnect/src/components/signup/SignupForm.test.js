@@ -21,7 +21,7 @@ describe('Sign up form', () => {
         props = {
             handleInputChange: mockRegisterUser,
             handleSubmitForm: mockInputChange,
-            outPutMessage: null
+            outPutSuccessMessage: null
         };
         mountedSignUpForm = undefined;
     });
@@ -47,7 +47,7 @@ describe('Sign up form', () => {
 
     describe('when `outPutMessage` is passed', () => {
         beforeEach(() => {
-            props.outPutMessage = 'You have successfully created account!';
+            props.outPutSuccessMessage = 'You have successfully created account!';
         });
 
         it('renders a `Alert box`', () => {
@@ -58,7 +58,7 @@ describe('Sign up form', () => {
 
     describe('when `outPutMessage` is null', () => {
         beforeEach(() => {
-            props.outPutMessage = null;
+            props.outPutSuccessMessage = null;
         });
 
         it('renders a `Alert box`', () => {
