@@ -15,8 +15,8 @@ describe('Sign up Page', () => {
         expect(Object.keys(homeDisplay.props()).length).toBe(0);
     });
 
-    it('rendered `Home` component does not receive any props', () => {
+    it('rendered `SignUpForm` component receive four props', () => {
         const signupFormDisplay = component.find('SignUpForm');
-        expect(Object.keys(signupFormDisplay.props()).length).toBe(3);
+        expect(Object.keys(signupFormDisplay.props()).length).toBe(4);
     });
 });
