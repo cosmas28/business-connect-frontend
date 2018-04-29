@@ -22,10 +22,10 @@ const SignInForm = props => {
             {responseMessage}
             <form onSubmit={props.handleLoginSubmitForm}>
                 <div className="form-input-division">
-                    <input type="text"
-                           name="username"
+                    <input type="email"
+                           name="email"
                            className="input-default form-text-input"
-                           placeholder="Username"
+                           placeholder="Email"
                            onChange={props.handleLoginInputChange}
                            required
                     />
