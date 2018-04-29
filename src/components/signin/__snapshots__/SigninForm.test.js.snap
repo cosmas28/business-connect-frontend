@@ -65,7 +65,7 @@ exports[`Sign in form test renders and matches our snapshot 1`] = `
         className="form-input-division"
       >
         <a
-          href=""
+          href="/"
         >
           You don't have an account? 
         </a>
