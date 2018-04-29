@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Sign in page renders sign in page without crashing 1`] = `
+<main
+  className="main-content"
+>
+  <div
+    className="container"
+  >
+    <div
+      className="row"
+    >
+      <SignInForm />
+    </div>
+  </div>
+</main>
+`;
