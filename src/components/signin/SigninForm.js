@@ -2,9 +2,24 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const SignInForm = props => {
+    let responseMessage = null;
+    if (props.loginSuccessMessage) {
+        responseMessage = <div className="alert alert-success" role="alert">
+            {props.loginSuccessMessage}
+        </div>;
+    } else if (props.loginPutErrorMessage) {
+        responseMessage = <div className="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Error</strong> {props.loginPutErrorMessage}
+            <button type="button" className="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>;
+    }
+
     return (
         <div className="main-login-page">
             <h2>Sign in to your account</h2>
+            {responseMessage}
             <form onSubmit={props.handleLoginSubmitForm}>
                 <div className="form-input-division">
                     <input type="text"
@@ -33,7 +48,7 @@ const SignInForm = props => {
                 </div>
                 <hr />
                     <div className="form-input-division">
-                        <a href="">You don't have an account? </a>
+                        <a href="/">You don't have an account? </a>
                     </div>
             </form>
         </div>
@@ -42,7 +57,9 @@ const SignInForm = props => {
 
 SignInForm.propTypes = {
     'handleLoginInputChange': PropTypes.func.isRequired,
-    'handleLoginSubmitForm': PropTypes.func.isRequired
+    'handleLoginSubmitForm': PropTypes.func.isRequired,
+    'loginPutErrorMessage': PropTypes.string,
+    'loginSuccessMessage': PropTypes.string
 };
 
 export default SignInForm;

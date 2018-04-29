@@ -14,17 +14,17 @@ exports[`Sign in form test renders and matches our snapshot 1`] = `
       Sign in to your account
     </h2>
     <form
-      action="dashboard.html"
-      method="post"
+      onSubmit={[MockFunction]}
     >
       <div
         className="form-input-division"
       >
         <input
           className="input-default form-text-input"
-          id="username"
           name="username"
+          onChange={[MockFunction]}
           placeholder="Username"
+          required={true}
           type="text"
         />
       </div>
@@ -32,10 +32,12 @@ exports[`Sign in form test renders and matches our snapshot 1`] = `
         className="form-input-division"
       >
         <input
-          className="input-default form-text-input"
+          className="test input-default form-text-input"
           id="password"
           name="password"
+          onChange={[MockFunction]}
           placeholder="Password"
+          required={true}
           type="password"
         />
       </div>
@@ -63,7 +65,7 @@ exports[`Sign in form test renders and matches our snapshot 1`] = `
         className="form-input-division"
       >
         <a
-          href="sign-in.html"
+          href=""
         >
           You don't have an account? 
         </a>
