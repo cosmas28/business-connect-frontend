@@ -21,7 +21,8 @@ describe('Sign up form', () => {
         props = {
             handleInputChange: mockRegisterUser,
             handleSubmitForm: mockInputChange,
-            outPutSuccessMessage: null
+            outPutSuccessMessage: null,
+            outPutErrorMessage: null
         };
         mountedSignUpForm = undefined;
     });
@@ -45,25 +46,36 @@ describe('Sign up form', () => {
         expect(props.handleSubmitForm).toBeCalled();
     });
 
-    describe('when `outPutMessage` is passed', () => {
+    describe('when `outPutSuccessMessage` is passed', () => {
         beforeEach(() => {
             props.outPutSuccessMessage = 'You have successfully created account!';
         });
 
-        it('renders a `Alert box`', () => {
-            const alertDiv = component().find('div.alert');
+        it('renders a `Success Alert box`', () => {
+            const alertDiv = component().find('div.alert-success');
             expect(alertDiv.length).toBe(1);
         });
     });
 
-    describe('when `outPutMessage` is null', () => {
+    describe('when `outPutSuccessMessage` is null', () => {
         beforeEach(() => {
             props.outPutSuccessMessage = null;
         });
 
         it('renders a `Alert box`', () => {
-            const alertDiv = component().find('div.alert');
+            const alertDiv = component().find('div.alert-success');
             expect(alertDiv.length).toBe(0);
+        });
+    });
+
+    describe('when `outPutErrorMessage` is passed', () => {
+        beforeEach(() => {
+            props.outPutErrorMessage = 'User already registered. Sign in';
+        });
+
+        it('renders a `Error Alert box`', () => {
+            const alertDiv = component().find('div.alert-danger');
+            expect(alertDiv.length).toBe(1);
         });
     });
 });

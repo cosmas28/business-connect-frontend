@@ -4,6 +4,7 @@ exports[`Sign up form renders and matches our snapshot 1`] = `
 <SignUpForm
   handleInputChange={[MockFunction]}
   handleSubmitForm={[MockFunction]}
+  outPutErrorMessage={null}
   outPutSuccessMessage={null}
 >
   <div
