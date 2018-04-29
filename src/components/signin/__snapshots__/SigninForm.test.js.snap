@@ -1,0 +1,74 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Sign in form test renders and matches our snapshot 1`] = `
+<SignInForm
+  handleLoginInputChange={[MockFunction]}
+  handleLoginSubmitForm={[MockFunction]}
+  loginPutErrorMessage={null}
+  loginSuccessMessage={null}
+>
+  <div
+    className="main-login-page"
+  >
+    <h2>
+      Sign in to your account
+    </h2>
+    <form
+      action="dashboard.html"
+      method="post"
+    >
+      <div
+        className="form-input-division"
+      >
+        <input
+          className="input-default form-text-input"
+          id="username"
+          name="username"
+          placeholder="Username"
+          type="text"
+        />
+      </div>
+      <div
+        className="form-input-division"
+      >
+        <input
+          className="input-default form-text-input"
+          id="password"
+          name="password"
+          placeholder="Password"
+          type="password"
+        />
+      </div>
+      <div
+        className="form-input-division"
+      >
+        <button
+          className="btn btn-primary input-default form-btn"
+          type="submit"
+        >
+          Sign In
+        </button>
+      </div>
+      <div
+        className="form-input-division"
+      >
+        <a
+          href=""
+        >
+          Forgot password?
+        </a>
+      </div>
+      <hr />
+      <div
+        className="form-input-division"
+      >
+        <a
+          href="sign-in.html"
+        >
+          You don't have an account? 
+        </a>
+      </div>
+    </form>
+  </div>
+</SignInForm>
+`;
