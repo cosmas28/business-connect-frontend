@@ -1,5 +1,5 @@
-[![Build Status](https://travis-ci.org/cosmas28/business-connect-frontend.svg?branch=master)](https://travis-ci.org/cosmas28/business-connect-frontend)
-[![Coverage Status](https://coveralls.io/repos/github/cosmas28/business-connect-frontend/badge.svg?branch=master)](https://coveralls.io/github/cosmas28/business-connect-frontend?branch=master)
+[![Build Status](https://travis-ci.org/cosmas28/business-connect-frontend.svg?branch=develop)](https://travis-ci.org/cosmas28/business-connect-frontend)
+[![Coverage Status](https://coveralls.io/repos/github/cosmas28/business-connect-frontend/badge.svg?branch=develop)](https://coveralls.io/github/cosmas28/business-connect-frontend?branch=develop)
 # WeConnect(Front-end)
 WeConnect provides a platform that brings businesses and individuals together.
 This platform creates awareness for businesses and gives the users the ability
