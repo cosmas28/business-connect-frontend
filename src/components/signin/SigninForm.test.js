@@ -45,4 +45,26 @@ describe('Sign in form test', () => {
         expect(props.handleLoginSubmitForm).toBeCalled();
     });
 
+    describe('when `loginSuccessMessage` is passed', () => {
+        beforeEach(() => {
+            props.loginSuccessMessage = 'You logged in successfully!';
+        });
+
+        it('renders a `Success Alert box`', () => {
+            const alertDiv = component().find('div.alert-success');
+            expect(alertDiv.length).toBe(1);
+        });
+    });
+
+    describe('when `loginPutErrorMessage` is passed', () => {
+        beforeEach(() => {
+            props.loginPutErrorMessage = 'Invalid email or password!';
+        });
+
+        it('renders a `Error Alert box`', () => {
+            const alertDiv = component().find('div.alert-danger');
+            expect(alertDiv.length).toBe(1);
+        });
+    });
+
 });
