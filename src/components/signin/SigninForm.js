@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 const SignInForm = props => {
     let responseMessage = null;
@@ -44,11 +45,11 @@ const SignInForm = props => {
                     <button type="submit" className="btn btn-primary input-default form-btn">Sign In</button>
                 </div>
                 <div className="form-input-division">
-                    <a href="">Forgot password?</a>
+                    <Link className="nav-link" to="/reset">Forgot password?</Link>
                 </div>
                 <hr />
                     <div className="form-input-division">
-                        <a href="/">You don't have an account? </a>
+                        <Link className="nav-link" to="/">You don't have an account?</Link>
                     </div>
             </form>
         </div>
