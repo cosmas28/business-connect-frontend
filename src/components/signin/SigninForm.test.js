@@ -29,4 +29,20 @@ describe('Sign in form test', () => {
     it('renders and matches our snapshot', () => {
         expect(component()).toMatchSnapshot();
     });
+
+    it('contains the form', () => {
+        expect(component().find('input')).toHaveLength(2);
+        expect(component().find('button')).toHaveLength(1);
+    });
+
+    it('should call `handleLoginInputChange` when input field is changed', () => {
+        component().find('input.test').simulate('change');
+        expect(props.handleLoginInputChange).toBeCalled();
+    });
+
+    it('should call `handleLoginSubmitForm` when submit button is called', () => {
+        component().find('form').simulate('submit');
+        expect(props.handleLoginSubmitForm).toBeCalled();
+    });
+
 });
