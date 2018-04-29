@@ -10,7 +10,10 @@ exports[`Sign in page renders sign in page without crashing 1`] = `
     <div
       className="row"
     >
-      <SignInForm />
+      <SignInForm
+        handleLoginInputChange={[MockFunction]}
+        handleLoginSubmitForm={[MockFunction]}
+      />
     </div>
   </div>
 </main>
