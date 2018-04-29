@@ -6,4 +6,6 @@ cache:
   - node_modules
 script:
   - npm install
-  - npm test
+  - npm
+after_success:
+  - "coveralls"
