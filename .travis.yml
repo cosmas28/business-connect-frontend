@@ -9,5 +9,6 @@ before_script:
 script:
   - npm install
   - npm test
+  - coveralls
 after_success:
   - "coveralls"
