@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 const SignUpForm = props => {
     let responseMessage = null;
@@ -87,7 +88,7 @@ const SignUpForm = props => {
                     <button type="submit" className="btn btn-primary input-default form-btn">Sign Up</button>
                 </div>
                 <div className="form-input-division">
-                    <a href="">You have an account?</a>
+                    <Link className="nav-link" to="/login">You have an account?</Link>
                 </div>
             </form>
         </div>
