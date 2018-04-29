@@ -2,8 +2,13 @@ import React from 'react';
 import SignInPage from './SigninPage';
 
 describe('Sign in page', () => {
+    const mockHandleSubmitForm = jest.fn(),
+        mockInputChange = jest.fn();
     const component = shallow(
-        <SignInPage />
+        <SignInPage
+            handleLoginInputChange={mockInputChange}
+            handleLoginSubmitForm={mockHandleSubmitForm}
+        />
     );
     it('renders sign in page without crashing', () => {
         expect(component).toMatchSnapshot();
