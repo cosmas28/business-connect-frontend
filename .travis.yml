@@ -10,5 +10,3 @@ script:
   - npm install
   - npm test
   - npm run coveralls
-after_success:
-  - "coveralls"
