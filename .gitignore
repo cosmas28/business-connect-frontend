@@ -9,8 +9,8 @@
 # production
 /build
 
-# production
-/__snapshots__
+# SnapShots files
+__snapshots__
 
 # misc
 .DS_Store
