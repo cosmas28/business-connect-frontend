@@ -40,7 +40,13 @@ const ResetPasswordForm = props => {
                     />
                 </div>
                 <div className="form-input-division">
-                    <input type="password" id="confirm_pwd" name="confirm_pwd" className="input-default form-text-input" placeholder="Confirm password" />
+                    <input type="password"
+                           name="confirm_password"
+                           className="input-default form-text-input"
+                           placeholder="Confirm password"
+                           onChange={props.handleResetPasswordInputChange}
+                           required
+                    />
                 </div>
                 <div className="form-input-division">
                     <button type="submit" className="btn btn-primary input-default form-btn">Reset password</button>
