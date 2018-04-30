@@ -12,7 +12,7 @@ exports[`Sign up form renders and matches our snapshot 1`] = `
         "entries": Array [
           Object {
             "hash": "",
-            "key": "zyehza",
+            "key": "t9fbls",
             "pathname": "/",
             "search": "",
             "state": undefined,
@@ -26,7 +26,7 @@ exports[`Sign up form renders and matches our snapshot 1`] = `
         "listen": [Function],
         "location": Object {
           "hash": "",
-          "key": "zyehza",
+          "key": "t9fbls",
           "pathname": "/",
           "search": "",
           "state": undefined,

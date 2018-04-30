@@ -67,5 +67,4 @@ describe('Sign in form test', () => {
             expect(alertDiv.length).toBe(1);
         });
     });
-
 });
