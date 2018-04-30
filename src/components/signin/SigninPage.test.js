@@ -27,8 +27,8 @@ describe('Sign in form test', () => {
         mountedSignInForm = null;
     });
 
-    it('renders and matches our snapshot', () => {
-        expect(component()).toMatchSnapshot();
+    it('renders header without crashing', () => {
+        expect(component()).toHaveLength(1);
     });
 
     it('contains the form', () => {
