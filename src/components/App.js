@@ -6,6 +6,7 @@ import Header from './common/Header';
 import SignUpPage from './signup/SignupPage';
 import SignInPage from './signin/SigninPage';
 import Footer from './common/Footer';
+import ResetPasswordPage from './resetPassword/ResetPasswordPage';
 
 class App extends React.Component {
     constructor(props) {
@@ -60,6 +61,7 @@ class App extends React.Component {
                             loginSuccessMessage={this.state.loginSuccessMessage}
                         />
                     ) }/>
+                    <Route exact path="/reset_password" component={ResetPasswordPage}/>
                     <Footer />
                 </div>
             </BrowserRouter>

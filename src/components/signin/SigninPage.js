@@ -49,7 +49,7 @@ const SignInPage = props => {
                                     <button type="submit" className="btn btn-primary input-default form-btn">Sign In</button>
                                 </div>
                                 <div className="form-input-division">
-                                    <Link className="nav-link" to="/reset">Forgot password?</Link>
+                                    <Link className="nav-link" to="/reset_password">Forgot password?</Link>
                                 </div>
                                 <hr />
                                 <div className="form-input-division">
