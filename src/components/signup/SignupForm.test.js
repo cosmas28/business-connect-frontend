@@ -1,7 +1,6 @@
 import React from 'react';
-import ReactTestUtils from 'react-dom/test-utils';
-import ReactDOM from 'react-dom';
-import SignUpForm from './SignupForm';
+import { MemoryRouter } from 'react-router-dom';
+import SignUpForm from './SignupForm'
 
 describe('Sign up form', () => {
     let props = null,
@@ -11,7 +10,7 @@ describe('Sign up form', () => {
     const component = () => {
         if (!mountedSignUpForm){
             mountedSignUpForm = mount(
-                <SignUpForm {...props} />
+                <MemoryRouter><SignUpForm {...props} /></MemoryRouter>
             );
         }
         return mountedSignUpForm;

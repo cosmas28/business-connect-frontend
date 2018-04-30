@@ -1,5 +1,6 @@
 import React from 'react';
 import SignInPage from './SigninPage';
+import { MemoryRouter } from 'react-router-dom';
 
 describe('Sign in form test', () => {
     let mountedSignInForm = null,
@@ -9,7 +10,7 @@ describe('Sign in form test', () => {
     const component = () => {
         if (!mountedSignInForm) {
             mountedSignInForm = mount(
-                <SignInPage {...props} />
+                <MemoryRouter><SignInPage {...props} /></MemoryRouter>
             );
         }
 
