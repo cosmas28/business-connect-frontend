@@ -14,7 +14,7 @@ const OneBusinessView = props => {
             </div>
             <div className="col-md-7">
                 <div className="view-right-side">
-                    <h3>{props.businessName}</h3>
+                    <h3 className="business-name">{props.businessName}</h3>
                     <h4>{props.businessOwner}</h4>
                     <p className="business-summary">{props.businessSummary}</p>
                     <div>
@@ -25,7 +25,7 @@ const OneBusinessView = props => {
             </div>
         </div>;
     } else if (props.errorMessage) {
-        renderedBusiness = <h3>{props.errorMessage}</h3>;
+        renderedBusiness = <h3 className="error">{props.errorMessage}</h3>;
     } else {
         renderedBusiness = <p>You have not registered a business.Please register one.</p>;
     }
@@ -38,11 +38,11 @@ const OneBusinessView = props => {
 };
 
 OneBusinessView.propTypes = {
-    'businessCategory': PropTypes.string.isRequired,
-    'businessLocation': PropTypes.string.isRequired,
-    'businessName': PropTypes.string.isRequired,
-    'businessOwner': PropTypes.string.isRequired,
-    'businessSummary': PropTypes.string.isRequired,
+    'businessCategory': PropTypes.string,
+    'businessLocation': PropTypes.string,
+    'businessName': PropTypes.string,
+    'businessOwner': PropTypes.string,
+    'businessSummary': PropTypes.string,
     'errorMessage': PropTypes.string
 };
 
