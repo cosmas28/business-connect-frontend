@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const OneBusinessView = props => {
     let renderedBusiness = null;
-    if (props.businessName) {
+    if (props.errorMessage === null) {
         renderedBusiness = <div className="row no-gutters">
             <div className="col-md-5">
                 <div className="view-left-side">
@@ -25,7 +25,7 @@ const OneBusinessView = props => {
             </div>
         </div>;
     } else {
-        renderedBusiness = <h2>No registered business</h2>
+        renderedBusiness = <h3>{props.errorMessage}</h3>;
     }
 
     return (
@@ -40,7 +40,8 @@ OneBusinessView.propTypes = {
     'businessLocation': PropTypes.string.isRequired,
     'businessName': PropTypes.string.isRequired,
     'businessOwner': PropTypes.string.isRequired,
-    'businessSummary': PropTypes.string.isRequired
+    'businessSummary': PropTypes.string.isRequired,
+    'errorMessage': PropTypes.string
 };
 
 export default OneBusinessView;
