@@ -24,8 +24,10 @@ const OneBusinessView = props => {
                 </div>
             </div>
         </div>;
-    } else {
+    } else if (props.errorMessage) {
         renderedBusiness = <h3>{props.errorMessage}</h3>;
+    } else {
+        renderedBusiness = <p>You have not registered a business.Please register one.</p>;
     }
 
     return (
