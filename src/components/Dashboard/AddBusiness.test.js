@@ -32,7 +32,7 @@ describe('Add business form test specs', () => {
     });
 
     it('contains the form', () => {
-        expect(component().find('input')).toHaveLength(4);
+        expect(component().find('input')).toHaveLength(3);
         expect(component().find('button')).toHaveLength(1);
     });
 
