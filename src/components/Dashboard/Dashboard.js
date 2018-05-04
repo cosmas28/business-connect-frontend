@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Route, Redirect, Switch } from 'react-router-dom';
+import axios from "axios";
 
 import DashboardNavBar from './../common/DashboardNavBar';
 import UserBusinessView from './UserBusinessView';
@@ -22,6 +23,25 @@ class Dashboard extends React.Component {
         const name = target.name;
         this.setState({ [name]: value });
     };
+
+    addBusinessHandler = event => {
+        event.preventDefault();
+        const input = {
+            'name': this.state.name,
+            'category': this.state.category,
+            'location': this.state.location,
+            'summary': this.state.summary
+        };
+        axios.post(this.apiUrl, input, { 'headers': { 'Authorization': `Bearer ${this.props.access_token}` } }).then(response => {
+            this.setState({ 'successMessage': response.data.message });
+            event.target.reset();
+        }).catch((error) => {
+            if (error.response) {
+                this.setState({ 'errorMessage': error.response.data.message });
+            }
+        });
+    };
+
     render() {
         return (
             <div className="page-wrapper">
