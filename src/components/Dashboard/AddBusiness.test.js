@@ -38,7 +38,7 @@ describe('Add business form test specs', () => {
 
     it('should call `handleInputChange` when input field is changed', () => {
         component().find('input.test').simulate('change');
-        expect(props.handleSubmitForm).toBeCalled();
+        expect(props.handleInputChange).toBeCalled();
     });
 
     it('should call `addBusinessHandler` when submit button is clicked', () => {
