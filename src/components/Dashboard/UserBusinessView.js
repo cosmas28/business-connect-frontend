@@ -2,7 +2,6 @@ import React from 'react';
 import axios from "axios";
 import PropTypes from 'prop-types';
 
-import DashboardNavBar from './../common/DashboardNavBar';
 import DashboardTitle from './../common/DashboardTitle';
 import OneBusinessView from './ViewBusiness/OneBusinessView';
 
@@ -42,7 +41,6 @@ class UserBusinessView extends React.Component {
         return (
             <main className="main-body">
                 <div className="container-fluid">
-                    <DashboardNavBar/>
                     <DashboardTitle title="My business"/>
                     <OneBusinessView
                         businessCategory={this.state.category}
