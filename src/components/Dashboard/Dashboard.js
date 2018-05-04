@@ -33,11 +33,11 @@ class Dashboard extends React.Component {
             'summary': this.state.summary
         };
         axios.post(this.apiUrl, input, { 'headers': { 'Authorization': `Bearer ${this.props.access_token}` } }).then(response => {
-            this.setState({ 'successMessage': response.data.message });
+            this.setState({ 'successMessage': response.data.response_message });
             event.target.reset();
         }).catch((error) => {
             if (error.response) {
-                this.setState({ 'errorMessage': error.response.data.message });
+                this.setState({ 'errorMessage': error.response.data.response_message });
             }
         });
     };
