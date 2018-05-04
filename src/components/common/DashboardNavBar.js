@@ -12,7 +12,9 @@ const DashboardNavBar = () => <header>
 
                 <div className="collapse navbar-collapse" id="sideNavbar">
                     <ul className="navbar-nav ml-auto">
-                        <li className="nav-item"><a className="nav-link" href="">Register<span className="sr-only">(current)</span></a></li>
+                        <li className="nav-item">
+                            <NavLink className="nav-link" to="/dashboard/register_business" >Add business</NavLink>
+                        </li>
                         <li className="nav-item">
                             <NavLink className="nav-link" to="/dashboard/user_business" >My business</NavLink>
                         </li>
