@@ -60,6 +60,14 @@ class Dashboard extends React.Component {
                         access_token={this.props.access_token}
                         user_id={this.props.user_id}/>
                 ) }/>
+                <Route path="/dashboard/register_business" render={() => (
+                    <AddBusinessForm
+                        addBusinessHandler={this.addBusinessHandler}
+                        errorMessage={this.state.errorMessage}
+                        handleInputChange={this.handleInputChange}
+                        successMessage={this.successMessage}
+                    />
+                ) }/>
             </div>
         );
     }
