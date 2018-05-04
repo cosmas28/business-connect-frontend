@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const OneBusinessView = props => {
     let renderedBusiness = null;
-    if (props.errorMessage === null) {
+    if (!props.errorMessage) {
         renderedBusiness = <div className="row no-gutters">
             <div className="col-md-5">
                 <div className="view-left-side">
