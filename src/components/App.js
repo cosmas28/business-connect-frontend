@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 import axios from "axios";
 
 import Header from './common/Header';
@@ -7,6 +7,7 @@ import SignUpPage from './signup/SignupPage';
 import SignInPage from './signin/SigninPage';
 import Footer from './common/Footer';
 import ResetPasswordPage from './resetPassword/ResetPasswordPage';
+import Dashboard from './Dashboard/Dashboard'
 
 class App extends React.Component {
     constructor(props) {
@@ -14,7 +15,9 @@ class App extends React.Component {
         this.state = {
             'accessToken': '',
             'loginErrorMessage': '',
-            'loginSuccessMessage': ''
+            'loginSuccessMessage': '',
+            'redirect': false,
+            'userId': null
         };
         this.apiUrl = 'https://weconnect-v2.herokuapp.com/api/v2/auth/login';
     }
@@ -36,10 +39,11 @@ class App extends React.Component {
             this.setState({
                 'loginSuccessMessage': response.data.response_message,
                 'accessToken': response.data.access_token,
+                'userId': response.data.user_id,
                 'email': '',
-                'password': ''
+                'password': '',
+                'redirect': true
             });
-            // event.target.reset();
         }).catch((error) => {
             if (error.response) {
                 this.setState({ 'loginErrorMessage': error.response.data.response_message });
@@ -48,10 +52,22 @@ class App extends React.Component {
     };
 
     render() {
+        const { redirect } = this.state;
+        let isRedirect = null;
+        if (redirect) {
+            isRedirect = <Redirect to={{
+                pathname: '/dashboard',
+                state: {
+                    access_token: this.state.accessToken,
+                    user_id: this.state.userId
+                }
+            }} />;
+        }
         return (
             <BrowserRouter>
                 <div className="page-wrapper">
                     <Header />
+                    {isRedirect}
                     <Route exact path="/" component={SignUpPage}/>
                     <Route path="/login" render={() => (
                         <SignInPage
@@ -62,6 +78,12 @@ class App extends React.Component {
                         />
                     ) }/>
                     <Route exact path="/reset_password" component={ResetPasswordPage}/>
+                    <Route path="/dashboard" render={() => (
+                        <Dashboard
+                            access_token={this.state.accessToken}
+                            user_id={this.state.userId}
+                        />
+                    ) }/>
                     <Footer />
                 </div>
             </BrowserRouter>
