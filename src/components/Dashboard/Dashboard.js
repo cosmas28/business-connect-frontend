@@ -46,7 +46,7 @@ class Dashboard extends React.Component {
         return (
             <div className="page-wrapper">
                 <DashboardNavBar/>
-                <Route path="/dashboard" render={
+                <Route exact path="/dashboard" render={
                     () => <Redirect to={{
                         'pathname': '/dashboard/user_business',
                         'state': {
