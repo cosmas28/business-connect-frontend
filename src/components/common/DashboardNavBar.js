@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 const DashboardNavBar = () => <header>
     <div className="row">
@@ -11,17 +12,14 @@ const DashboardNavBar = () => <header>
 
                 <div className="collapse navbar-collapse" id="sideNavbar">
                     <ul className="navbar-nav ml-auto">
-                        <li className="nav-item active"><a className="nav-link" href="">Register<span className="sr-only">(current)</span></a></li>
-                        <li className="nav-item"><a className="nav-link" href="">View businesses</a></li>
+                        <li className="nav-item"><a className="nav-link" href="">Register<span className="sr-only">(current)</span></a></li>
+                        <li className="nav-item">
+                            <NavLink className="nav-link" to="/dashboard/user_business" >My business</NavLink>
+                        </li>
                         <li className="nav-item dropdown">
                             <a className="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
                                 My business
                             </a>
-                            <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a className="dropdown-item" href="">view </a>
-                                <a className="dropdown-item" href="">Update </a>
-                                <a className="dropdown-item" href="">Delete</a>
-                            </div>
                         </li>
                         <li className="nav-item"><a className="nav-link" href="">Logout</a></li>
                     </ul>
