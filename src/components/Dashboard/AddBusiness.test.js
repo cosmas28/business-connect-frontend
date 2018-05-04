@@ -41,6 +41,11 @@ describe('Add business form test specs', () => {
         expect(props.handleSubmitForm).toBeCalled();
     });
 
+    it('should call `addBusinessHandler` when submit button is clicked', () => {
+        component().find('form').simulate('submit');
+        expect(props.addBusinessHandler).toBeCalled();
+    });
+
     describe('when `successMessage` is passed', () => {
         beforeEach(() => {
             props.successMessage = 'You have successfully registered a business!';
