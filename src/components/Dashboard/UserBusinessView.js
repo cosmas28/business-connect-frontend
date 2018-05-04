@@ -32,7 +32,9 @@ class UserBusinessView extends React.Component {
             })
             .catch(error => {
             if (error.response) {
-                this.setState({ 'errorMessage': error.response.data.response_message });
+                this.setState({ 'errorMessage': error.request.response_message });
+            } else if (error.request) {
+                this.setState({ 'errorMessage': error.request.response_message });
             }
         });
     }
