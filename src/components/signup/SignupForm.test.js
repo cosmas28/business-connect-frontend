@@ -1,7 +1,7 @@
 import React from 'react';
-import ReactTestUtils from 'react-dom/test-utils';
-import ReactDOM from 'react-dom';
-import SignUpForm from './SignupForm';
+import { MemoryRouter } from 'react-router-dom';
+import SignUpForm from './SignupForm'
+import ReactDOM from "react-dom";
 
 describe('Sign up form', () => {
     let props = null,
@@ -11,7 +11,7 @@ describe('Sign up form', () => {
     const component = () => {
         if (!mountedSignUpForm){
             mountedSignUpForm = mount(
-                <SignUpForm {...props} />
+                <MemoryRouter><SignUpForm {...props} /></MemoryRouter>
             );
         }
         return mountedSignUpForm;
@@ -27,8 +27,8 @@ describe('Sign up form', () => {
         mountedSignUpForm = undefined;
     });
 
-    it('renders and matches our snapshot', () => {
-        expect(component()).toMatchSnapshot();
+    it('renders header without crashing', () => {
+        expect(component()).toHaveLength(1);
     });
 
     it('contains the form', () => {

@@ -2,12 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { MemoryRouter } from 'react-router-dom';
 
-import Header from './Header';
+import DashboardNavBar from './DashboardNavBar';
 
-it('renders header without crashing', () => {
+it('renders navbar without crashing', () => {
     const div = document.createElement('div');
     ReactDOM.render(
-        <MemoryRouter><Header /></MemoryRouter>,
+        <MemoryRouter><DashboardNavBar /></MemoryRouter>,
         div);
     ReactDOM.unmountComponentAtNode(div);
 });

@@ -9,6 +9,9 @@
 # production
 /build
 
+# SnapShots files
+__snapshots__
+
 # misc
 .DS_Store
 .env.local

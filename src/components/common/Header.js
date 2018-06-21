@@ -1,10 +1,11 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Header = () => <header>
     <div className="row">
         <div className="col-md-12 col-sm-12 col-xs-12">
             <nav className="navbar fixed-top navbar-expand-lg we-menu navbar-light ">
-                <a className="navbar-brand we-logo" href="">WeConnect</a>
+                <Link className="navbar-brand we-logo" to="/">WeConnect</Link>
                 <button className="navbar-toggler we-toggler" type="button" data-toggle="collapse"
                         data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -13,10 +14,8 @@ const Header = () => <header>
 
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav ml-auto">
-                        <li className="nav-item"><a className="nav-link" href="">Business<span
-                            className="sr-only">(current)</span></a></li>
-                        <li className="nav-item"><a className="nav-link" href="/">Sign Up</a></li>
-                        <li className="nav-item"><a className="nav-link" href="">Login</a></li>
+                        <li className="nav-item"><Link className="nav-link" to="/">Signup</Link></li>
+                        <li className="nav-item"><Link className="nav-link" to="/login">Login</Link></li>
                     </ul>
                 </div>
             </nav>
