@@ -21,14 +21,14 @@ const SignUpForm = props => {
 
     return (
         <div className="col-md-6 col-sm-12 col-xs-12 offset-md-2">
-            <h2>Sign up to register a business</h2>
+            <p>Sign up to register a business</p>
             {responseMessage}
             <form onSubmit={props.handleSubmitForm}>
                 <div className="row">
                     <div className="col">
                         <input type="email"
                                name="email"
-                               className="test input-default form-text-input"
+                               className="test form-text-input form-control"
                                placeholder="Email Address"
                                onChange={props.handleInputChange}
                                required
@@ -36,7 +36,7 @@ const SignUpForm = props => {
                     </div>
                     <div className="col">
                         <input type="text"
-                               className="input-default form-text-input"
+                               className="form-text-input form-control"
                                placeholder="Username"
                                name="username"
                                onChange={props.handleInputChange}
@@ -48,7 +48,7 @@ const SignUpForm = props => {
                 <div className="row">
                     <div className="col">
                         <input type="text"
-                               className="input-default form-text-input"
+                               className="form-text-input form-control"
                                placeholder="First name"
                                name="first_name"
                                onChange={props.handleInputChange}
@@ -57,7 +57,7 @@ const SignUpForm = props => {
                     </div>
                     <div className="col">
                         <input type="text"
-                               className="input-default form-text-input"
+                               className="form-text-input form-control"
                                placeholder="Last name"
                                name="last_name"
                                onChange={props.handleInputChange}
@@ -68,7 +68,7 @@ const SignUpForm = props => {
                 <hr/>
                 <div className="form-input-division">
                     <input type="password"
-                           className="input-default form-text-input"
+                           className="form-text-input form-control"
                            placeholder="Password"
                            name="password"
                            onChange={props.handleInputChange}
@@ -77,7 +77,7 @@ const SignUpForm = props => {
                 </div>
                 <div className="form-input-division">
                     <input type="password"
-                           className="input-default form-text-input"
+                           className="form-text-input form-control"
                            placeholder="Confirm password"
                            name="confirm_password"
                            onChange={props.handleInputChange}

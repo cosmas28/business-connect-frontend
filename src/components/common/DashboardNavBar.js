@@ -12,18 +12,16 @@ const DashboardNavBar = () => <header>
 
                 <div className="collapse navbar-collapse" id="sideNavbar">
                     <ul className="navbar-nav ml-auto">
-                        <li className="nav-item">
-                            <NavLink className="nav-link" to="/dashboard/register_business" >Add business</NavLink>
-                        </li>
-                        <li className="nav-item">
-                            <NavLink className="nav-link" to="/dashboard/user_business" >My business</NavLink>
-                        </li>
                         <li className="nav-item dropdown">
                             <a className="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-                                My business
+                                Profile
                             </a>
+                            <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <NavLink className="nav-link" to="/dashboard/register_business" >Create business</NavLink>
+                                <NavLink className="nav-link" to="/dashboard/user_business" >View my business</NavLink>
+                                <a className="dropdown-item" href="">Logout</a>
+                            </div>
                         </li>
-                        <li className="nav-item"><a className="nav-link" href="">Logout</a></li>
                     </ul>
                 </div>
             </nav>

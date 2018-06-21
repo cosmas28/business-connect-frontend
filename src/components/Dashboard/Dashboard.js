@@ -11,8 +11,8 @@ class Dashboard extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            'errorMessage': '',
-            'successMessage': ''
+            errorMessage: '',
+            successMessage: ''
         };
         this.apiUrl = 'https://weconnect-v2.herokuapp.com/api/v2/businesses';
     }
@@ -27,17 +27,17 @@ class Dashboard extends React.Component {
     addBusinessHandler = event => {
         event.preventDefault();
         const input = {
-            'name': this.state.name,
-            'category': this.state.category,
-            'location': this.state.location,
-            'summary': this.state.summary
+            name: this.state.name,
+            category: this.state.category,
+            location: this.state.location,
+            summary: this.state.summary
         };
         axios.post(this.apiUrl, input, { 'headers': { 'Authorization': `Bearer ${this.props.access_token}` } }).then(response => {
-            this.setState({ 'successMessage': response.data.response_message });
+            this.setState({ successMessage: response.data.response_message });
             event.target.reset();
         }).catch((error) => {
             if (error.response) {
-                this.setState({ 'errorMessage': error.response.data.response_message });
+                this.setState({ errorMessage: error.response.data.response_message });
             }
         });
     };

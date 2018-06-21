@@ -16,6 +16,12 @@ body {
     background-color: transparent;
     border-bottom: 0px solid #000000;
 }
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    .navbar.we-menu {
+        background-color: deepskyblue;
+    }
+}
 .account-menu {
     background-color: #00A6FF;
 }
@@ -31,15 +37,15 @@ body {
     background-color: white;
 }
 .navbar.we-menu .navbar-nav > li > a {
-    font-size: 20px;
-    font-weight: 600;
+    font-size: 16px;
+    font-weight: 300;
     letter-spacing: 0;
     line-height: 20px !important;
     font-family: "Raleway", sans-serif;
     letter-spacing: 0.3px;
     padding: 15px 20px;
     color: white;
-    text-transform: uppercase;
+    text-transform: capitalize;
 }
 .navbar.we-menu .navbar-nav > li:last-child > a {
     padding-right: 0;
@@ -51,19 +57,19 @@ body {
 .navbar.we-menu .navbar-nav > li > a:active,
 .navbar.we-menu .navbar-nav > li > a:focus,
 .navbar.we-menu .navbar-nav > li > a:hover {
-    color: deepskyblue;
+    color: #DCDCDC;
 }
 .navbar.we-menu .navbar-nav > .active > a,
 .navbar.we-menu .navbar-nav > .active > a:focus,
 .navbar.we-menu .navbar-nav > .active > a:hover{
     background-color: transparent;
-    color: deepskyblue;
+    color: #DCDCDC;
 }
 .navbar.bi-menu > .open > a,
 .navbar.bi-menu > .open > a:focus,
 .navbar.bi-menu > .open > a:hover{
     background-color: transparent;
-    color: deepskyblue;
+    color: #DCDCDC;
 }
 
 /* Main content */
@@ -88,16 +94,42 @@ body {
 }
 .main-content {
     min-height: 750px;
-    background-color: #9fcdff;
+    /* background-color: #9fcdff; */
     color: white;
+    background-image: url('images/1.jpg');
+}
+@media only screen and (max-width: 768px){
+    .main-content {
+        margin-top: 65px;
+        padding-top: 70px;
+    }
+}
+.form-box {
+    /* background-color: #47525E; */
 }
 .main-login-page {
     margin: 0 300px 0 300px;
 }
+@media only screen and (max-width: 768px) {
+    .main-login-page {
+        margin: auto;
+    }
+}
 .landing-content {
     font-weight: 500;
     font-size: 20px;
-    color: #6c757d;
+    color: #000000;
+}
+.create-business-page {
+    margin: 0 300px 0 300px;
+    background-color: #DCDCDC;
+    padding: 40px;
+    border-radius: 10px;
+}
+@media only screen and (max-width: 768px) {
+    .create-business-page {
+        margin: auto;
+    }
 }
 .form-input-division {
     width: 100%;
@@ -130,14 +162,28 @@ body {
 .form-input-division > a {
     color: #FFFFFF;
     text-decoration: none;
-    font-weight: 600;
-    font-size: 20px;
+    font-weight: 400;
+    font-size: 17px;
 }
 .form-input-division > a:hover {
     color: deepskyblue;
 }
 .main-view-page {
     margin: 0 200px 0 200px;
+}
+@media only screen and (max-width: 768px) {
+    .main-view-page {
+        margin: 0;
+    }
+    h3 {
+        font-size: 20px;
+    }
+    p {
+        font-size: 13px;
+    }
+    .badge {
+        font-size: 11px;
+    }
 }
 .business-view {
     padding-top: 10px;
@@ -169,7 +215,7 @@ body {
 }
 .navbar.account-menu .navbar-nav > li > a {
     font-size: 20px;
-    font-weight: 600;
+    font-weight: 400;
     letter-spacing: 0;
     line-height: 20px !important;
     font-family: "Raleway", sans-serif;
@@ -185,12 +231,20 @@ body {
     background-attachment: inherit;
     position: inherit;
 }
+@media only screen and (max-width: 768px) {
+    .main-body {
+        padding-right: 10px;
+        padding-left: 10px;
+        padding-bottom: 10px;
+        padding-top: 90px;
+    }
+}
 .account-title {
     border-bottom: 3px solid #9fcdff;
     padding-bottom: 10px;
     margin-bottom: 10px;
     color: #00A6FF;
-    font-weight: 600;
+    font-weight: 400;
 }
 .register-form-input {
     width: 100%;
@@ -208,4 +262,5 @@ body {
     padding: 30px;
     margin-top: 0;
     text-align: center;
+    background: #C0C0C0;
 }

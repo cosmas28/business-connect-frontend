@@ -7,8 +7,8 @@ class SignUpPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            'successMessage': '',
-            'errorMessage': ''
+            successMessage: '',
+            errorMessage: ''
         };
         this.apiUrl = 'https://weconnect-v2.herokuapp.com/api/v2/auth/register';
     }
@@ -23,19 +23,19 @@ class SignUpPage extends React.Component {
     newUserSubmitHandler = event => {
         event.preventDefault();
         const input = {
-            'confirm_password': this.state.confirm_password,
-            'email': this.state.email,
-            'first_name': this.state.first_name,
-            'last_name': this.state.last_name,
-            'password': this.state.password,
-            'username': this.state.username
+            confirm_password: this.state.confirm_password,
+            email: this.state.email,
+            first_name: this.state.first_name,
+            last_name: this.state.last_name,
+            password: this.state.password,
+            username: this.state.username
         };
         axios.post(this.apiUrl, input).then(response => {
-            this.setState({ 'successMessage': response.data.message });
+            this.setState({ successMessage: response.data.message });
             event.target.reset();
         }).catch((error) => {
             if (error.response) {
-                this.setState({ 'errorMessage': error.response.data.message });
+                this.setState({ errorMessage: error.response.data.message });
             }
         });
     };

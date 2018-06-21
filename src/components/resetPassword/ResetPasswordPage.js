@@ -6,8 +6,8 @@ class ResetPasswordPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            'ErrorMessage': '',
-            'SuccessMessage': ''
+            ErrorMessage: '',
+            SuccessMessage: ''
         };
         this.apiUrl = 'https://weconnect-v2.herokuapp.com/api/v2/auth/reset_password';
     }
@@ -22,20 +22,20 @@ class ResetPasswordPage extends React.Component {
     handleFormSubmit = event => {
         event.preventDefault();
         const input = {
-            'email': this.state.email,
-            'password': this.state.password,
-            'confirm_password': this.state.confirm_password
+            email: this.state.email,
+            password: this.state.password,
+            confirm_password: this.state.confirm_password
         };
         axios.post(this.apiUrl, input).then(response => {
             this.setState({
-                'SuccessMessage': response.data.response_message,
-                'email': '',
-                'password': '',
-                'confirm_password': ''
+                SuccessMessage: response.data.response_message,
+                email: '',
+                password: '',
+                confirm_password: ''
             });
         }).catch((error) => {
             if (error.response) {
-                this.setState({ 'ErrorMessage': error.response.data.response_message });
+                this.setState({ ErrorMessage: error.response.data.response_message });
             }
         });
     };

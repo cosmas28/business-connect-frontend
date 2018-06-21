@@ -23,13 +23,13 @@ const SignInPage = props => {
                 <div className="row">
                     <div className="col-md-12 col-sm-12 com-xs-12">
                         <div className="main-login-page">
-                            <h2>Sign in to your account</h2>
+                            <p>Sign in to your account</p>
                             {responseMessage}
                             <form onSubmit={props.handleLoginSubmitForm}>
                                 <div className="form-input-division">
                                     <input type="email"
                                            name="email"
-                                           className="input-default form-text-input"
+                                           className="form-text-input form-control"
                                            placeholder="Email"
                                            onChange={props.handleLoginInputChange}
                                            required
@@ -39,7 +39,7 @@ const SignInPage = props => {
                                     <input type="password"
                                            id="password"
                                            name="password"
-                                           className="test input-default form-text-input"
+                                           className="test form-text-input form-control"
                                            placeholder="Password"
                                            onChange={props.handleLoginInputChange}
                                            required

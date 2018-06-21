@@ -19,13 +19,14 @@ const AddBusinessForm = props => {
     } else {
         responseMessage = null;
     }
+    
     return (
         <main className="main-body">
             <div className="container-fluid">
                 <DashboardTitle title="Add Business"/>
                 <div className="row no-gutters">
                     <div className="col-md-12 col-sm-12 col-xs-12">
-                        <div className="main-login-page">
+                        <div className="create-business-page">
                             {responseMessage}
                             <form onSubmit={props.addBusinessHandler}>
                                 <div className="form-input-division">
@@ -41,7 +42,7 @@ const AddBusinessForm = props => {
                                     <input type="text"
                                            name="category"
                                            className="register-form-input"
-                                           placeholder="Business Number"
+                                           placeholder="Business Category"
                                            onChange={props.handleInputChange}
                                            required
                                     />

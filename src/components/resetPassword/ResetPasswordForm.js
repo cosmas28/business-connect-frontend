@@ -18,13 +18,13 @@ const ResetPasswordForm = props => {
 
     return (
         <div className="main-login-page">
-            <h2>Reset your password</h2>
+            <p>Reset your password</p>
             {responseMessage}
             <form onSubmit={props.handleResetPasswordSubmitForm}>
                 <div className="form-input-division">
                     <input type="email"
                            name="email"
-                           className="test input-default form-text-input"
+                           className="form-text-input form-control"
                            placeholder="Email"
                            onChange={props.handleResetPasswordInputChange}
                            required
@@ -34,7 +34,7 @@ const ResetPasswordForm = props => {
                     <input type="password"
                            id="password"
                            name="password"
-                           className="input-default form-text-input" placeholder="New password"
+                           className="form-text-input form-control" placeholder="New password"
                            onChange={props.handleResetPasswordInputChange}
                            required
                     />
@@ -42,7 +42,7 @@ const ResetPasswordForm = props => {
                 <div className="form-input-division">
                     <input type="password"
                            name="confirm_password"
-                           className="input-default form-text-input"
+                           className="form-text-input form-control"
                            placeholder="Confirm password"
                            onChange={props.handleResetPasswordInputChange}
                            required

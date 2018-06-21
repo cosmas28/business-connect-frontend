@@ -13,11 +13,11 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            'accessToken': '',
-            'loginErrorMessage': '',
-            'loginSuccessMessage': '',
-            'redirect': false,
-            'userId': null
+            accessToken: '',
+            loginErrorMessage: '',
+            loginSuccessMessage: '',
+            redirect: false,
+            userId: null
         };
         this.apiUrl = 'https://weconnect-v2.herokuapp.com/api/v2/auth/login';
     }
@@ -32,17 +32,17 @@ class App extends React.Component {
     handleLoginSubmit = event => {
         event.preventDefault();
         const input = {
-            'email': this.state.email,
-            'password': this.state.password
+            email: this.state.email,
+            password: this.state.password
         };
         axios.post(this.apiUrl, input).then(response => {
             this.setState({
-                'loginSuccessMessage': response.data.response_message,
-                'accessToken': response.data.access_token,
-                'userId': response.data.user_id,
-                'email': '',
-                'password': '',
-                'redirect': true
+                loginSuccessMessage: response.data.response_message,
+                accessToken: response.data.access_token,
+                userId: response.data.user_id,
+                email: '',
+                password: '',
+                redirect: true
             });
         }).catch((error) => {
             if (error.response) {
@@ -84,7 +84,6 @@ class App extends React.Component {
                             user_id={this.state.userId}
                         />
                     ) }/>
-                    <Footer />
                 </div>
             </BrowserRouter>
         );
