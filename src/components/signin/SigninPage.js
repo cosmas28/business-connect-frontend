@@ -1,74 +1,81 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import axios from "axios";
+import { Route, Redirect, Switch } from 'react-router-dom';
 
-const SignInPage = props => {
-    let responseMessage = null;
-    if (props.loginSuccessMessage) {
-        responseMessage = <div className="alert alert-success" role="alert">
-            {props.loginSuccessMessage}
-        </div>;
-    } else if (props.loginPutErrorMessage) {
-        responseMessage = <div className="alert alert-danger alert-dismissible fade show" role="alert">
-            <strong>Error</strong> {props.loginPutErrorMessage}
-            <button type="button" className="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>;
+import Header from '../common/Header';
+import SignInForm from './SignInForm';
+
+class SignInPage extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            redirect: false,
+            loginErrorMessage: '',
+            loginSuccessMessage: ''
+        };
+        this.apiUrl = 'https://weconnect-v2.herokuapp.com/api/v2/auth/login';
     }
 
-    return (
-        <main className="main-content">
-            <div className="container">
-                <div className="row">
-                    <div className="col-md-12 col-sm-12 com-xs-12">
-                        <div className="main-login-page">
-                            <p>Sign in to your account</p>
-                            {responseMessage}
-                            <form onSubmit={props.handleLoginSubmitForm}>
-                                <div className="form-input-division">
-                                    <input type="email"
-                                           name="email"
-                                           className="form-text-input form-control"
-                                           placeholder="Email"
-                                           onChange={props.handleLoginInputChange}
-                                           required
-                                    />
-                                </div>
-                                <div className="form-input-division">
-                                    <input type="password"
-                                           id="password"
-                                           name="password"
-                                           className="test form-text-input form-control"
-                                           placeholder="Password"
-                                           onChange={props.handleLoginInputChange}
-                                           required
-                                    />
-                                </div>
-                                <div className="form-input-division">
-                                    <button type="submit" className="btn btn-primary input-default form-btn">Sign In</button>
-                                </div>
-                                <div className="form-input-division">
-                                    <Link className="nav-link" to="/reset_password">Forgot password?</Link>
-                                </div>
-                                <hr />
-                                <div className="form-input-division">
-                                    <Link className="nav-link" to="/">You don't have an account?</Link>
-                                </div>
-                            </form>
+    handleLoginInputChange = event => {
+        const target = event.target;
+        const value = target.value;
+        const name = target.name;
+        this.setState({ [name]: value });
+    };
+
+    handleLoginSubmit = event => {
+        event.preventDefault();
+        const input = {
+            email: this.state.email,
+            password: this.state.password
+        };
+        axios.post(this.apiUrl, input).then(response => {
+            sessionStorage.setItem('accessToken', response.data.access_token);
+            sessionStorage.setItem('userId', response.data.user_id);
+            sessionStorage.setItem('loggedIn', true);
+            this.setState({
+                loginSuccessMessage: response.data.response_message,
+                email: '',
+                password: '',
+                redirect: true
+            });
+        }).catch((error) => {
+            if (error.response) {
+                this.setState({ loginErrorMessage: error.response.data.response_message });
+            }
+        });
+    };
+
+    render () {
+        const { redirect } = this.state;
+        let isRedirect = null;
+        if (redirect) {
+            isRedirect = <Redirect to={{
+                pathname: '/dashboard'
+            }} />;
+        }
+        
+        return (
+            <div>
+                {isRedirect}
+                <Header/>
+                <main className="main-content">
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-md-12 col-sm-12 com-xs-12">
+                                <SignInForm
+                                    handleLoginInputChange={this.handleLoginInputChange}
+                                    handleLoginSubmitForm={this.handleLoginSubmit}
+                                    loginPutErrorMessage={this.state.loginErrorMessage}
+                                    loginSuccessMessage={this.state.loginSuccessMessage}
+                                />
+                            </div>
                         </div>
                     </div>
-                </div>
+                </main>
             </div>
-        </main>
-    );
-};
-
-SignInPage.propTypes = {
-    'handleLoginInputChange': PropTypes.func.isRequired,
-    'handleLoginSubmitForm': PropTypes.func.isRequired,
-    'loginPutErrorMessage': PropTypes.string,
-    'loginSuccessMessage': PropTypes.string
-};
+        );
+    }
+}
 
 export default SignInPage;
