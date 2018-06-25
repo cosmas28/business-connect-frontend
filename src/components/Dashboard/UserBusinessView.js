@@ -2,6 +2,7 @@ import React from 'react';
 import axios from "axios";
 import PropTypes from 'prop-types';
 
+import DashboardNavBar from './../common/DashboardNavBar';
 import DashboardTitle from './../common/DashboardTitle';
 import OneBusinessView from './ViewBusiness/OneBusinessView';
 
@@ -16,11 +17,13 @@ class UserBusinessView extends React.Component {
             owner: '',
             summary: ''
         };
-        this.apiUrl = `https://weconnect-v2.herokuapp.com/api/v2/businesses/user/${this.props.user_id}`;
+        this.accessToken = sessionStorage.getItem('accessToken');
+        this.userId = sessionStorage.getItem('userId');
+        this.apiUrl = `https://weconnect-v2.herokuapp.com/api/v2/businesses/user/${this.userId}`;
     }
 
     componentDidMount() {
-        axios.get(this.apiUrl, { 'headers': { 'Authorization': `Bearer ${this.props.access_token}` } })
+        axios.get(this.apiUrl, { 'headers': { 'Authorization': `Bearer ${this.accessToken}` } })
             .then(response => {
                 this.setState({
                     category: response.data.category,
@@ -41,27 +44,25 @@ class UserBusinessView extends React.Component {
 
     render() {
         return (
-            <main className="main-body">
-                <div className="container-fluid">
-                    <DashboardTitle title="My business"/>
-                    <OneBusinessView
-                        businessCategory={this.state.category}
-                        businessLocation={this.state.location}
-                        businessName={this.state.name}
-                        businessOwner={this.state.owner}
-                        businessSummary={this.state.summary}
-                        errorMessage={this.state.errorMessage}
-                    />
-                </div>
-            </main>
+            <div>
+                <DashboardNavBar/>
+                <main className="main-body">
+                    <div className="container-fluid">
+                        <DashboardTitle title="My business"/>
+                        <OneBusinessView
+                            businessCategory={this.state.category}
+                            businessLocation={this.state.location}
+                            businessName={this.state.name}
+                            businessOwner={this.state.owner}
+                            businessSummary={this.state.summary}
+                            errorMessage={this.state.errorMessage}
+                        />
+                    </div>
+                </main>
+            </div>
         );
     }
 
 }
-
-UserBusinessView.propTypes = {
-    'access_token': PropTypes.string.isRequired,
-    'user_id': PropTypes.number.isRequired
-};
 
 export default UserBusinessView;
