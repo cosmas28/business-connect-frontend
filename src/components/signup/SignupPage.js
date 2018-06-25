@@ -1,5 +1,7 @@
 import React from 'react';
 import axios from 'axios';
+
+import Header from '../common/Header';
 import Home from './Home';
 import SignUpForm from './SignupForm';
 
@@ -42,19 +44,22 @@ class SignUpPage extends React.Component {
 
     render() {
         return (
-            <main className="main-content">
-                <div className="container">
-                    <div className="row">
-                        <Home/>
-                        <SignUpForm
-                            handleInputChange={this.handleInputChange}
-                            handleSubmitForm={this.newUserSubmitHandler}
-                            outPutSuccessMessage={this.state.successMessage}
-                            outPutErrorMessage={this.state.errorMessage}
-                        />
+            <div>
+                <Header />
+                <main className="main-content">
+                    <div className="container">
+                        <div className="row">
+                            <Home/>
+                            <SignUpForm
+                                handleInputChange={this.handleInputChange}
+                                handleSubmitForm={this.newUserSubmitHandler}
+                                outPutSuccessMessage={this.state.successMessage}
+                                outPutErrorMessage={this.state.errorMessage}
+                            />
+                        </div>
                     </div>
-                </div>
-            </main>
+                </main>
+            </div>
         );
     }
 }
