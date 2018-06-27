@@ -27,7 +27,7 @@ describe('Sign up form', () => {
         mountedSignUpForm = undefined;
     });
 
-    it('renders header without crashing', () => {
+    it('renders without crashing', () => {
         expect(component()).toHaveLength(1);
     });
 
