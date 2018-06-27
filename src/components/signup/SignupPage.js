@@ -1,18 +1,16 @@
 import React from 'react';
-import axios from 'axios';
-
+import { connect } from 'react-redux';
+// import { withRouter } from 'react-router-redux';
 import Header from '../common/Header';
 import Home from './Home';
 import SignUpForm from './SignupForm';
+import * as signupActions from '../../actions/signupActions';
 
-class SignUpPage extends React.Component {
+export class SignUpPage extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            successMessage: '',
-            errorMessage: ''
-        };
-        this.apiUrl = 'https://weconnect-v2.herokuapp.com/api/v2/auth/register';
+        this.handleInputChange = this.handleInputChange.bind(this);
+        this.newUserSubmitHandler = this.newUserSubmitHandler.bind(this);
     }
 
     handleInputChange = event => {
@@ -32,14 +30,7 @@ class SignUpPage extends React.Component {
             password: this.state.password,
             username: this.state.username
         };
-        axios.post(this.apiUrl, input).then(response => {
-            this.setState({ successMessage: response.data.message });
-            event.target.reset();
-        }).catch((error) => {
-            if (error.response) {
-                this.setState({ errorMessage: error.response.data.message });
-            }
-        });
+        this.props.registerUser(input);
     };
 
     render() {
@@ -53,8 +44,8 @@ class SignUpPage extends React.Component {
                             <SignUpForm
                                 handleInputChange={this.handleInputChange}
                                 handleSubmitForm={this.newUserSubmitHandler}
-                                outPutSuccessMessage={this.state.successMessage}
-                                outPutErrorMessage={this.state.errorMessage}
+                                outPutSuccessMessage={this.props.user}
+                                outPutErrorMessage={this.props.error}
                             />
                         </div>
                     </div>
@@ -64,4 +55,19 @@ class SignUpPage extends React.Component {
     }
 }
 
-export default SignUpPage;
+//Maps state from store to props
+const mapStateToProps = (state, ownProps) => {
+    return {
+        user: state.user,
+        error: state.error
+    }
+}
+
+//Maps actions to props
+const mapDispatchToProps = (dispatch) => {
+    return {
+        registerUser: user => dispatch(signupActions.registerUser(user))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignUpPage);
