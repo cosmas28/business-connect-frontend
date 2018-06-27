@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 import axios from "axios";
 
 import SignUpPage from './signup/SignupPage';
-import SignInPage from './signin/SignInPage';
+import SignInPage from './signin/SigninPage';
 import ResetPasswordPage from './resetPassword/ResetPasswordPage';
 import UserBusinessView from './Dashboard/UserBusinessView';
 import Dashboard from './Dashboard/Dashboard';
