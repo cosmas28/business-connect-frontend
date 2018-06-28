@@ -24,8 +24,8 @@ export const doLogin = (loginInput) => {
         .then(response => {
             if (response.data.status_code === 200){
                 sessionStorage.setItem('loggedIn', true);
+                sessionStorage.setItem('accessToken', response.data.access_token);
                 dispatch(loginSuccess(response.data))
-                history.replace('/dashboard');
             } else {
                 dispatch(loginFailed(response.data))
                 history.replace('/login');
