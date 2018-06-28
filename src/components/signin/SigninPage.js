@@ -1,19 +1,17 @@
 import React from 'react';
 import axios from "axios";
 import { Route, Redirect, Switch } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import Header from '../common/Header';
 import SignInForm from './SignInForm';
+import * as actions from '../../actions/loginActions';
 
 class SignInPage extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            redirect: false,
-            loginErrorMessage: '',
-            loginSuccessMessage: ''
-        };
-        this.apiUrl = 'https://weconnect-v2.herokuapp.com/api/v2/auth/login';
+        this.handleLoginInputChange = this.handleLoginInputChange.bind(this);
+        this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
     }
 
     handleLoginInputChange = event => {
@@ -29,27 +27,13 @@ class SignInPage extends React.Component {
             email: this.state.email,
             password: this.state.password
         };
-        axios.post(this.apiUrl, input).then(response => {
-            sessionStorage.setItem('accessToken', response.data.access_token);
-            sessionStorage.setItem('userId', response.data.user_id);
-            sessionStorage.setItem('loggedIn', true);
-            this.setState({
-                loginSuccessMessage: response.data.response_message,
-                email: '',
-                password: '',
-                redirect: true
-            });
-        }).catch((error) => {
-            if (error.response) {
-                this.setState({ loginErrorMessage: error.response.data.response_message });
-            }
-        });
+        this.props.doLogin(input);
     };
 
     render () {
-        const { redirect } = this.state;
+        const loggedIn = sessionStorage.getItem('loggedIn');
         let isRedirect = null;
-        if (redirect) {
+        if (loggedIn) {
             isRedirect = <Redirect to={{
                 pathname: '/dashboard'
             }} />;
@@ -66,8 +50,8 @@ class SignInPage extends React.Component {
                                 <SignInForm
                                     handleLoginInputChange={this.handleLoginInputChange}
                                     handleLoginSubmitForm={this.handleLoginSubmit}
-                                    loginPutErrorMessage={this.state.loginErrorMessage}
-                                    loginSuccessMessage={this.state.loginSuccessMessage}
+                                    // loginPutErrorMessage={this.props.loginResponse}
+                                    loginMessage={this.props.loginResponse}
                                 />
                             </div>
                         </div>
@@ -78,4 +62,18 @@ class SignInPage extends React.Component {
     }
 }
 
-export default SignInPage;
+//Maps state from store to props
+const mapStateToProps = (state, ownProps) => {
+    return {
+        loginResponse: state.login.response_message,
+    }
+}
+
+//Maps actions to props
+const mapDispatchToProps = (dispatch) => {
+    return {
+        doLogin: loginInput => dispatch(actions.doLogin(loginInput))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignInPage);
