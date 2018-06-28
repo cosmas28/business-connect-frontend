@@ -14,6 +14,7 @@ class DashboardNavBar extends React.Component {
 
     onClickLogout  = event => {
         sessionStorage.removeItem('accessToken');
+        sessionStorage.setItem('loggedIn', false);
         sessionStorage.removeItem('userId');
         axios({ method: 'post', url: this.logoutUrl });
     }
