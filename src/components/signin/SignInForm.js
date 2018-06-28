@@ -4,13 +4,16 @@ import { Link } from 'react-router-dom';
 
 const SignInForm = props => {
     let responseMessage = null;
-    if (props.loginSuccessMessage) {
-        responseMessage = <div className="alert alert-success" role="alert">
-            {props.loginSuccessMessage}
+    if (props.loginMessage === 'You logged in successfully!') {
+        responseMessage = <div className="alert alert-success alert-dismissible fade show" role="alert">
+            {props.loginMessage}
+            <button type="button" className="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
         </div>;
-    } else if (props.loginPutErrorMessage) {
+    } else {
         responseMessage = <div className="alert alert-danger alert-dismissible fade show" role="alert">
-            <strong>Error</strong> {props.loginPutErrorMessage}
+            <strong>Error</strong> {props.loginMessage}
             <button type="button" className="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -20,7 +23,9 @@ const SignInForm = props => {
     return (
         <div className="main-login-page">
             <p>Sign in to your account</p>
-            {responseMessage}
+            {props.loginMessage &&
+                responseMessage
+            }
             <form onSubmit={props.handleLoginSubmitForm}>
                 <div className="form-input-division">
                     <input type="email"
@@ -59,8 +64,7 @@ const SignInForm = props => {
 SignInForm.propTypes = {
     'handleLoginInputChange': PropTypes.func.isRequired,
     'handleLoginSubmitForm': PropTypes.func.isRequired,
-    'loginPutErrorMessage': PropTypes.string,
-    'loginSuccessMessage': PropTypes.string
+    'loginMessage': PropTypes.string
 };
 
 export default SignInForm;
