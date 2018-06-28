@@ -7,3 +7,6 @@ export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILED = 'LOGIN_FAILED';
 
 export const CLEAR_ERROR = 'CLEAR_ERROR';
+
+// action types for business componet
+export const FETCH_ALL_BUSINESSES_SUCCESS = 'FETCH_ALL_BUSINESSES_SUCCESS';
