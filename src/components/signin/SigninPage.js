@@ -1,6 +1,4 @@
 import React from 'react';
-import axios from "axios";
-import { Route, Redirect, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import Header from '../common/Header';
@@ -27,21 +25,14 @@ class SignInPage extends React.Component {
             email: this.state.email,
             password: this.state.password
         };
-        this.props.doLogin(input);
+        this.props.doLogin(input).then(() => {
+            this.props.history.push('/dashboard');
+        });
     };
 
     render () {
-        const loggedIn = sessionStorage.getItem('loggedIn');
-        let isRedirect = null;
-        if (loggedIn) {
-            isRedirect = <Redirect to={{
-                pathname: '/dashboard'
-            }} />;
-        }
-        
         return (
             <div>
-                {isRedirect}
                 <Header/>
                 <main className="main-content">
                     <div className="container">
@@ -50,7 +41,6 @@ class SignInPage extends React.Component {
                                 <SignInForm
                                     handleLoginInputChange={this.handleLoginInputChange}
                                     handleLoginSubmitForm={this.handleLoginSubmit}
-                                    // loginPutErrorMessage={this.props.loginResponse}
                                     loginMessage={this.props.loginResponse}
                                 />
                             </div>
