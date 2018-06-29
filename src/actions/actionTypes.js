@@ -10,3 +10,4 @@ export const CLEAR_ERROR = 'CLEAR_ERROR';
 
 // action types for business componet
 export const FETCH_ALL_BUSINESSES_SUCCESS = 'FETCH_ALL_BUSINESSES_SUCCESS';
+export const FETCH_BUSINESSES_BY_USER_ID = 'FETCH_BUSINESSES_BY_USER_ID';
