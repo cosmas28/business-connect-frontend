@@ -46,7 +46,7 @@ class DashboardNavBar extends React.Component {
                                             Profile
                                         </a>
                                         <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                            <NavLink className="nav-link" to="/dashboard/register_business" >Create business</NavLink>
+                                            <NavLink className="nav-link" to="/register_business" >Create business</NavLink>
                                             <NavLink className="nav-link" to="/user_business" >View my business</NavLink>
                                             <a className="dropdown-item" href="" onClick={this.onClickLogout} >Logout</a>
                                         </div>
