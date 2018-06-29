@@ -6,3 +6,12 @@ export const businessesReducer = (currentState = [], action) => {
             return currentState;
     }
 };
+
+export const userBusinessReducer = (currentState = [], action) => {
+    switch (action.type) {
+        case 'FETCH_BUSINESSES_BY_USER_ID':
+            return action.userBusinesses;
+        default:
+            return currentState;
+    }
+};
