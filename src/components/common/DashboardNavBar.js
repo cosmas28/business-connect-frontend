@@ -40,13 +40,14 @@ class DashboardNavBar extends React.Component {
 
                             <div className="collapse navbar-collapse" id="sideNavbar">
                                 <ul className="navbar-nav ml-auto">
+                                    <li className="nav-item"><NavLink className="nav-link" to="/dashboard" >Businesses</NavLink></li>
                                     <li className="nav-item dropdown">
                                         <a className="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
                                             Profile
                                         </a>
                                         <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                                             <NavLink className="nav-link" to="/dashboard/register_business" >Create business</NavLink>
-                                            <NavLink className="nav-link" to="/dashboard/user_business" >View my business</NavLink>
+                                            <NavLink className="nav-link" to="/user_business" >View my business</NavLink>
                                             <a className="dropdown-item" href="" onClick={this.onClickLogout} >Logout</a>
                                         </div>
                                     </li>
