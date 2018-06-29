@@ -1,45 +1,21 @@
 import React from 'react';
 import axios from "axios";
-import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import DashboardNavBar from './../common/DashboardNavBar';
 import DashboardTitle from './../common/DashboardTitle';
 import OneBusinessView from './ViewBusiness/OneBusinessView';
+import { fetchUserBusinessesById } from '../../actions/businessActions';
 
 class UserBusinessView extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            category: '',
-            errorMessage: '',
-            location: '',
-            name: '',
-            owner: '',
-            summary: ''
-        };
         this.accessToken = sessionStorage.getItem('accessToken');
         this.userId = sessionStorage.getItem('userId');
-        this.apiUrl = `https://weconnect-v2.herokuapp.com/api/v2/businesses/user/${this.userId}`;
     }
 
     componentDidMount() {
-        axios.get(this.apiUrl, { 'headers': { 'Authorization': `Bearer ${this.accessToken}` } })
-            .then(response => {
-                this.setState({
-                    category: response.data.category,
-                    location: response.data.location,
-                    name: response.data.name,
-                    owner: response.data.created_by,
-                    summary: response.data.summary
-                });
-            })
-            .catch(error => {
-            if (error.response) {
-                this.setState({ errorMessage: error.request.response_message });
-            } else if (error.request) {
-                this.setState({ errorMessage: error.request.response_message });
-            }
-        });
+        this.props.fetchUserBusinessesById(this.accessToken, this.userId);
     }
 
     render() {
@@ -50,12 +26,12 @@ class UserBusinessView extends React.Component {
                     <div className="container-fluid">
                         <DashboardTitle title="My business"/>
                         <OneBusinessView
-                            businessCategory={this.state.category}
-                            businessLocation={this.state.location}
-                            businessName={this.state.name}
-                            businessOwner={this.state.owner}
-                            businessSummary={this.state.summary}
-                            errorMessage={this.state.errorMessage}
+                            businessCategory={this.props.userBusinesses.category}
+                            businessLocation={this.props.userBusinesses.location}
+                            businessName={this.props.userBusinesses.name}
+                            businessOwner={this.props.userBusinesses.created_by}
+                            businessSummary={this.props.userBusinesses.summary}
+                            errorMessage={this.props.userBusinesses.errorMessage}
                         />
                     </div>
                 </main>
@@ -65,4 +41,18 @@ class UserBusinessView extends React.Component {
 
 }
 
-export default UserBusinessView;
+const mapStateToProps = state => {
+    return {
+        userBusinesses: state.userBusinesses,
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        fetchUserBusinessesById: (accessToken, userId) => dispatch(
+            fetchUserBusinessesById(accessToken, userId)
+        )
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserBusinessView);
