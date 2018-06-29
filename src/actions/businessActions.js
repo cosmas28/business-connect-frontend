@@ -17,6 +17,20 @@ export const fetchUserBusinessesSuccess = (userBusinesses) => {
     }
 }
 
+export const registerBusinessSuccess = (message) => {
+    return {
+        type: actionTypes.REGISTER_BUSINESS_SUCCESS,
+        message
+    }
+}
+
+export const registerBusinessFailed = (error) => {
+    return {
+        type: actionTypes.REGISTER_BUSINESS_FAILED,
+        error,
+  }
+};
+
 export const fetchBusinesses = (accessToken) => {
     return (dispatch) => {
         return axios.get(apiUrl, { 'headers': { 'Authorization': `Bearer ${accessToken}` }})
@@ -37,6 +51,22 @@ export const fetchUserBusinessesById = (accessToken, userId) => {
         })
         .catch(error => {
             throw(error);
+        });
+    };
+};
+
+export const registerBusiness = (accessToken, inputData) => {
+    return (dispatch) => {
+        return axios.post(apiUrl, inputData, { 'headers': { 'Authorization': `Bearer ${accessToken}` }})
+        .then(response => {
+            if (response.data.status_code === 201){
+                dispatch(registerBusinessSuccess(response.data))
+            } else {
+                dispatch(registerBusinessFailed(response.data))
+            }
+        })
+        .catch(error => {
+            dispatch(registerBusinessFailed(error.response.data))
         });
     };
 };
