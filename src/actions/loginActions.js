@@ -1,6 +1,5 @@
 import axios from 'axios';
 import * as actionTypes from './actionTypes';
-import history from './../helpers/history';
 
 const apiUrl = 'https://weconnect-v2.herokuapp.com/api/v2/auth/login';
 
@@ -29,13 +28,11 @@ export const doLogin = (loginInput) => {
                 dispatch(loginSuccess(response.data))
             } else {
                 dispatch(loginFailed(response.data))
-                history.replace('/login');
             }
         })
         .catch(error => {
             if (error.response) {
                 dispatch(loginFailed(error.response.data))
-                history.replace('/login');
             }
         });
     };
