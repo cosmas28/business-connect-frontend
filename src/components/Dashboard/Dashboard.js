@@ -57,15 +57,11 @@ class Dashboard extends React.Component {
 }
 
 const mapStateToProps = state => {
-    return {
-        businesses: state.businesses
-    }
+    return { businesses: state.businesses };
 };
 
 const mapDispatchToProps = (dispatch) => {
-    return {
-        fetchBusinesses: accessToken => dispatch(fetchBusinesses(accessToken))
-    }
+    return { fetchBusinesses: accessToken => dispatch(fetchBusinesses(accessToken)) };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

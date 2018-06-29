@@ -4,9 +4,9 @@ import { loginReducer } from './loginReducers';
 import { businessesReducer, userBusinessReducer, registerBusinessReducer } from './businessesReducers';
 
 export default combineReducers({
-    user: registerUserReducer,
-    login: loginReducer,
     businesses: businessesReducer,
+    login: loginReducer,
     registerBusiness: registerBusinessReducer,
-    userBusinesses: userBusinessReducer,
+    user: registerUserReducer,
+    userBusinesses: userBusinessReducer
 });

@@ -24,20 +24,7 @@ module.exports = {
         "array-bracket-spacing": "error",
         "array-callback-return": "error",
         "array-element-newline": "error",
-        "arrow-body-style": "error",
-        "arrow-parens": [
-            "error",
-            "as-needed"
-        ],
-        "arrow-spacing": [
-            "error",
-            {
-                "after": true,
-                "before": true
-            }
-        ],
-        "block-scoped-var": "error",
-        "block-spacing": "error",
+        // #158593229
         "brace-style": [
             "error",
             "1tbs"
@@ -214,7 +201,8 @@ module.exports = {
         "no-underscore-dangle": "error",
         "no-unmodified-loop-condition": "error",
         "no-unneeded-ternary": "error",
-        "no-unused-expressions": "error",
+        "no-unused-expressions": "off",
+        "no-unused-vars": "off",
         "no-use-before-define": "off",
         "no-useless-call": "error",
         "no-useless-computed-key": "error",
@@ -235,7 +223,7 @@ module.exports = {
         ],
         "object-property-newline": "error",
         "object-shorthand": "error",
-        "one-var": "error",
+        "one-var": "off",
         "one-var-declaration-per-line": "error",
         "operator-assignment": "error",
         "operator-linebreak": "error",
@@ -249,8 +237,8 @@ module.exports = {
         "prefer-reflect": "error",
         "prefer-rest-params": "error",
         "prefer-spread": "error",
-        "prefer-template": "error",
-        "quote-props": "error",
+        "prefer-template": "off",
+        "quote-props": "off",
         "quotes": [
             "error",
             "single"

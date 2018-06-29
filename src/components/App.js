@@ -6,7 +6,7 @@ import SignInPage from './signin/SigninPage';
 import ResetPasswordPage from './resetPassword/ResetPasswordPage';
 import UserBusinessView from './Dashboard/UserBusinessView';
 import Dashboard from './Dashboard/Dashboard';
-import AddBusiness from './Dashboard/AddBusiness'
+import AddBusiness from './Dashboard/AddBusiness';
 import ProtectedRoute from './ProtectedRoute';
 
 class App extends React.Component {
