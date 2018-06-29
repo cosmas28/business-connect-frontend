@@ -25,6 +25,7 @@ export const doLogin = (loginInput) => {
             if (response.data.status_code === 200){
                 sessionStorage.setItem('loggedIn', true);
                 sessionStorage.setItem('accessToken', response.data.access_token);
+                sessionStorage.setItem('userId', response.data.user_id);
                 dispatch(loginSuccess(response.data))
             } else {
                 dispatch(loginFailed(response.data))
