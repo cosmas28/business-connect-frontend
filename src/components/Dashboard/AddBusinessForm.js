@@ -5,21 +5,19 @@ import DashboardTitle from './../common/DashboardTitle';
 
 const AddBusinessForm = props => {
     let responseMessage = null;
-    if (props.successMessage) {
+    if (props.responseMessage === 'Business has been registered successfully!') {
         responseMessage = <div className="alert alert-success" role="alert">
-            {props.successMessage}
+            {props.responseMessage}
         </div>;
-    } else if (props.errorMessage) {
+    } else {
         responseMessage = <div className="alert alert-danger alert-dismissible fade show" role="alert">
-            <strong>Error</strong> {props.errorMessage}
+            <strong>Error</strong> {props.responseMessage}
             <button type="button" className="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>;
-    } else {
-        responseMessage = null;
     }
-    
+
     return (
         <main className="main-body">
             <div className="container-fluid">
@@ -27,7 +25,9 @@ const AddBusinessForm = props => {
                 <div className="row no-gutters">
                     <div className="col-md-12 col-sm-12 col-xs-12">
                         <div className="create-business-page">
-                            {responseMessage}
+                        {props.responseMessage &&
+                            responseMessage
+                        }
                             <form onSubmit={props.addBusinessHandler}>
                                 <div className="form-input-division">
                                     <input type="text"
@@ -79,9 +79,8 @@ const AddBusinessForm = props => {
 
 AddBusinessForm.propTypes = {
     'addBusinessHandler': PropTypes.func.isRequired,
-    'errorMessage': PropTypes.string,
     'handleInputChange': PropTypes.func.isRequired,
-    'successMessage': PropTypes.string
+    'responseMessage': PropTypes.string
 };
 
 export default AddBusinessForm;
