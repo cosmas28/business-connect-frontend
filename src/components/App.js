@@ -25,7 +25,7 @@ class App extends React.Component {
                         <Route exact path="/reset_password" component={ResetPasswordPage}/>
                         <ProtectedRoute path="/dashboard" loggedIn={this.loggedIn} component={Dashboard} />
                         <Route path="/user_business" component={UserBusinessView} />
-                        <Route path="/dashboard/register_business" component={AddBusiness} />
+                        <Route path="/register_business" component={AddBusiness} />
                     </Switch>
                 </div>
             </BrowserRouter>
