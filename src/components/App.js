@@ -8,6 +8,7 @@ import UserBusinessView from './Dashboard/UserBusinessView';
 import Dashboard from './Dashboard/Dashboard';
 import AddBusiness from './Dashboard/AddBusiness';
 import ProtectedRoute from './ProtectedRoute';
+import PublicRoute from './PublicRoute';
 
 class App extends React.Component {
     constructor(props) {

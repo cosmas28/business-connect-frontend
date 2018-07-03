@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-// import { withRouter } from 'react-router-redux';
 import Header from '../common/Header';
 import Home from './Home';
 import SignUpForm from './SignupForm';
@@ -13,14 +12,13 @@ export class SignUpPage extends React.Component {
         this.newUserSubmitHandler = this.newUserSubmitHandler.bind(this);
     }
 
-    handleInputChange = event => {
-        const target = event.target;
-        const value = target.value;
-        const name = target.name;
-        this.setState({ [name]: value });
-    };
+    handleInputChange(event) {
+        const object = event.target;
+        const { name: key, value: v } = object;
+        this.setState({ [key]: v });
+    }
 
-    newUserSubmitHandler = event => {
+    newUserSubmitHandler(event) {
         event.preventDefault();
         const input = {
             confirm_password: this.state.confirm_password,
@@ -31,7 +29,7 @@ export class SignUpPage extends React.Component {
             username: this.state.username
         };
         this.props.registerUser(input);
-    };
+    }
 
     render() {
         return (
@@ -55,19 +53,17 @@ export class SignUpPage extends React.Component {
     }
 }
 
-//Maps state from store to props
+// Maps state from store to props
 const mapStateToProps = (state, ownProps) => {
     return {
-        user: state.user,
-        error: state.error
-    }
-}
+        error: state.error,
+        user: state.user
+    };
+};
 
-//Maps actions to props
+// Maps actions to props
 const mapDispatchToProps = (dispatch) => {
-    return {
-        registerUser: user => dispatch(signupActions.registerUser(user))
-    }
-}
+    return { registerUser: user => dispatch(signupActions.registerUser(user)) };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignUpPage);
