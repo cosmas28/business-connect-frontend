@@ -23,7 +23,7 @@ class App extends React.Component {
                     <Switch>
                         <Route exact path="/" component={SignUpPage}/>
                         <Route exact path="/login" component={SignInPage}/>
-                        <Route exact path="/reset_password" component={ResetPasswordPage}/>
+                        <Route exact path="/reset_password/password/:token" component={ResetPasswordPage}/>
                         <Route exact path="/reset_password/confirm_email" component={ConfirmEmail}/>
                         <ProtectedRoute path="/dashboard" loggedIn={this.loggedIn} component={Dashboard} />
                         <Route path="/user_business" component={UserBusinessView} />
