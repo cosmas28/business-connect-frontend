@@ -18,6 +18,15 @@ export const registerBusinessReducer = (currentState = [], action) => {
     }
 };
 
+export const businessReducer = (currentState = {}, action) => {
+    switch (action.type) {
+        case 'FETCH_BUSINESSES_BY_ID':
+            return action.business;
+        default:
+            return currentState;
+    }
+};
+
 export const userBusinessReducer = (currentState = [], action) => {
     switch (action.type) {
         case 'FETCH_BUSINESSES_BY_USER_ID':
