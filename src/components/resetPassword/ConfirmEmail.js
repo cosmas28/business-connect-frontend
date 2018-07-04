@@ -21,7 +21,7 @@ class ConfirmEmail extends React.Component {
         event.preventDefault();
         const input = {
             email: this.state.email,
-            url: 'http://localhost:3000/reset_password'
+            url: 'http://localhost:3000/reset_password/password'
         };
         this.props.doConfirmEmail(input);
     }
