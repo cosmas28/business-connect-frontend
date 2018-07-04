@@ -17,6 +17,13 @@ export const fetchUserBusinessesSuccess = (userBusinesses) => {
     };
 };
 
+export const fetchBusinessesByIdSuccess = (business) => {
+    return {
+        business,
+        type: actionTypes.FETCH_BUSINESSES_BY_ID
+    };
+};
+
 export const registerBusinessSuccess = (message) => {
     return {
         message,
@@ -47,7 +54,19 @@ export const fetchUserBusinessesById = (accessToken, userId) => {
     return (dispatch) => {
         return axios.get(apiUrl + '/user/' + userId, { 'headers': { 'Authorization': `Bearer ${accessToken}` } })
         .then(response => {
-            dispatch(fetchUserBusinessesSuccess(response.data));
+            dispatch(fetchUserBusinessesSuccess(response.data.business_list));
+        })
+        .catch(error => {
+            throw error;
+        });
+    };
+};
+
+export const fetchBusinessesById = (accessToken, businessId) => {
+    return (dispatch) => {
+        return axios.get(apiUrl + '/' + businessId, { 'headers': { 'Authorization': `Bearer ${accessToken}` } })
+        .then(response => {
+            dispatch(fetchBusinessesByIdSuccess(response.data));
         })
         .catch(error => {
             throw error;
