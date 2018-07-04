@@ -8,3 +8,14 @@ export const confirmEmailReducer = (currentState = {}, action) => {
             return currentState;
     }
 };
+
+export const resetPasswordReducer = (currentState = {}, action) => {
+    switch (action.type) {
+        case 'RESET_PASSWORD_SUCCESS':
+            return action.message;
+        case 'RESET_PASSWORD_FAIL':
+            return action.error;
+        default:
+            return currentState;
+    }
+};
