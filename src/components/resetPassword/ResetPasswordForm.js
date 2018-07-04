@@ -2,14 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const ResetPasswordForm = props => {
-    let responseMessage = null;
-    if (props.ResetPasswordSuccessMessage) {
-        responseMessage = <div className="alert alert-success" role="alert">
-            {props.ResetPasswordSuccessMessage}
+    let message = null;
+    if (props.statusCode === 200) {
+        message = <div className="alert alert-success" role="alert">
+            {props.responseMessage}
+            <button type="button" className="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
         </div>;
-    } else if (props.ResetPasswordPutErrorMessage) {
-        responseMessage = <div className="alert alert-danger alert-dismissible fade show" role="alert">
-            <strong>Error</strong> {props.ResetPasswordPutErrorMessage}
+    } else {
+        message = <div className="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Error</strong> {props.responseMessage}
             <button type="button" className="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -19,17 +22,10 @@ const ResetPasswordForm = props => {
     return (
         <div className="main-login-page">
             <p>Reset your password</p>
-            {responseMessage}
+            {props.responseMessage &&
+                message
+            }
             <form onSubmit={props.handleResetPasswordSubmitForm}>
-                <div className="form-input-division">
-                    <input type="email"
-                           name="email"
-                           className="form-text-input form-control"
-                           placeholder="Email"
-                           onChange={props.handleResetPasswordInputChange}
-                           required
-                    />
-                </div>
                 <div className="form-input-division">
                     <input type="password"
                            id="password"
@@ -57,10 +53,10 @@ const ResetPasswordForm = props => {
 };
 
 ResetPasswordForm.protoTypes = {
-    'ResetPasswordPutErrorMessage': PropTypes.string,
-    'ResetPasswordSuccessMessage': PropTypes.string,
     'handleResetPasswordInputChange': PropTypes.func.isRequired,
-    'handleResetPasswordSubmitForm': PropTypes.func.isRequired
+    'handleResetPasswordSubmitForm': PropTypes.func.isRequired,
+    'responseMessage': PropTypes.string,
+    'statusCode': PropTypes.number
 };
 
 export default ResetPasswordForm;
