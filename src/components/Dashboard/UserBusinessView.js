@@ -1,6 +1,6 @@
 import React from 'react';
-import axios from "axios";
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import DashboardNavBar from './../common/DashboardNavBar';
 import DashboardTitle from './../common/DashboardTitle';
@@ -20,19 +20,31 @@ class UserBusinessView extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="page-wrapper">
                 <DashboardNavBar/>
                 <main className="main-body">
                     <div className="container-fluid">
-                        <DashboardTitle title="My business"/>
-                        <OneBusinessView
-                            businessCategory={this.props.userBusinesses.category}
-                            businessLocation={this.props.userBusinesses.location}
-                            businessName={this.props.userBusinesses.name}
-                            businessOwner={this.props.userBusinesses.created_by}
-                            businessSummary={this.props.userBusinesses.summary}
-                            errorMessage={this.props.userBusinesses.errorMessage}
-                        />
+                        <DashboardTitle title="My business(es)"/>
+                         <div className="row no-gutters">
+                            <div className="col-md-12 col-sm-12 col-xs-12">
+                                <div className="main-view-page">
+                                    {!this.props.userBusinesses &&
+                                        <p>You have not registered a business.Please register one.</p>
+                                    }
+                                    {this.props.userBusinesses.map((business, id) => {
+                                        return (
+                                            <OneBusinessView
+                                                name={business.name}
+                                                category={business.category}
+                                                location={business.location}
+                                                summary={business.summary}
+                                                id={business.id}
+                                            />
+                                        );
+                                    })}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </main>
             </div>
@@ -43,7 +55,8 @@ class UserBusinessView extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        userBusinesses: state.userBusinesses,
+        statusCode: state.userBusinesses.status_code,
+        userBusinesses: state.userBusinesses
     };
 };
 
