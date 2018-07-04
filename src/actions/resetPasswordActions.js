@@ -17,6 +17,20 @@ export const confirmEmailSuccess = (message) => {
     };
 };
 
+export const resetPasswordSuccess = (message) => {
+    return {
+        message,
+        type: actionTypes.RESET_PASSWORD_SUCCESS
+    };
+};
+
+export const resetPasswordFailed = (error) => {
+    return {
+        error,
+        type: actionTypes.RESET_PASSWORD_FAIL
+    };
+};
+
 export const confirmEmail = (userInput) => {
     return (dispatch) => {
         return axios.post(apiUrl + 'confirm_email', userInput)
@@ -31,6 +45,22 @@ export const confirmEmail = (userInput) => {
             if (error.response) {
                 dispatch(confirmEmailFailed(error.response.data));
             }
+        });
+    };
+};
+
+export const resetPassword = (accessToken, inputData) => {
+    return (dispatch) => {
+        return axios.post(apiUrl + accessToken, inputData)
+        .then(response => {
+            if (response.data.status_code === 200) {
+                dispatch(resetPasswordSuccess(response.data));
+            } else {
+                dispatch(resetPasswordFailed(response.data));
+            }
+        })
+        .catch(error => {
+            dispatch(resetPasswordFailed(error.response.data));
         });
     };
 };
