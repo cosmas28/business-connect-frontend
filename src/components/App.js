@@ -9,6 +9,7 @@ import UserBusinessView from './Dashboard/UserBusinessView';
 import Dashboard from './Dashboard/Dashboard';
 import AddBusiness from './Dashboard/AddBusiness';
 import ProtectedRoute from './ProtectedRoute';
+import DetailBusinessView from './Dashboard/DetailBusinessView';
 
 class App extends React.Component {
     constructor(props) {
@@ -27,6 +28,7 @@ class App extends React.Component {
                         <Route exact path="/reset_password/confirm_email" component={ConfirmEmail}/>
                         <ProtectedRoute path="/dashboard" loggedIn={this.loggedIn} component={Dashboard} />
                         <Route path="/user_business" component={UserBusinessView} />
+                        <Route path="/businesses/:id" component={DetailBusinessView} />
                         <Route path="/register_business" component={AddBusiness} />
                     </Switch>
                 </div>
