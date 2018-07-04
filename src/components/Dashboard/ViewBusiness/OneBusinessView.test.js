@@ -1,6 +1,6 @@
 import React from 'react';
 
-import OneBusinessView from './OneBusinessView';
+import DetailBusinessView from './DetailBusinessView';
 
 describe('One business view test suite', () => {
     let mountedBusinessView = null,
@@ -8,7 +8,7 @@ describe('One business view test suite', () => {
     const component = () => {
         if (!mountedBusinessView) {
             mountedBusinessView = mount(
-                <OneBusinessView {...props} />
+                <DetailBusinessView {...props} />
             );
         }
 
