@@ -1,63 +1,67 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import ResetPasswordForm from './ResetPasswordForm';
-import axios from "axios/index";
+import * as actions from '../../actions/resetPasswordActions';
+import Header from '../common/Header';
+
 
 class ResetPasswordPage extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            ErrorMessage: '',
-            SuccessMessage: ''
-        };
-        this.apiUrl = 'https://weconnect-v2.herokuapp.com/api/v2/auth/reset_password';
+        this.handleFormSubmit = this.handleFormSubmit.bind(this);
+        this.handleInputChange = this.handleInputChange.bind(this);
+        this.token = this.props.match.params.token;
     }
 
-    handleInputChange = event => {
-        const target = event.target;
-        const value = target.value;
-        const name = target.name;
-        this.setState({ [name]: value });
-    };
+    handleInputChange(event) {
+        const object = event.target;
+        const { name: key, value: v } = object;
+        this.setState({ [key]: v });
+    }
 
-    handleFormSubmit = event => {
+    handleFormSubmit(event) {
         event.preventDefault();
         const input = {
-            email: this.state.email,
-            password: this.state.password,
-            confirm_password: this.state.confirm_password
+            confirm_password: this.state.confirm_password,
+            password: this.state.password
         };
-        axios.post(this.apiUrl, input).then(response => {
-            this.setState({
-                SuccessMessage: response.data.response_message,
-                email: '',
-                password: '',
-                confirm_password: ''
-            });
-        }).catch((error) => {
-            if (error.response) {
-                this.setState({ ErrorMessage: error.response.data.response_message });
-            }
-        });
-    };
+        this.props.resetPassword(this.token, input);
+    }
 
-    render(){
+    render() {
         return (
-            <main className="main-content">
-                <div className="container">
-                    <div className="row">
-                        <div className="col-md-12 col-sm-12 col-xs-12">
-                            <ResetPasswordForm
-                                ResetPasswordPutErrorMessage={this.state.ErrorMessage}
-                                ResetPasswordSuccessMessage={this.state.SuccessMessage}
-                                handleResetPasswordInputChange={this.handleInputChange}
-                                handleResetPasswordSubmitForm={this.handleFormSubmit}
-                            />
+            <div>
+                <Header/>
+                <main className="main-content">
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-md-12 col-sm-12 col-xs-12">
+                                <ResetPasswordForm
+                                    responseMessage={this.props.message}
+                                    statusCode={this.props.status_code}
+                                    handleResetPasswordInputChange={this.handleInputChange}
+                                    handleResetPasswordSubmitForm={this.handleFormSubmit}
+                                />
+                            </div>
                         </div>
                     </div>
-                </div>
-            </main>
+                </main>
+            </div>
         );
     }
 }
 
-export default ResetPasswordPage;
+// Maps state from store to props
+const mapStateToProps = (state) => {
+    return {
+        message: state.resetPassword.response_message,
+        status_code: state.resetPassword.status_code
+    };
+};
+
+// Maps actions to props
+const mapDispatchToProps = (dispatch) => {
+    return { resetPassword: (token, inputData) => dispatch(actions.resetPassword(token, inputData)) };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ResetPasswordPage);
