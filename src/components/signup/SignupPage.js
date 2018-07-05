@@ -42,8 +42,8 @@ export class SignUpPage extends React.Component {
                             <SignUpForm
                                 handleInputChange={this.handleInputChange}
                                 handleSubmitForm={this.newUserSubmitHandler}
-                                outPutSuccessMessage={this.props.user}
-                                outPutErrorMessage={this.props.error}
+                                outPutMessage={this.props.message}
+                                statusCode={this.props.statusCode}
                             />
                         </div>
                     </div>
@@ -56,8 +56,8 @@ export class SignUpPage extends React.Component {
 // Maps state from store to props
 const mapStateToProps = (state, ownProps) => {
     return {
-        error: state.error,
-        user: state.user
+        message: state.user.message,
+        statusCode: state.user.status_code
     };
 };
 
