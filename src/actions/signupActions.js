@@ -21,14 +21,14 @@ export const registerUser = (user) => {
     return (dispatch) => {
         return axios.post(apiUrl, user)
         .then(response => {
-            if (response.data.status_code === 201){
-                dispatch(registerUserSuccess(response.data.message))
+            if (response.data.status_code === 201) {
+                dispatch(registerUserSuccess(response.data));
             } else {
-                dispatch(registerUserFailed(response.data.message))
+                dispatch(registerUserFailed(response.data));
             }
         })
         .catch(error => {
-            dispatch(registerUserFailed(error.response.data.message))
+            dispatch(registerUserFailed(error.response.data));
         });
     };
 };
