@@ -4,25 +4,28 @@ import { Link } from 'react-router-dom';
 
 const SignUpForm = props => {
     let responseMessage = null;
-    if (props.outPutSuccessMessage) {
+    if (props.statusCode === 201) {
         responseMessage = <div className="alert alert-success" role="alert">
-            {props.outPutSuccessMessage}
-        </div>;
-    } else if (props.outPutErrorMessage) {
-        responseMessage = <div className="alert alert-danger alert-dismissible fade show" role="alert">
-            <strong>Error</strong> {props.outPutErrorMessage}
+            {props.outPutMessage}
             <button type="button" className="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>;
     } else {
-        responseMessage = null;
+        responseMessage = <div className="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Error</strong> {props.outPutMessage}
+            <button type="button" className="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>;
     }
 
     return (
         <div className="col-md-6 col-sm-12 col-xs-12 offset-md-2">
             <p>Sign up to register a business</p>
-            {responseMessage}
+            {props.outPutMessage &&
+                responseMessage
+            }
             <form onSubmit={props.handleSubmitForm}>
                 <div className="row">
                     <div className="col">
@@ -98,8 +101,8 @@ const SignUpForm = props => {
 SignUpForm.propTypes = {
     'handleInputChange': PropTypes.func.isRequired,
     'handleSubmitForm': PropTypes.func.isRequired,
-    'outPutErrorMessage': PropTypes.string,
-    'outPutSuccessMessage': PropTypes.string
+    'outPutMessage': PropTypes.string,
+    'statusCode': PropTypes.number
 };
 
 export default SignUpForm;
