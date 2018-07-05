@@ -2,7 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import DashboardNavBar from './../common/DashboardNavBar';
+import Footer from './../common/Footer';
 import DashboardTitle from './../common/DashboardTitle';
+import OneBusinessView from './ViewBusiness/OneBusinessView';
 import { fetchBusinesses } from '../../actions/businessActions';
 
 class Dashboard extends React.Component {
@@ -25,32 +27,36 @@ class Dashboard extends React.Component {
                         <div className="row no-gutters">
                             <div className="col-md-12 col-sm-12 col-xs-12">
                                 <div className="main-view-page">
-                                {this.props.businesses.map((business, id) => {
-                                    return (
-                                        <div className="row no-gutters business-view">
-                                            <div className="col-md-12 col-sm-12 col-xs-12">
-                                                <div className="view-right-side">
-                                                    <h3 className="">{business.name}</h3>
-                                                    <div>
-                                                        <span className="badge badge-primary">{business.location}</span>
-                                                        <span className="badge badge-info">{business.category}</span>
-                                                    </div>
-                                                    <p>
-                                                    {business.summary}
-                                                    </p>
-                                                    <a className="btn btn-primary" href="single-business.html">
-                                                        <span className="badge badge-light">4</span>Reviews
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    );
-                                })}
+                                <div className="category-tags">
+                                    <a href="single-business.html"><span className="badge">Category</span></a>
+                                    <a href="#"><span className="badge">Category</span></a>
+                                    <a href="#"><span className="badge">Category</span></a>
+                                    <a href="#"><span className="badge">Category</span></a>
+                                    <a href="#"><span className="badge">Category</span></a>
+                                    <a href="#"><span className="badge">Category</span></a>
+                                    <a href="#"><span className="badge">Category</span></a>
+                                    <a href="#"><span className="badge">Category</span></a>
+                                </div>
+                                {!this.props.businesses &&
+                                        <p>You have not registered a business.Please register one.</p>
+                                    }
+                                    {this.props.businesses.map((business, id) => {
+                                        return (
+                                            <OneBusinessView
+                                                name={business.name}
+                                                category={business.category}
+                                                location={business.location}
+                                                summary={business.summary}
+                                                id={business.id}
+                                            />
+                                        );
+                                    })}
                                 </div>
                             </div>
                         </div>
                     </div>
                 </main>
+                <Footer />
             </div>
         );
     }
