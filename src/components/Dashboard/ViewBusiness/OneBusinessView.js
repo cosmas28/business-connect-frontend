@@ -5,20 +5,25 @@ import { Link } from 'react-router-dom';
 const OneBusinessView = props => {
     return (
         <div className="row no-gutters business-view">
-            <div className="col-md-12 col-sm-12 col-xs-12">
-                <div className="view-right-side">
-                <Link to={`/businesses/${props.id}`}><h3 className="">{props.name}</h3></Link>
-                    <div>
-                        <span className="badge badge-primary">{props.location}</span>
-                        <span className="badge badge-info">{props.category}</span>
+            <Link className="link-class" to={`/businesses/${props.id}`} >
+                <div className="col-md-12 col-sm-12 col-xs-12">
+                    <div className="view-right-side">
+                        <h3 className="">{props.name}</h3>
+                        <div>
+                            <span className="badge badge-info">{props.category} </span>
+                            <span className="business-text"><span className="fa fa-map-marker"></span>  {props.location}</span> |
+                            <span className="business-text"><span className="fa fa-comments"></span>  4</span> |
+                            <span>By <span class="business-text">Business owner</span></span>
+                        </div>
+                        <p>
+                        {props.summary}
+                        </p>
                     </div>
-                    <p>
-                    {props.summary}
-                    </p>
-                    <a className="btn btn-primary" href="single-business.html">
-                        <span className="badge badge-light">4</span>Reviews
-                    </a>
                 </div>
+            </Link>
+            <div class="business-btn">
+                <button type="button" className="btn btn-danger">Delete</button>
+                <button type="button" className="btn btn-light">Update</button>
             </div>
         </div>
     );
