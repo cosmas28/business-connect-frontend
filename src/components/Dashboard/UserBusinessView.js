@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import DashboardNavBar from './../common/DashboardNavBar';
+import Footer from './../common/Footer';
 import DashboardTitle from './../common/DashboardTitle';
 import OneBusinessView from './ViewBusiness/OneBusinessView';
 import { fetchUserBusinessesById } from '../../actions/businessActions';
@@ -47,6 +48,7 @@ class UserBusinessView extends React.Component {
                         </div>
                     </div>
                 </main>
+                <Footer />
             </div>
         );
     }
