@@ -23,7 +23,7 @@ describe('sign up actions', () => {
         confirm_password: 'Password123'
     };
 
-    it('creates REGISTER_USER_FAILED when user has been signup', () => {
+    it('returns REGISTER_USER_FAILED when user failed to signup', () => {
         fetchMock.postOnce(
             'https://weconnect-v2.herokuapp.com/api/v2/auth/register',
             { }
@@ -32,7 +32,10 @@ describe('sign up actions', () => {
         const expectedActions = [
             {
                 type: types.REGISTER_USER_FAILED,
-                error: 'User already exists. Sign in!'
+                error: {
+                    message: 'User already exists. Sign in!',
+                    status_code: 406
+                }
             },
         ];
         const store = mockStore({ result: [] });
