@@ -1,27 +1,34 @@
 import React from 'react';
+import renderer from 'react-test-renderer';
+import { MemoryRouter } from 'react-router-dom';
 import ReactDOM from 'react-dom';
-import { SignUpPage } from './SignupPage';
+import { mapStateToProps, SignUpPage } from './SignupPage';
 
-describe('Sign up Page', () => {
-    const component = shallow(
-        <SignUpPage />
+describe(' Sign up components', () => {
+    it('should map state to props correctly', () => {
+        const signupRes = {
+            message: 'You have successfully created an account!',
+            status_ode: 201
+        };
+
+        const appState = { user: signupRes };
+        const ownProps = {};
+        const componentState = mapStateToProps(appState, ownProps);
+        expect(componentState.response).toEqual(signupRes);
+    });
+
+    it('Render without crashing', () => {
+        const sampleProps = {
+            message: 'You have successfully created an account!',
+            status_ode: 201
+        };
+        const mockRegisterUser = jest.fn();
+        const tree = renderer.create(
+            <MemoryRouter><SignUpPage
+                response={sampleProps}
+                registerUser={mockRegisterUser}
+            /></MemoryRouter>
         );
-    it('renders signup page without crashing', () => {
-        expect(component).toMatchSnapshot();
-    });
-
-    it('rendered `Home` component does not receive any props', () => {
-        const homeDisplay = component.find('Home');
-        expect(Object.keys(homeDisplay.props()).length).toBe(0);
-    });
-
-    it('rendered `Header` component does not receive any props', () => {
-        const headerDisplay = component.find('Header');
-        expect(Object.keys(headerDisplay.props()).length).toBe(0);
-    });
-
-    it('rendered `SignUpForm` component receive four props', () => {
-        const signupFormDisplay = component.find('SignUpForm');
-        expect(Object.keys(signupFormDisplay.props()).length).toBe(4);
+        expect(tree.toJSON()).toMatchSnapshot();
     });
 });

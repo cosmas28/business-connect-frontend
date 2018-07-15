@@ -1,19 +1,20 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
-import SignUpForm from './SignupForm'
-import ReactDOM from "react-dom";
+import SignUpForm from './SignupForm';
+import ReactDOM from 'react-dom';
 
 describe('Sign up form', () => {
     let props = null,
-        mountedSignUpForm;
+        mountedSignUpForm = null;
     const mockRegisterUser = jest.fn(),
         mockInputChange = jest.fn();
     const component = () => {
-        if (!mountedSignUpForm){
+        if (!mountedSignUpForm) {
             mountedSignUpForm = mount(
                 <MemoryRouter><SignUpForm {...props} /></MemoryRouter>
             );
         }
+
         return mountedSignUpForm;
     };
 
@@ -21,8 +22,8 @@ describe('Sign up form', () => {
         props = {
             handleInputChange: mockRegisterUser,
             handleSubmitForm: mockInputChange,
-            outPutSuccessMessage: null,
-            outPutErrorMessage: null
+            outPutMessage: null,
+            tatusCode: 201
         };
         mountedSignUpForm = undefined;
     });
@@ -37,24 +38,15 @@ describe('Sign up form', () => {
     });
 
     it('should call `handleSubmitForm` when submit button is called', () => {
-        component().find('form').simulate('submit');
+        component().find('form')
+        .simulate('submit');
         expect(props.handleSubmitForm).toBeCalled();
     });
 
     it('should call `handleInputChange` when input field is changed', () => {
-        component().find('input.test').simulate('change');
+        component().find('input.test')
+        .simulate('change');
         expect(props.handleSubmitForm).toBeCalled();
-    });
-
-    describe('when `outPutSuccessMessage` is passed', () => {
-        beforeEach(() => {
-            props.outPutSuccessMessage = 'You have successfully created account!';
-        });
-
-        it('renders a `Success Alert box`', () => {
-            const alertDiv = component().find('div.alert-success');
-            expect(alertDiv.length).toBe(1);
-        });
     });
 
     describe('when `outPutSuccessMessage` is null', () => {
@@ -65,17 +57,6 @@ describe('Sign up form', () => {
         it('renders a `Alert box`', () => {
             const alertDiv = component().find('div.alert-success');
             expect(alertDiv.length).toBe(0);
-        });
-    });
-
-    describe('when `outPutErrorMessage` is passed', () => {
-        beforeEach(() => {
-            props.outPutErrorMessage = 'User already registered. Sign in';
-        });
-
-        it('renders a `Error Alert box`', () => {
-            const alertDiv = component().find('div.alert-danger');
-            expect(alertDiv.length).toBe(1);
         });
     });
 });
