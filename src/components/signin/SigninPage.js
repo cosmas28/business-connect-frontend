@@ -40,7 +40,8 @@ class SignInPage extends React.Component {
                                 <SignInForm
                                     handleLoginInputChange={this.handleLoginInputChange}
                                     handleLoginSubmitForm={this.handleLoginSubmit}
-                                    loginMessage={this.props.loginResponse}
+                                    loginMessage={this.props.loginResponse.response_message}
+                                    statusCode={this.props.loginResponse.status_code}
                                 />
                             </div>
                         </div>
@@ -53,7 +54,7 @@ class SignInPage extends React.Component {
 
 // Maps state from store to props
 const mapStateToProps = (state, ownProps) => {
-    return { loginResponse: state.login.response_message };
+    return { loginResponse: state.login };
 };
 
 // Maps actions to props
