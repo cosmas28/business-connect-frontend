@@ -1,7 +1,7 @@
 import axios from 'axios';
 import * as actionTypes from './actionTypes';
 
-const apiUrl = 'https://weconnect-v2.herokuapp.com/api/v2/auth/login';
+const apiUrl = 'http://127.0.0.1:5000/api/v2/auth/login';
 
 export const loginFailed = (loginError) => {
     return {
@@ -22,10 +22,10 @@ export const doLogin = (loginInput) => {
         return axios.post(apiUrl, loginInput)
         .then(response => {
             if (response.data.status_code === 200) {
+                dispatch(loginSuccess(response.data));
                 sessionStorage.setItem('loggedIn', true);
                 sessionStorage.setItem('accessToken', response.data.access_token);
                 sessionStorage.setItem('userId', response.data.user_id);
-                dispatch(loginSuccess(response.data));
             } else {
                 dispatch(loginFailed(response.data));
             }
