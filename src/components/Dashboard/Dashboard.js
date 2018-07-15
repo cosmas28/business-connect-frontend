@@ -43,6 +43,7 @@ class Dashboard extends React.Component {
                                     {this.props.businesses.map((business, id) => {
                                         return (
                                             <OneBusinessView
+                                                key={id}
                                                 name={business.name}
                                                 category={business.category}
                                                 location={business.location}
