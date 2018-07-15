@@ -13,6 +13,6 @@ const DashboardTitle = props => {
     );
 };
 
-DashboardTitle.propTypes = { 'title': PropTypes.string.isRequired };
+DashboardTitle.propTypes = { 'title': PropTypes.string };
 
 export default DashboardTitle;

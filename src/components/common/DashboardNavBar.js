@@ -1,30 +1,29 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
-import axios from "axios";
-
-import { NavLink } from 'react-router-dom';
+import { Redirect, NavLink } from 'react-router-dom';
+import axios from 'axios';
 
 class DashboardNavBar extends React.Component {
     constructor(props) {
         super(props);
         this.state = {};
-        this.logoutUrl = 'https://weconnect-v2.herokuapp.com/api/v2/auth/logout';
-        this.onClickLogout = this.onClickLogout.bind(this)
+        this.logoutUrl = 'http://127.0.0.1:5000/api/v2/auth/logout';
+        this.onClickLogout = this.onClickLogout.bind(this);
     }
 
-    onClickLogout  = event => {
+    onClickLogout(event) {
         sessionStorage.removeItem('accessToken');
-        sessionStorage.setItem('loggedIn', false);
+        sessionStorage.removeItem('loggedIn');
         sessionStorage.removeItem('userId');
-        axios({ method: 'post', url: this.logoutUrl });
+        axios({
+            method: 'post',
+            url: this.logoutUrl
+        });
     }
 
     render() {
         let isRedirect = null;
-        if (sessionStorage.getItem('accessToken') === null) {
-            isRedirect = <Redirect to={{
-                pathname: '/login'
-            }} />;
+        if (sessionStorage.getItem('loggedIn') === null) {
+            isRedirect = <Redirect to={{ pathname: '/login' }} />;
         }
 
         return (
@@ -59,6 +58,6 @@ class DashboardNavBar extends React.Component {
             </header>
         );
     }
-} 
+}
 
 export default DashboardNavBar;

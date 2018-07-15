@@ -66,14 +66,6 @@ class ConfirmEmail extends React.Component {
                                                 required
                                             />
                                         </div>
-                                        {/* <div className="form-input-division">
-                                            <input type="hidden"
-                                                name="url"
-                                                value="http://localhost:3000/reset_password"
-                                                className="form-text-input form-control"
-                                                onChange={this.onInputChange}
-                                            />
-                                        </div> */}
                                         <div className="form-input-division">
                                             <button type="submit" className="btn btn-primary input-default form-btn">Send</button>
                                         </div>
