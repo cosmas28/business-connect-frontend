@@ -37,8 +37,8 @@ class ResetPasswordPage extends React.Component {
                         <div className="row">
                             <div className="col-md-12 col-sm-12 col-xs-12">
                                 <ResetPasswordForm
-                                    responseMessage={this.props.message}
-                                    statusCode={this.props.status_code}
+                                    responseMessage={this.props.response.response_message}
+                                    statusCode={this.props.response.status_code}
                                     handleResetPasswordInputChange={this.handleInputChange}
                                     handleResetPasswordSubmitForm={this.handleFormSubmit}
                                 />
@@ -53,10 +53,7 @@ class ResetPasswordPage extends React.Component {
 
 // Maps state from store to props
 const mapStateToProps = (state) => {
-    return {
-        message: state.resetPassword.response_message,
-        status_code: state.resetPassword.status_code
-    };
+    return { response: state.resetPassword };
 };
 
 // Maps actions to props
