@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const SignInForm = props => {
     let responseMessage = null;
-    if (props.loginMessage === 'You logged in successfully!') {
+    if (props.statusCode === 200) {
         responseMessage = <div className="alert alert-success alert-dismissible fade show" role="alert">
             {props.loginMessage}
             <button type="button" className="close" data-dismiss="alert" aria-label="Close">
@@ -64,7 +64,8 @@ const SignInForm = props => {
 SignInForm.propTypes = {
     'handleLoginInputChange': PropTypes.func.isRequired,
     'handleLoginSubmitForm': PropTypes.func.isRequired,
-    'loginMessage': PropTypes.string
+    'loginMessage': PropTypes.string,
+    'statusCode': PropTypes.number
 };
 
 export default SignInForm;
