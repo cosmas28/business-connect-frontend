@@ -30,7 +30,7 @@ const ResetPasswordForm = props => {
                     <input type="password"
                            id="password"
                            name="password"
-                           className="form-text-input form-control" placeholder="New password"
+                           className="form-text-input form-control test" placeholder="New password"
                            onChange={props.handleResetPasswordInputChange}
                            required
                     />
