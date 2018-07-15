@@ -1,48 +1,80 @@
-import configureMockStore from 'redux-mock-store'
-import thunk from 'redux-thunk'
+import configureMockStore from 'redux-mock-store';
+import thunk from 'redux-thunk';
+import moxios from 'moxios';
 import * as actions from '../signupActions';
 import * as types from '../actionTypes';
-import fetchMock from 'fetch-mock';
 import expect from 'expect';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
 describe('sign up actions', () => {
-    afterEach(() => {
-        fetchMock.reset();
-        fetchMock.restore();
+    beforeEach(() => {
+        moxios.install();
     });
 
-    const mockInput = {
-        email: 'victor.mutai@andela.com',
-        username: 'jamboo',
-        first_name: 'victor',
-        last_name: 'mutai',
-        password: 'Password123',
-        confirm_password: 'Password123'
-    };
+    afterEach(() => {
+        moxios.uninstall();
+    });
 
-    it('returns REGISTER_USER_FAILED when user failed to signup', () => {
-        fetchMock.postOnce(
-            'https://weconnect-v2.herokuapp.com/api/v2/auth/register',
-            { }
-        );
+    const signUpInput = {};
+
+    it('creates REGISTER_USER_SUCCESS after successfully user registration', done => {
+        moxios.wait(() => {
+            const request = moxios.requests.mostRecent();
+            request.respondWith({
+                response: {
+                    message: 'You have successfully created an account!',
+                    status_code: 201
+                }
+            });
+        });
 
         const expectedActions = [
             {
-                type: types.REGISTER_USER_FAILED,
-                error: {
-                    message: 'User already exists. Sign in!',
-                    status_code: 406
+                type: types.REGISTER_USER_SUCCESS,
+                user: {
+                    message: 'You have successfully created an account!',
+                    status_code: 201
                 }
-            },
+            }
         ];
-        const store = mockStore({ result: [] });
 
-        return store.dispatch(actions.registerUser(mockInput)).then((data) => {
+        const store = mockStore({ user: [] });
+
+        return store.dispatch(actions.registerUser(signUpInput)).then(() => {
             expect(store.getActions()).toEqual(expectedActions);
+            done();
+        });
+    });
+
+    it('creates REGISTER_USER_FAILED when user registration failed', done => {
+        moxios.wait(() => {
+            const request = moxios.requests.mostRecent();
+            request.respondWith({
+                response: {
+                    message: 'This user already exists!',
+                    status_code: 406
+                },
+                status: 406
+            });
         });
 
+        const expectedActions = [
+            {
+                error: {
+                    message: 'This user already exists!',
+                    status_code: 406
+                },
+                type: types.REGISTER_USER_FAILED
+            }
+        ];
+
+        const store = mockStore({ error: [] });
+
+        return store.dispatch(actions.registerUser(signUpInput)).then(() => {
+            expect(store.getActions()).toEqual(expectedActions);
+            done();
+        });
     });
-})
+});
