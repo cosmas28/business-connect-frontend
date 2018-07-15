@@ -29,20 +29,24 @@ class UserBusinessView extends React.Component {
                          <div className="row no-gutters">
                             <div className="col-md-12 col-sm-12 col-xs-12">
                                 <div className="main-view-page">
-                                    {!this.props.userBusinesses &&
+                                    {this.props.userBusinesses.status_code === 204 ? (
                                         <p>You have not registered a business.Please register one.</p>
-                                    }
-                                    {this.props.userBusinesses.map((business, id) => {
-                                        return (
-                                            <OneBusinessView
-                                                name={business.name}
-                                                category={business.category}
-                                                location={business.location}
-                                                summary={business.summary}
-                                                id={business.id}
-                                            />
-                                        );
-                                    })}
+                                    ) : (
+                                        <div>
+                                            {this.props.userBusinesses.map((business, id) => {
+                                                return (
+                                                    <OneBusinessView
+                                                        key={id}
+                                                        name={business.name}
+                                                        category={business.category}
+                                                        location={business.location}
+                                                        summary={business.summary}
+                                                        id={business.id}
+                                                    />
+                                                );
+                                            })}
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                         </div>
@@ -57,7 +61,7 @@ class UserBusinessView extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        statusCode: state.userBusinesses.status_code,
+        // statusCode: state.userBusinesses.status_code,
         userBusinesses: state.userBusinesses
     };
 };
