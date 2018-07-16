@@ -42,7 +42,7 @@ export class SignUpPage extends React.Component {
                             <SignUpForm
                                 handleInputChange={this.handleInputChange}
                                 handleSubmitForm={this.newUserSubmitHandler}
-                                outPutMessage={this.props.response.response_message}
+                                outPutMessage={this.props.response.message}
                                 statusCode={this.props.response.status_code}
                             />
                         </div>
