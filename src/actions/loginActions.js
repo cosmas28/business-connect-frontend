@@ -1,5 +1,6 @@
 import axios from 'axios';
 import * as actionTypes from './actionTypes';
+import history from '../helpers/history';
 
 const apiUrl = 'http://127.0.0.1:5000/api/v2/auth/login';
 
@@ -22,6 +23,7 @@ export const doLogin = (loginInput) => {
         return axios.post(apiUrl, loginInput)
         .then(response => {
             if (response.data.status_code === 200) {
+                history.push('/dashboard');
                 dispatch(loginSuccess(response.data));
                 sessionStorage.setItem('loggedIn', true);
                 sessionStorage.setItem('accessToken', response.data.access_token);

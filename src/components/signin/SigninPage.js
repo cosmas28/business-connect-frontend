@@ -24,9 +24,7 @@ class SignInPage extends React.Component {
             email: this.state.email,
             password: this.state.password
         };
-        this.props.doLogin(input).then(() => {
-            this.props.history.push('/dashboard');
-        });
+        this.props.doLogin(input)
     }
 
     render () {
