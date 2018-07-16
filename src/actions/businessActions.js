@@ -1,5 +1,6 @@
 import axios from 'axios';
 import * as actionTypes from './actionTypes';
+import history from '../helpers/history';
 
 const apiUrl = 'http://127.0.0.1:5000/api/v2/businesses';
 
@@ -116,6 +117,7 @@ export const registerBusiness = (accessToken, inputData) => {
         return axios.post(apiUrl, inputData, { 'headers': { 'Authorization': `Bearer ${accessToken}` } })
         .then(response => {
             if (response.data.status_code === 201) {
+                history.push('/dashboard');
                 dispatch(registerBusinessSuccess(response.data));
             } else {
                 dispatch(registerBusinessFailed(response.data));
