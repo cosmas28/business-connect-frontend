@@ -42,3 +42,14 @@ export const userBusinessReducer = (currentState = [], action) => {
             return currentState;
     }
 };
+
+export const deleteBusinessReducer = (currentState = [], action) => {
+    switch (action.type) {
+        case 'DELETE_BUSINESS_SUCCESS':
+            return action.message;
+        case 'DELETE_BUSINESS_FAIL':
+            return action.error;
+        default:
+            return currentState;
+    }
+};
