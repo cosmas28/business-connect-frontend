@@ -5,12 +5,14 @@ import {
     businessesReducer,
     userBusinessReducer,
     registerBusinessReducer,
-    businessReducer
+    businessReducer,
+    deleteBusinessReducer
 } from './businessesReducers';
 import { confirmEmailReducer, resetPasswordReducer } from './resetPasswordReducers';
 
 export default combineReducers({
     business: businessReducer,
+    businessDelete: deleteBusinessReducer,
     businesses: businessesReducer,
     login: loginReducer,
     mail: confirmEmailReducer,
