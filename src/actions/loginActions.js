@@ -23,8 +23,8 @@ export const doLogin = (loginInput) => {
         return axios.post(apiUrl, loginInput)
         .then(response => {
             if (response.data.status_code === 200) {
-                history.push('/dashboard');
                 dispatch(loginSuccess(response.data));
+                history.push('/dashboard');
                 sessionStorage.setItem('loggedIn', true);
                 sessionStorage.setItem('accessToken', response.data.access_token);
                 sessionStorage.setItem('userId', response.data.user_id);
