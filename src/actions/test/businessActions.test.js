@@ -19,6 +19,7 @@ describe('business interaction tests', () => {
     const dataInput = {};
     const mockFetchedBusinesses = {};
     const mockAccessToken = 'thisismybesttokenin2018';
+    const mockBusinesssId = 1;
 
     describe('business registration action tests', () => {
         it('should create REGISTER_BUSINESS_SUCCESS action', done => {
@@ -132,8 +133,6 @@ describe('business interaction tests', () => {
     });
 
     describe('fetch business by ID tests', () => {
-        const mockBusinesssId = 1;
-
         it('should create FETCH_BUSINESSES_BY_ID_SUCCESS action after successfuly fetched a busiess', done => {
             moxios.wait(() => {
                 const request = moxios.requests.mostRecent();
@@ -240,6 +239,63 @@ describe('business interaction tests', () => {
 
             return store.dispatch(actions.fetchUserBusinessesById(mockAccessToken, mockUserId)).then(() => {
                 expect(store.getActions()[0].type).toEqual(expectedAction[0].type);
+                done();
+            });
+        });
+    });
+
+    describe('delete business action tests', () => {
+        it('should create DELETE_BUSINESS_SUCCESS action', done => {
+            moxios.wait(() => {
+                const request = moxios.requests.mostRecent();
+                request.respondWith({
+                    response: {
+                        respond_message: 'Business is successfully deleted!',
+                        status_code: 204
+                    }
+                });
+            });
+            const expectedAction = [
+                {
+                    message: {
+                        respond_message: 'Business is successfully deleted!',
+                        status_code: 204
+                    },
+                    type: types.DELETE_BUSINESS_SUCCESS
+                }
+            ];
+
+            const store = mockStore({ businessDelete: [] });
+
+            return store.dispatch(actions.deleteBusiness(mockAccessToken, mockBusinesssId)).then(() => {
+                expect(store.getActions()).toEqual(expectedAction);
+                done();
+            });
+        });
+        it('should create DELETE_BUSINESS_FAIL action', done => {
+            moxios.wait(() => {
+                const request = moxios.requests.mostRecent();
+                request.respondWith({
+                    response: {
+                        respond_message: 'You have no permission to delete this business!',
+                        status_code: 401
+                    }
+                });
+            });
+            const expectedAction = [
+                {
+                    error: {
+                        respond_message: 'You have no permission to delete this business!',
+                        status_code: 401
+                    },
+                    type: types.DELETE_BUSINESS_FAIL
+                }
+            ];
+
+            const store = mockStore({ businessDelete: [] });
+
+            return store.dispatch(actions.deleteBusiness(mockAccessToken, mockBusinesssId)).then(() => {
+                expect(store.getActions()).toEqual(expectedAction);
                 done();
             });
         });
