@@ -60,6 +60,20 @@ export const registerBusinessFailed = (error) => {
   };
 };
 
+export const deleteBusinessSuccess = (message) => {
+    return {
+        message,
+        type: actionTypes.DELETE_BUSINESS_SUCCESS
+    };
+};
+
+export const deleteBusinessFail = (error) => {
+    return {
+       error,
+        type: actionTypes.DELETE_BUSINESS_FAIL
+    };
+};
+
 export const fetchBusinesses = (accessToken) => {
     return (dispatch) => {
         return axios.get(apiUrl, { 'headers': { 'Authorization': `Bearer ${accessToken}` } })
@@ -117,14 +131,35 @@ export const registerBusiness = (accessToken, inputData) => {
         return axios.post(apiUrl, inputData, { 'headers': { 'Authorization': `Bearer ${accessToken}` } })
         .then(response => {
             if (response.data.status_code === 201) {
-                history.push('/dashboard');
                 dispatch(registerBusinessSuccess(response.data));
+                history.push('/dashboard');
             } else {
                 dispatch(registerBusinessFailed(response.data));
             }
         })
         .catch(error => {
-            dispatch(registerBusinessFailed(error.response.data));
+            if (error.response) {
+                dispatch(registerBusinessFailed(error.response.data));
+            }
+        });
+    };
+};
+
+export const deleteBusiness = (accessToken, businessId) => {
+    return (dispatch) => {
+        return axios.delete(apiUrl + '/' + businessId, { 'headers': { 'Authorization': `Bearer ${accessToken}` } })
+        .then(response => {
+            if (response.data.status_code === 204) {
+                dispatch(deleteBusinessSuccess(response.data));
+                history.push('/dashboard');
+            } else {
+                dispatch(deleteBusinessFail(response.data));
+            }
+        })
+        .catch(error => {
+            if (error.response) {
+                dispatch(deleteBusinessFail(error.response.data));
+            }
         });
     };
 };
