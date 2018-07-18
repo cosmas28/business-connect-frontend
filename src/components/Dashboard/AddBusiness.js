@@ -61,7 +61,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         deleteMessage: () => dispatch(deleteResponseMessages()),
-        registerBusiness: (accessToken, inputData) => dispatch(actions.registerBusiness(accessToken, inputData))  
+        registerBusiness: (accessToken, inputData) => dispatch(actions.registerBusiness(accessToken, inputData))
     };
 };
 
