@@ -1,23 +1,19 @@
 import { combineReducers } from 'redux';
-import { registerUserReducer } from './registerUserReducers';
-import { loginReducer } from './loginReducers';
 import {
     businessesReducer,
     userBusinessReducer,
-    registerBusinessReducer,
     businessReducer,
     deleteBusinessReducer
 } from './businessesReducers';
+import { responseMessageReducer } from './responseMsgReducers';
 import { confirmEmailReducer, resetPasswordReducer } from './resetPasswordReducers';
 
 export default combineReducers({
     business: businessReducer,
     businessDelete: deleteBusinessReducer,
     businesses: businessesReducer,
-    login: loginReducer,
     mail: confirmEmailReducer,
-    registerBusiness: registerBusinessReducer,
+    messages: responseMessageReducer,
     resetPassword: resetPasswordReducer,
-    user: registerUserReducer,
     userBusinesses: userBusinessReducer
 });

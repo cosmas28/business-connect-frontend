@@ -18,7 +18,7 @@ describe('login action tests', () => {
 
     const loginInput = {};
 
-    it('creates LOGIN_SUCCESS action after successfully login', done => {
+    it('creates ADD_RESPONSE_MESSAGE action after successfully login', done => {
         moxios.wait(() => {
             const request = moxios.requests.mostRecent();
             request.respondWith({
@@ -31,11 +31,11 @@ describe('login action tests', () => {
 
         const expectedAction = [
             {
-                loginResponse: {
+                message: {
                     message: 'You have successfully login!',
                     status_code: 200
                 },
-                type: types.LOGIN_SUCCESS
+                type: types.ADD_RESPONSE_MESSAGE
             }
         ];
 
@@ -47,7 +47,7 @@ describe('login action tests', () => {
         });
     });
 
-    it('creates LOGIN_FAILED action after successfully login', done => {
+    it('creates ADD_RESPONSE_MESSAGE action after successfully login', done => {
         moxios.wait(() => {
             const request = moxios.requests.mostRecent();
             request.respondWith({
@@ -60,11 +60,11 @@ describe('login action tests', () => {
 
         const expectedAction = [
             {
-                loginError: {
+                message: {
                     message: 'Invalid username or password!',
                     status_code: 401
                 },
-                type: types.LOGIN_FAILED
+                type: types.ADD_RESPONSE_MESSAGE
             }
         ];
 

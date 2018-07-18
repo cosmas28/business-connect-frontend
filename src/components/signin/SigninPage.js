@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Header from '../common/Header';
 import SignInForm from './SignInForm';
 import * as actions from '../../actions/loginActions';
+import { deleteResponseMessages } from '../../actions/responseMessage';
 
 class SignInPage extends React.Component {
     constructor(props) {
@@ -24,7 +25,11 @@ class SignInPage extends React.Component {
             email: this.state.email,
             password: this.state.password
         };
-        this.props.doLogin(input)
+        this.props.doLogin(input);
+    }
+
+    componentWillUnmount() {
+        this.props.deleteMessage();
     }
 
     render () {
@@ -52,12 +57,15 @@ class SignInPage extends React.Component {
 
 // Maps state from store to props
 const mapStateToProps = (state, ownProps) => {
-    return { loginResponse: state.login };
+    return { loginResponse: state.messages };
 };
 
 // Maps actions to props
 const mapDispatchToProps = (dispatch) => {
-    return { doLogin: loginInput => dispatch(actions.doLogin(loginInput)) };
+    return {
+        deleteMessage: () => dispatch(deleteResponseMessages()),
+        doLogin: loginInput => dispatch(actions.doLogin(loginInput))
+    };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignInPage);

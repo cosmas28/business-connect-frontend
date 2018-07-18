@@ -1,6 +1,7 @@
 import axios from 'axios';
 import * as actionTypes from './actionTypes';
 import history from '../helpers/history';
+import { addResponseMessage } from './responseMessage';
 
 const apiUrl = 'http://127.0.0.1:5000/api/v2/businesses';
 
@@ -44,20 +45,6 @@ export const fetchBusinessesByIdFail = (error) => {
         error,
         type: actionTypes.FETCH_BUSINESSES_BY_ID_FAIL
     };
-};
-
-export const registerBusinessSuccess = (message) => {
-    return {
-        message,
-        type: actionTypes.REGISTER_BUSINESS_SUCCESS
-    };
-};
-
-export const registerBusinessFailed = (error) => {
-    return {
-        error,
-        type: actionTypes.REGISTER_BUSINESS_FAILED
-  };
 };
 
 export const deleteBusinessSuccess = (message) => {
@@ -131,15 +118,15 @@ export const registerBusiness = (accessToken, inputData) => {
         return axios.post(apiUrl, inputData, { 'headers': { 'Authorization': `Bearer ${accessToken}` } })
         .then(response => {
             if (response.data.status_code === 201) {
-                dispatch(registerBusinessSuccess(response.data));
+                dispatch(addResponseMessage(response.data));
                 history.push('/dashboard');
             } else {
-                dispatch(registerBusinessFailed(response.data));
+                dispatch(addResponseMessage(response.data));
             }
         })
         .catch(error => {
             if (error.response) {
-                dispatch(registerBusinessFailed(error.response.data));
+                dispatch(addResponseMessage(error.response.data));
             }
         });
     };

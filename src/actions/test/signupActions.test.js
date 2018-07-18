@@ -19,7 +19,7 @@ describe('sign up actions', () => {
 
     const signUpInput = {};
 
-    it('creates REGISTER_USER_SUCCESS after successfully user registration', done => {
+    it('creates ADD_RESPONSE_MESSAGE after successfully user registration', done => {
         moxios.wait(() => {
             const request = moxios.requests.mostRecent();
             request.respondWith({
@@ -32,11 +32,11 @@ describe('sign up actions', () => {
 
         const expectedActions = [
             {
-                type: types.REGISTER_USER_SUCCESS,
-                user: {
+                message: {
                     message: 'You have successfully created an account!',
                     status_code: 201
-                }
+                },
+                type: types.ADD_RESPONSE_MESSAGE
             }
         ];
 
@@ -48,7 +48,7 @@ describe('sign up actions', () => {
         });
     });
 
-    it('creates REGISTER_USER_FAILED when user registration failed', done => {
+    it('creates ADD_RESPONSE_MESSAGE when user registration failed', done => {
         moxios.wait(() => {
             const request = moxios.requests.mostRecent();
             request.respondWith({
@@ -62,11 +62,11 @@ describe('sign up actions', () => {
 
         const expectedActions = [
             {
-                error: {
+                message: {
                     message: 'This user already exists!',
                     status_code: 406
                 },
-                type: types.REGISTER_USER_FAILED
+                type: types.ADD_RESPONSE_MESSAGE
             }
         ];
 

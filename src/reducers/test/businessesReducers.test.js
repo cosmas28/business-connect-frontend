@@ -158,38 +158,6 @@ describe('business reducers tests suites', () => {
         });
     });
 
-    describe('register business reducer', () => {
-        it('should return the initial state', () => {
-            expect(registerBusinessReducer(undefined, {})).toEqual([]);
-        });
-
-        it('should handle REGISTER_BUSINESS_SUCCESS action', () => {
-            expect(registerBusinessReducer([], {
-                message: {
-                    response_message: 'You have successfully registered a business!',
-                    status_code: 201
-                },
-                type: types.REGISTER_BUSINESS_SUCCESS
-            })).toEqual({
-                response_message: 'You have successfully registered a business!',
-                status_code: 201
-            });
-        });
-
-        it('should handle REGISTER_BUSINESS_FAILED action', () => {
-            expect(registerBusinessReducer([], {
-                error: {
-                    response_message: 'This business already exists!',
-                    status_code: 406
-                },
-                type: types.REGISTER_BUSINESS_FAILED
-            })).toEqual({
-                response_message: 'This business already exists!',
-                status_code: 406
-            });
-        });
-    });
-
     describe('delete business reducer', () => {
         it('should return the initial state', () => {
             expect(deleteBusinessReducer(undefined, {})).toEqual([]);

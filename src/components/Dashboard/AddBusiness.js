@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import DashboardNavBar from './../common/DashboardNavBar';
 import AddBusinessForm from './AddBusinessForm';
 import * as actions from '../../actions/businessActions';
+import { deleteResponseMessages } from '../../actions/responseMessage';
 
 class AddBusiness extends React.Component {
     constructor(props) {
@@ -30,6 +31,10 @@ class AddBusiness extends React.Component {
         this.props.registerBusiness(this.accessToken, input);
     }
 
+    componentWillUnmount() {
+        this.props.deleteMessage();
+    }
+
     render() {
         return (
         <div className="page-wrapper">
@@ -46,12 +51,18 @@ class AddBusiness extends React.Component {
 
 // Maps state from store to props
 const mapStateToProps = (state) => {
-    return { responseMessage: state.registerBusiness.response_message };
+    return {
+        // responseMessage: state.registerBusiness.response_message,
+        responseMessage: state.messages.response_message
+    };
 };
 
 // Maps actions to props
 const mapDispatchToProps = (dispatch) => {
-    return { registerBusiness: (accessToken, inputData) => dispatch(actions.registerBusiness(accessToken, inputData)) };
+    return {
+        deleteMessage: () => dispatch(deleteResponseMessages()),
+        registerBusiness: (accessToken, inputData) => dispatch(actions.registerBusiness(accessToken, inputData))  
+    };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddBusiness);

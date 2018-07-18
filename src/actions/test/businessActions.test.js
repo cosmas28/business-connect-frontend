@@ -22,7 +22,7 @@ describe('business interaction tests', () => {
     const mockBusinesssId = 1;
 
     describe('business registration action tests', () => {
-        it('should create REGISTER_BUSINESS_SUCCESS action', done => {
+        it('should create ADD_RESPONSE_MESSAGE action', done => {
             moxios.wait(() => {
                 const request = moxios.requests.mostRecent();
                 request.respondWith({
@@ -38,7 +38,7 @@ describe('business interaction tests', () => {
                         respond_message: 'Business is successfully registered!',
                         status_code: 201
                     },
-                    type: types.REGISTER_BUSINESS_SUCCESS
+                    type: types.ADD_RESPONSE_MESSAGE
                 }
             ];
 
@@ -49,7 +49,7 @@ describe('business interaction tests', () => {
                 done();
             });
         });
-        it('should create REGISTER_BUSINESS_FAILED action', done => {
+        it('should create ADD_RESPONSE_MESSAGE action', done => {
             moxios.wait(() => {
                 const request = moxios.requests.mostRecent();
                 request.respondWith({
@@ -61,11 +61,11 @@ describe('business interaction tests', () => {
             });
             const expectedAction = [
                 {
-                    error: {
+                    message: {
                         respond_message: 'The business name already exists!',
                         status_code: 406
                     },
-                    type: types.REGISTER_BUSINESS_FAILED
+                    type: types.ADD_RESPONSE_MESSAGE
                 }
             ];
 

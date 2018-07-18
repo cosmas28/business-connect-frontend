@@ -4,6 +4,7 @@ import Header from '../common/Header';
 import Home from './Home';
 import SignUpForm from './SignupForm';
 import * as signupActions from '../../actions/signupActions';
+import { deleteResponseMessages } from '../../actions/responseMessage';
 
 export class SignUpPage extends React.Component {
     constructor(props) {
@@ -31,6 +32,10 @@ export class SignUpPage extends React.Component {
         this.props.registerUser(input);
     }
 
+    componentWillUnmount() {
+        this.props.deleteMessage();
+    }
+
     render() {
         return (
             <div>
@@ -55,12 +60,15 @@ export class SignUpPage extends React.Component {
 
 // Maps state from store to props
 export const mapStateToProps = (state, ownProps) => {
-    return { response: state.user };
+    return { response: state.messages };
 };
 
 // Maps actions to props
 export const mapDispatchToProps = (dispatch) => {
-    return { registerUser: user => dispatch(signupActions.registerUser(user)) };
+    return {
+        deleteMessage: () => dispatch(deleteResponseMessages()),
+        registerUser: user => dispatch(signupActions.registerUser(user))
+    };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignUpPage);

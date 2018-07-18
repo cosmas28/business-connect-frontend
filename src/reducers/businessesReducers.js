@@ -10,17 +10,6 @@ export const businessesReducer = (currentState = [], action) => {
     }
 };
 
-export const registerBusinessReducer = (currentState = [], action) => {
-    switch (action.type) {
-        case 'REGISTER_BUSINESS_SUCCESS':
-            return action.message;
-        case 'REGISTER_BUSINESS_FAILED':
-            return action.error;
-        default:
-            return currentState;
-    }
-};
-
 export const businessReducer = (currentState = {}, action) => {
     switch (action.type) {
         case 'FETCH_BUSINESSES_BY_ID_SUCCESS':
