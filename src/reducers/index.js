@@ -7,6 +7,7 @@ import {
 } from './businessesReducers';
 import { responseMessageReducer } from './responseMsgReducers';
 import { confirmEmailReducer, resetPasswordReducer } from './resetPasswordReducers';
+import { reviewsReducer } from './reviewsReducers';
 
 export default combineReducers({
     business: businessReducer,
@@ -15,5 +16,6 @@ export default combineReducers({
     mail: confirmEmailReducer,
     messages: responseMessageReducer,
     resetPassword: resetPasswordReducer,
+    reviews: reviewsReducer,
     userBusinesses: userBusinessReducer
 });
