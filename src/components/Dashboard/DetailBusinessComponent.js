@@ -14,7 +14,7 @@ const DetailBusinessComponent = props => {
                         <div>
                             <span className="badge badge-info">{props.category}</span>
                             <span className="business-text"><span className="fa fa-map-marker"></span> {props.location}</span> |
-                            <span className="business-text"><span className="fa fa-comments"></span> 4</span> |
+                            <span className="business-text"><span className="fa fa-comments"></span> {props.totalReviews}</span> |
                             <span>By <span className="business-text">{props.ownerName}</span></span>
                         </div>
                         <p>
@@ -37,7 +37,8 @@ DetailBusinessComponent.propTypes = {
     'name': PropTypes.string,
     'onDelete': PropTypes.func,
     'ownerName': PropTypes.string,
-    'summary': PropTypes.string
+    'summary': PropTypes.string,
+    'totalReviews': PropTypes.number
 };
 
 export default DetailBusinessComponent;
