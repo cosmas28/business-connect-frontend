@@ -1,6 +1,6 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
-import AddBusinessForm from './AddBusinessForm';
+import AddBusinessForm from '../../src/components/Dashboard/AddBusinessForm';
 
 describe('Add business form test specs', () => {
     let mountedAddBusinessForm = null,

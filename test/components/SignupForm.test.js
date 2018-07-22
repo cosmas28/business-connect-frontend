@@ -1,6 +1,6 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
-import SignUpForm from './SignupForm';
+import SignUpForm from '../../src/components/signup/SignupForm';
 import ReactDOM from 'react-dom';
 
 describe('Sign up form', () => {

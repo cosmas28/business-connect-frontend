@@ -1,5 +1,5 @@
-import { addResponseMessage, deleteResponseMessages } from '../responseMessage';
-import * as actionTypes from '../actionTypes';
+import { addResponseMessage, deleteResponseMessages } from '../../src/actions/responseMessage';
+import * as actionTypes from '../../src/actions/actionTypes';
 
 describe('test response message actions', () => {
     it('should return message object and action type', () => {

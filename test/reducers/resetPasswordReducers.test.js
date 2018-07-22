@@ -1,5 +1,5 @@
-import { confirmEmailReducer, resetPasswordReducer } from '../resetPasswordReducers';
-import * as types from '../../actions/actionTypes';
+import { confirmEmailReducer, resetPasswordReducer } from '../../src/reducers/resetPasswordReducers';
+import * as types from '../../src/actions/actionTypes';
 
 describe('reset password reducers tests', () => {
     describe('email confirmation reducer tests', () => {

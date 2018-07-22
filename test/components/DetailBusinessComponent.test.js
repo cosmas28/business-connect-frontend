@@ -1,6 +1,6 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
-import DetailBusinessComponent from './DetailBusinessComponent';
+import DetailBusinessComponent from '../../src/components/Dashboard/DetailBusinessComponent';
 
 describe('One business view test suite', () => {
     let mountedDetailBusinessComponent = null;

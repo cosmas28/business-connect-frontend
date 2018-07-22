@@ -1,5 +1,5 @@
-import { reviewsReducer } from '../reviewsReducers';
-import * as types from '../../actions/actionTypes';
+import { reviewsReducer } from '../../src/reducers/reviewsReducers';
+import * as types from '../../src/actions/actionTypes';
 
 describe('reviews reducers', () => {
     it('should return the initial state', () => {
