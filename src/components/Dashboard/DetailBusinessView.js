@@ -81,34 +81,35 @@ class DetailBusinessView extends React.Component {
                             name={this.props.business.name}
                             onDelete={this.handleDeleteBusiness}
                             summary={this.props.business.summary}
+                            totalReviews={
+                                this.props.business.reviews
+                                ? this.props.business.reviews.length
+                                : 0}
                         />
                         <div className="row">
                             <div className="r-comment">
-                                <h3 className="r-comment">4 Comments</h3>
-                                <div className="comment-section">
-                                    <h5 className="r-username"><strong>Username</strong></h5>
+                                <h3 className="r-comment">
+                                    Business Reviews
+                                </h3>
+                                {this.props.message.status_code > 200 ? (
+                                    <p>There is no reviews!</p>
+                                ) : (
                                     <div>
-                                        <span className="business-text">July 9, 2018 AT 18:21</span>
+                                        {this.props.business.reviews && this.props.business.reviews.map((review_, id) => {
+                                            return (
+                                                <div key={id} className="comment-section">
+                                                    <h5 className="r-username"><strong>{review_.reviewed_by}</strong></h5>
+                                                    <div>
+                                                        <span className="business-text">July 9, 2018 AT 18:21</span>
+                                                    </div>
+                                                    <p>
+                                                        {review_.review}
+                                                    </p>
+                                                </div>
+                                            );
+                                        })}
                                     </div>
-                                    <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                        Laudantium veniam exercitationem expedita laborum at
-                                        voluptate. Labore, voluptates totam at aut nemo deserunt
-                                        rem magni pariatur quos perspiciatis atque eveniet unde
-                                    </p>
-                                </div>
-                                <div className="comment-section">
-                                    <h5 className="r-username"><strong>Username</strong></h5>
-                                    <div>
-                                        <span className="business-text">July 9, 2018 AT 18:21</span>
-                                    </div>
-                                    <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                        Laudantium veniam exercitationem expedita laborum at
-                                        voluptate. Labore, voluptates totam at aut nemo deserunt
-                                        rem magni pariatur quos perspiciatis atque eveniet unde
-                                    </p>
-                                </div>
+                                )}
                                 <AddReviewForm
                                     addReviewHandler={this.onSubmitReview}
                                     handleInputChange={this.onInputChange}
@@ -125,7 +126,8 @@ class DetailBusinessView extends React.Component {
 const mapStateToProps = state => {
     return {
         business: state.business,
-        deleteRes: state.businessDelete
+        deleteRes: state.businessDelete,
+        message: state.messages
     };
 };
 
