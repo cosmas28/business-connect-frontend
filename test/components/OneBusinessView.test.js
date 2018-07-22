@@ -1,6 +1,6 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
-import OneBusinessView from './OneBusinessView';
+import OneBusinessView from '../../src/components/Dashboard/ViewBusiness/OneBusinessView';
 
 describe('One business tests', () => {
     let mountedOneBusinessView = null;

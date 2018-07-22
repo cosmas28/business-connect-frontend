@@ -1,5 +1,5 @@
 import React from 'react';
-import ResetPasswordForm from './ResetPasswordForm';
+import ResetPasswordForm from '../../src/components/resetPassword/ResetPasswordForm';
 import { MemoryRouter } from 'react-router-dom';
 
 describe('Reset password form test suite', () => {

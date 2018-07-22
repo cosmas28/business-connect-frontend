@@ -1,5 +1,5 @@
-import { businessesReducer, businessReducer, userBusinessReducer, registerBusinessReducer, deleteBusinessReducer } from '../businessesReducers';
-import * as types from '../../actions/actionTypes';
+import { businessesReducer, businessReducer, userBusinessReducer, registerBusinessReducer, deleteBusinessReducer } from '../../src/reducers/businessesReducers';
+import * as types from '../../src/actions/actionTypes';
 
 describe('business reducers tests suites', () => {
     describe('fetch all businesses reducer', () => {

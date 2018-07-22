@@ -1,5 +1,5 @@
-import { responseMessageReducer } from '../responseMsgReducers';
-import * as types from '../../actions/actionTypes';
+import { responseMessageReducer } from '../../src/reducers/responseMsgReducers';
+import * as types from '../../src/actions/actionTypes';
 
 describe('response message reducer tests', () => {
     it('should return the initial state', () => {

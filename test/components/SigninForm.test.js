@@ -1,5 +1,5 @@
 import React from 'react';
-import SignInForm from './SignInForm';
+import SignInForm from '../../src/components/signin/SignInForm';
 import { MemoryRouter } from 'react-router-dom';
 
 describe('Sign in form test', () => {
