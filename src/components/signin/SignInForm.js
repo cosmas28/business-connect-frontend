@@ -1,8 +1,16 @@
+// ./src/components/sigin/SignInForm.js
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
+/**
+ *
+ * @param {Object} props - properties from parent component
+ * @returns {JSX} - render dashboard title bar
+ */
 const SignInForm = props => {
+
+    // display flash message if it exists
     let responseMessage = null;
     if (props.statusCode === 200) {
         responseMessage = <div className="alert alert-success alert-dismissible fade show" role="alert">
@@ -61,6 +69,7 @@ const SignInForm = props => {
     );
 };
 
+// define prop types for SignInForm
 SignInForm.propTypes = {
     'handleLoginInputChange': PropTypes.func.isRequired,
     'handleLoginSubmitForm': PropTypes.func.isRequired,

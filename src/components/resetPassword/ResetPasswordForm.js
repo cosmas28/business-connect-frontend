@@ -1,7 +1,15 @@
+// ./src/components/resetPassword/ResetPasswordForm.js
 import React from 'react';
 import PropTypes from 'prop-types';
 
+/**
+ *
+ * @param {Object} props - properties from parent component
+ * @returns {JSX} - render dashboard title bar
+ */
 const ResetPasswordForm = props => {
+
+    // display flash message if it exists
     let message = null;
     if (props.statusCode === 200) {
         message = <div className="alert alert-success" role="alert">
@@ -52,6 +60,7 @@ const ResetPasswordForm = props => {
     );
 };
 
+// define prop types for AddBusinessForm
 ResetPasswordForm.protoTypes = {
     'handleResetPasswordInputChange': PropTypes.func.isRequired,
     'handleResetPasswordSubmitForm': PropTypes.func.isRequired,

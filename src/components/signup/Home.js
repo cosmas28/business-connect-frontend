@@ -1,5 +1,9 @@
+// ./src/components/signup/Home.js
 import React from 'react';
 
+/**
+ * @returns {JSX} - render landing page static content
+ */
 const Home = () => <div className="col-md-4 col-sm-12 col-xs-12">
         <div className="row">
             <div className="col-md-12 col-sm-12 col-xs-12">

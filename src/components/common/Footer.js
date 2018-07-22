@@ -1,5 +1,9 @@
+// ./src/components/common/Footer
 import React from 'react';
 
+/**
+ * @returns {JSX} - render dashboard title bar
+ */
 const Footer = () => <footer className="site-footer">
         <div className="container">
         <div className="row">

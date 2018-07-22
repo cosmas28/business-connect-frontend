@@ -1,10 +1,17 @@
+// ./src/actions/businessActions.js
 import axios from 'axios';
 import * as actionTypes from './actionTypes';
 import history from '../helpers/history';
 import { addResponseMessage } from './responseMessage';
 
+// API URL
 const apiUrl = 'http://127.0.0.1:5000/api/v2/businesses';
 
+/**
+ *
+ * @param {Array} businesses - an array of business objects
+ * @returns {Object} - an object of action type and array of businesses
+ */
 export const fetchBusinessesSuccess = (businesses) => {
     return {
         businesses,
@@ -12,6 +19,11 @@ export const fetchBusinessesSuccess = (businesses) => {
     };
 };
 
+/**
+ *
+ * @param {Object} error - an object of error message and status code
+ * @returns {Object} - an object of error message and action type
+ */
 export const fetchBusinessesFail = (error) => {
     return {
         error,
@@ -19,6 +31,11 @@ export const fetchBusinessesFail = (error) => {
     };
 };
 
+/**
+ *
+ * @param {Array} userBusinesses - an array of user businesses
+ * @returns {Object} - an object of action type and array of user businesses
+ */
 export const fetchUserBusinessesSuccess = (userBusinesses) => {
     return {
         type: actionTypes.FETCH_BUSINESSES_BY_USER_ID_SUCCESS,
@@ -26,6 +43,11 @@ export const fetchUserBusinessesSuccess = (userBusinesses) => {
     };
 };
 
+/**
+ *
+ * @param {Object} error - an object of error message and status code
+ * @returns {Object} - an object of error message and action type
+ */
 export const fetchUserBusinessesFail = (error) => {
     return {
         error,
@@ -33,6 +55,11 @@ export const fetchUserBusinessesFail = (error) => {
     };
 };
 
+/**
+ *
+ * @param {Object} business - an object of business details
+ * @returns {Object} - an object of business details and action type
+ */
 export const fetchBusinessesByIdSuccess = (business) => {
     return {
         business,
@@ -40,6 +67,11 @@ export const fetchBusinessesByIdSuccess = (business) => {
     };
 };
 
+/**
+ *
+ * @param {Object} error - an object of error message and status code
+ * @returns {Object} - an object of error message and action type
+ */
 export const fetchBusinessesByIdFail = (error) => {
     return {
         error,
@@ -47,6 +79,11 @@ export const fetchBusinessesByIdFail = (error) => {
     };
 };
 
+/**
+ *
+ * @param {Object} message - an object of success message and status code
+ * @return {Object} - an object of success message and action type
+ */
 export const deleteBusinessSuccess = (message) => {
     return {
         message,
@@ -54,6 +91,11 @@ export const deleteBusinessSuccess = (message) => {
     };
 };
 
+/**
+ *
+ * @param {Object} error - an object of error message and status code
+ * @returns {Object} - an object of error message and action type
+ */
 export const deleteBusinessFail = (error) => {
     return {
        error,
@@ -61,6 +103,11 @@ export const deleteBusinessFail = (error) => {
     };
 };
 
+/**
+ *
+ * @param {string} accessToken - API authorization access token
+ * @returns {Function} - a function that takes dispatch as its only argument and dispatches an action when the promise resolves
+ */
 export const fetchBusinesses = (accessToken) => {
     return (dispatch) => {
         return axios.get(apiUrl, { 'headers': { 'Authorization': `Bearer ${accessToken}` } })
@@ -77,6 +124,12 @@ export const fetchBusinesses = (accessToken) => {
     };
 };
 
+/**
+ *
+ * @param {string} accessToken - API authorization access token
+ * @param {number} userId - unique user ID for accessing user businesses
+ * @returns {Function} - a function that takes dispatch as its only argument and dispatches an action when the promise resolves
+ */
 export const fetchUserBusinessesById = (accessToken, userId) => {
     return (dispatch) => {
         return axios.get(apiUrl + '/user/' + userId, { 'headers': { 'Authorization': `Bearer ${accessToken}` } })
@@ -95,6 +148,12 @@ export const fetchUserBusinessesById = (accessToken, userId) => {
     };
 };
 
+/**
+ *
+ * @param {string} accessToken - API authorization access token
+ * @param {number} businessId - unique business ID for accessing business details
+ * @returns {Function} - a function that takes dispatch as its only argument and dispatches an action when the promise resolves
+ */
 export const fetchBusinessesById = (accessToken, businessId) => {
     return (dispatch) => {
         return axios.get(apiUrl + '/' + businessId, { 'headers': { 'Authorization': `Bearer ${accessToken}` } })
@@ -113,6 +172,12 @@ export const fetchBusinessesById = (accessToken, businessId) => {
     };
 };
 
+/**
+ *
+ * @param {string} accessToken - API authorization access token
+ * @param {Object} inputData - an object of business registration data
+ * @returns {Function} - a function that takes dispatch as its only argument and dispatches an action when the promise resolves
+ */
 export const registerBusiness = (accessToken, inputData) => {
     return (dispatch) => {
         return axios.post(apiUrl, inputData, { 'headers': { 'Authorization': `Bearer ${accessToken}` } })
@@ -132,6 +197,12 @@ export const registerBusiness = (accessToken, inputData) => {
     };
 };
 
+/**
+ *
+ * @param {string} accessToken - API authorization access token
+ * @param {number} businessId - unique business ID for accessing business details
+ * @returns {Function} - a function that takes dispatch as its only argument and dispatches an action when the promise resolves
+ */
 export const deleteBusiness = (accessToken, businessId) => {
     return (dispatch) => {
         return axios.delete(apiUrl + '/' + businessId, { 'headers': { 'Authorization': `Bearer ${accessToken}` } })

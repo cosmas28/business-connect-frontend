@@ -1,9 +1,17 @@
+// ./src/components/Dashboard/AddBusinessForm.js
 import React from 'react';
 import PropTypes from 'prop-types';
 
 import DashboardTitle from './../common/DashboardTitle';
 
+/**
+ *
+ * @param {Object} props - properties from parent component
+ * @returns {JSX} - render dashboard title bar
+ */
 const AddBusinessForm = props => {
+
+    // display flash message if it exists
     let responseMessage = null;
     if (props.responseMessage === 'Business has been registered successfully!') {
         responseMessage = <div className="alert alert-success" role="alert">
@@ -77,6 +85,7 @@ const AddBusinessForm = props => {
     );
 };
 
+// define prop types for AddBusinessForm
 AddBusinessForm.propTypes = {
     'addBusinessHandler': PropTypes.func.isRequired,
     'handleInputChange': PropTypes.func.isRequired,

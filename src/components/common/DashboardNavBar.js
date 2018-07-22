@@ -1,8 +1,14 @@
+// ./src/components/common/DashboardNavBar.js
 import React from 'react';
 import { Redirect, NavLink } from 'react-router-dom';
 import axios from 'axios';
 
 class DashboardNavBar extends React.Component {
+
+    /**
+     *
+     * @param {Object} props - passed properties
+     */
     constructor(props) {
         super(props);
         this.state = {};
@@ -10,6 +16,7 @@ class DashboardNavBar extends React.Component {
         this.onClickLogout = this.onClickLogout.bind(this);
     }
 
+    // event hander for logout link, when clicked
     onClickLogout(event) {
         sessionStorage.removeItem('accessToken');
         sessionStorage.removeItem('loggedIn');
@@ -20,6 +27,7 @@ class DashboardNavBar extends React.Component {
         });
     }
 
+    // renders JSX for dashboard navigation bar
     render() {
         let isRedirect = null;
         if (sessionStorage.getItem('loggedIn') === null) {

@@ -2,6 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
+/**
+ *
+ * @param {Object} props - business detail properties from parent component
+ * @returns {JSX} - render dashboard title bar
+ */
 const OneBusinessView = props => {
     return (
         <div className="row no-gutters business-view">
@@ -29,6 +34,7 @@ const OneBusinessView = props => {
     );
 };
 
+// define prop types for OneBusinessView
 OneBusinessView.propTypes = {
     'category': PropTypes.string,
     'id': PropTypes.number,

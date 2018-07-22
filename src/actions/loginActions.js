@@ -1,9 +1,16 @@
+// ./src/actions/loginActions.js
 import axios from 'axios';
 import history from '../helpers/history';
 import { addResponseMessage } from './responseMessage';
 
+// API URL
 const apiUrl = 'http://127.0.0.1:5000/api/v2/auth/login';
 
+/**
+     *
+     * @param {Object} loginInput - login user input data
+     * @returns {Function} returns a function that takes dispatch as its only argument and dispatches an action when the promise resolves
+ */
 export const doLogin = (loginInput) => {
     return (dispatch) => {
         return axios.post(apiUrl, loginInput)

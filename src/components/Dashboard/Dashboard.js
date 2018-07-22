@@ -1,3 +1,4 @@
+// ./src/components/Dashboard/Dashboard.js
 import React from 'react';
 import { connect } from 'react-redux';
 
@@ -8,15 +9,22 @@ import OneBusinessView from './ViewBusiness/OneBusinessView';
 import { fetchBusinesses } from '../../actions/businessActions';
 
 class Dashboard extends React.Component {
+
+    /**
+     *
+     * @param {Object} props - passed properties
+     */
     constructor(props) {
         super(props);
         this.accessToken = sessionStorage.getItem('accessToken');
     }
 
+    // execute fetchBusinesses() after the component did mount on the dom
     componentDidMount() {
         this.props.fetchBusinesses(this.accessToken);
     }
 
+    // renders JSX content
     render() {
         return (
             <div className="page-wrapper">
@@ -63,12 +71,15 @@ class Dashboard extends React.Component {
     }
 }
 
+// Maps state from store to props
 const mapStateToProps = state => {
     return { businesses: state.businesses };
 };
 
+// Maps actions to props
 const mapDispatchToProps = (dispatch) => {
     return { fetchBusinesses: accessToken => dispatch(fetchBusinesses(accessToken)) };
 };
 
+// use connect to put mapStateToProps and mapDispatchToProps together
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

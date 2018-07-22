@@ -1,8 +1,16 @@
+// ./src/components/Dashboard/DetailBusinessComponent.js
 import React from 'react';
 import PropTypes from 'prop-types';
 import DashboardTitle from './../common/DashboardTitle';
 
+/**
+ *
+ * @param {Object} props - properties from parent component
+ * @returns {JSX} - render JSX content
+ */
 const DetailBusinessComponent = props => {
+
+    // get userId fro the local storage
     const userId = sessionStorage.getItem('userId');
 
     return (
@@ -30,6 +38,7 @@ const DetailBusinessComponent = props => {
     );
 };
 
+// define prop types for AddBusinessForm
 DetailBusinessComponent.propTypes = {
     'canDelete': PropTypes.bool,
     'category': PropTypes.string,

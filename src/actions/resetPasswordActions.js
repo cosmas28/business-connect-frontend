@@ -1,8 +1,15 @@
+// ./src/actions/resetPasswordActions.js
 import axios from 'axios';
 import * as actionTypes from './actionTypes';
 
+// API URL
 const apiUrl = 'http://127.0.0.1:5000/api/v2/auth/reset_password/';
 
+/**
+ *
+ * @param {Object} error - an object of error message and status code
+ * @returns {Object} - an object of error message and action type
+ */
 export const confirmEmailFailed = (error) => {
     return {
         error,
@@ -10,6 +17,11 @@ export const confirmEmailFailed = (error) => {
     };
 };
 
+/**
+ *
+ * @param {Object} message - an object of success message and status code
+ * @return {Object} - an object of success message and action type
+ */
 export const confirmEmailSuccess = (message) => {
     return {
         message,
@@ -17,6 +29,11 @@ export const confirmEmailSuccess = (message) => {
     };
 };
 
+/**
+ *
+ * @param {Object} message - an object of success message and status code
+ * @return {Object} - an object of success message and action type
+ */
 export const resetPasswordSuccess = (message) => {
     return {
         message,
@@ -24,6 +41,11 @@ export const resetPasswordSuccess = (message) => {
     };
 };
 
+/**
+ *
+ * @param {Object} error - an object of error message and status code
+ * @returns {Object} - an object of error message and action type
+ */
 export const resetPasswordFailed = (error) => {
     return {
         error,
@@ -31,6 +53,11 @@ export const resetPasswordFailed = (error) => {
     };
 };
 
+/**
+ *
+ * @param {Object} userInput - an object of email and reset password url
+ * @returns {Function} - a function that takes dispatch as its only argument and dispatches an action when the promise resolves
+ */
 export const confirmEmail = (userInput) => {
     return (dispatch) => {
         return axios.post(apiUrl + 'confirm_email', userInput)
@@ -49,6 +76,12 @@ export const confirmEmail = (userInput) => {
     };
 };
 
+/**
+ *
+ * @param {string} accessToken - API authorization access token
+ * @param {Object} inputData - an object of password and confirm password data
+ * @returns {Function} - a function that takes dispatch as its only argument and dispatches an action when the promise resolves
+ */
 export const resetPassword = (accessToken, inputData) => {
     return (dispatch) => {
         return axios.post(apiUrl + accessToken, inputData)

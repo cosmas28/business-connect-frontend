@@ -1,6 +1,10 @@
+// ./src/components/common/DashboardTitle.js
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+/**
+ * @returns {JSX} - render dashboard title bar
+ */
 const Header = () => <header>
     <div className="row">
         <div className="col-md-12 col-sm-12 col-xs-12">

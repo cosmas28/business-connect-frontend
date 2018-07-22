@@ -1,3 +1,4 @@
+// ./src/components/Dashboard/AddBusiness.js
 import React from 'react';
 import { connect } from 'react-redux';
 
@@ -7,6 +8,11 @@ import * as actions from '../../actions/businessActions';
 import { deleteResponseMessages } from '../../actions/responseMessage';
 
 class AddBusiness extends React.Component {
+
+    /**
+     *
+     * @param {Object} props - passed properties
+     */
     constructor(props) {
         super(props);
         this.accessToken = sessionStorage.getItem('accessToken');
@@ -14,12 +20,14 @@ class AddBusiness extends React.Component {
         this.addBusinessHandler = this.addBusinessHandler.bind(this);
     }
 
+    // event handler for business registration input change
     handleInputChange(event) {
         const object = event.target;
         const { value: v, name: key } = object;
         this.setState({ [key]: v });
     }
 
+    // event handler for business registration form onSubmit event
     addBusinessHandler(event) {
         event.preventDefault();
         const input = {
@@ -31,10 +39,14 @@ class AddBusiness extends React.Component {
         this.props.registerBusiness(this.accessToken, input);
     }
 
+    // executed just before the component gets removed from the DOM
     componentWillUnmount() {
+
+        // delete any flash message on responseMessage props
         this.props.deleteMessage();
     }
 
+    // renders JSX content
     render() {
         return (
         <div className="page-wrapper">
@@ -65,4 +77,5 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 
+// use connect to put mapStateToProps and mapDispatchToProps together
 export default connect(mapStateToProps, mapDispatchToProps)(AddBusiness);

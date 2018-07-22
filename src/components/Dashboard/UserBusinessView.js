@@ -1,3 +1,4 @@
+// ./src/components/Dashboard/AddBusiness.js
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -9,16 +10,23 @@ import OneBusinessView from './ViewBusiness/OneBusinessView';
 import { fetchUserBusinessesById } from '../../actions/businessActions';
 
 class UserBusinessView extends React.Component {
+
+    /**
+     *
+     * @param {Object} props - passed properties
+     */
     constructor(props) {
         super(props);
         this.accessToken = sessionStorage.getItem('accessToken');
         this.userId = sessionStorage.getItem('userId');
     }
 
+    // execute fetchUserBusinessesById() after the component did mount on the dom
     componentDidMount() {
         this.props.fetchUserBusinessesById(this.accessToken, this.userId);
     }
 
+    // renders JSX content
     render() {
         return (
             <div className="page-wrapper">
@@ -59,6 +67,7 @@ class UserBusinessView extends React.Component {
 
 }
 
+// Maps state from store to props
 const mapStateToProps = state => {
     return {
         // statusCode: state.userBusinesses.status_code,
@@ -66,6 +75,7 @@ const mapStateToProps = state => {
     };
 };
 
+// Maps actions to props
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchUserBusinessesById: (accessToken, userId) => dispatch(
@@ -74,4 +84,5 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 
+// use connect to put mapStateToProps and mapDispatchToProps together
 export default connect(mapStateToProps, mapDispatchToProps)(UserBusinessView);

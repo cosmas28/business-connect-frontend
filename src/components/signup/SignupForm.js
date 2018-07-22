@@ -1,8 +1,16 @@
+// ./src/components/signup/SignupForm.js
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
+/**
+ *
+ * @param {Object} props - properties from parent component
+ * @returns {JSX} - render dashboard title bar
+ */
 const SignUpForm = props => {
+
+    // display flash message if it exists
     let responseMessage = null;
     if (props.statusCode === 201) {
         responseMessage = <div className="alert alert-success" role="alert">
@@ -98,6 +106,7 @@ const SignUpForm = props => {
     );
 };
 
+// define prop types for SignUpForm
 SignUpForm.propTypes = {
     'handleInputChange': PropTypes.func.isRequired,
     'handleSubmitForm': PropTypes.func.isRequired,

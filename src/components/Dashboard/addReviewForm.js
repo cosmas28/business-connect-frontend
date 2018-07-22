@@ -1,6 +1,12 @@
+// ./src/components/Dashboard/addReviewForm.js
 import React from 'react';
 import PropTypes from 'prop-types';
 
+/**
+ *
+ * @param {Object} props - properties from parent component
+ * @returns {JSX} - render dashboard title bar
+ */
 const AddReviewForm = props => {
     return (
         <form onSubmit={props.addReviewHandler}>
@@ -21,6 +27,7 @@ const AddReviewForm = props => {
     );
 };
 
+// define prop types for AddReviewForm
 AddReviewForm.propTypes = {
     'addReviewHandler': PropTypes.func.isRequired,
     'handleInputChange': PropTypes.func.isRequired

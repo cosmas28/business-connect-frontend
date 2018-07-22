@@ -1,3 +1,4 @@
+// ./src/components/resetPassword/ConfirmEmail.js
 import React from 'react';
 import { connect } from 'react-redux';
 
@@ -5,18 +6,25 @@ import Header from '../common/Header';
 import * as actions from '../../actions/resetPasswordActions';
 
 class ConfirmEmail extends React.Component {
+
+    /**
+     *
+     * @param {Object} props - passed properties from the store
+     */
     constructor(props) {
         super(props);
         this.onInputChange = this.onInputChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
     }
 
+    // event handler for reset password email confirmation form input change
     onInputChange(event) {
         const object = event.target;
         const { name: key, value: v } = object;
         this.setState({ [key]: v });
     }
 
+    // event handler for reset password email confirmation form onSubmit event
     onSubmit(event) {
         event.preventDefault();
         const input = {
@@ -26,6 +34,7 @@ class ConfirmEmail extends React.Component {
         this.props.doConfirmEmail(input);
     }
 
+    // renders JSX content
     render() {
         let responseMessage = null;
         if (this.props.status_code === 200) {
@@ -93,5 +102,6 @@ const mapDispatchToProps = (dispatch) => {
     return { doConfirmEmail: userInput => dispatch(actions.confirmEmail(userInput)) };
 };
 
+// use connect to put mapStateToProps and mapDispatchToProps together
 export default connect(mapStateToProps, mapDispatchToProps)(ConfirmEmail);
 

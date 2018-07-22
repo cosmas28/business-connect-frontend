@@ -1,6 +1,12 @@
+// ./src/components/common/DashboardTitle.js
 import React from 'react';
 import PropTypes from 'prop-types';
 
+/**
+ *
+ * @param {Object} props - properties from parent component
+ * @returns {JSX} - render dashboard title bar
+ */
 const DashboardTitle = props => {
     return (
         <div className="row">
@@ -13,6 +19,7 @@ const DashboardTitle = props => {
     );
 };
 
+// define prop types for DashboardTitle
 DashboardTitle.propTypes = { 'title': PropTypes.string };
 
 export default DashboardTitle;

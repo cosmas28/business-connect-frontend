@@ -1,3 +1,11 @@
+// ./src/reducers/businessReducers.js
+
+/**
+ *
+ * @param {Array} currentState - current store state of businesses object
+ * @param {string} action - a store dispatched action type
+ * @returns {Array} - next store state of businesses object
+ */
 export const businessesReducer = (currentState = [], action) => {
     switch (action.type) {
         case 'FETCH_ALL_BUSINESSES_SUCCESS':
@@ -10,6 +18,12 @@ export const businessesReducer = (currentState = [], action) => {
     }
 };
 
+/**
+ *
+ * @param {Object} currentState - current store state of business object
+ * @param {string} action - a store dispatched action type
+ * @returns {Array} - next store state of business object
+ */
 export const businessReducer = (currentState = {}, action) => {
     switch (action.type) {
         case 'FETCH_BUSINESSES_BY_ID_SUCCESS':
@@ -21,6 +35,12 @@ export const businessReducer = (currentState = {}, action) => {
     }
 };
 
+/**
+ *
+ * @param {Array} currentState - current store state of userBusinesses object
+ * @param {string} action - a store dispatched action type
+ * @returns {Array} - next store state of userBusinesses object
+ */
 export const userBusinessReducer = (currentState = [], action) => {
     switch (action.type) {
         case 'FETCH_BUSINESSES_BY_USER_ID_SUCCESS':
@@ -32,6 +52,12 @@ export const userBusinessReducer = (currentState = [], action) => {
     }
 };
 
+/**
+ *
+ * @param {Array} currentState - current store state of businessDelete object
+ * @param {string} action - a store dispatched action type
+ * @returns {Array} - next store state of businessDelete object
+ */
 export const deleteBusinessReducer = (currentState = [], action) => {
     switch (action.type) {
         case 'DELETE_BUSINESS_SUCCESS':

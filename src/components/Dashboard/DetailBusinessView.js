@@ -1,3 +1,4 @@
+// ./src/components/Dashboard/DetailBusinessView.js
 import React from 'react';
 import { connect } from 'react-redux';
 import DetailBusinessComponent from './DetailBusinessComponent';
@@ -8,6 +9,11 @@ import AddReviewForm from './addReviewForm';
 
 
 class DetailBusinessView extends React.Component {
+
+    /**
+     *
+     * @param {Object} props - passed properties
+     */
     constructor(props) {
         super(props);
         this.accessToken = sessionStorage.getItem('accessToken');
@@ -18,14 +24,17 @@ class DetailBusinessView extends React.Component {
         this.onInputChange = this.onInputChange.bind(this);
     }
 
+    // event handler for business delete button
     handleDeleteBusiness() {
         this.props.deleteBusiness(this.accessToken, this.businessId);
     }
 
+    // execute fetchBusinessesById() after the component did mount on the dom
     componentDidMount() {
         this.props.fetchBusinessesById(this.accessToken, this.businessId);
     }
 
+    // event handler for review form onSubmit event
     onSubmitReview(event) {
         event.preventDefault();
         const input = { review: this.state.review };
@@ -33,12 +42,14 @@ class DetailBusinessView extends React.Component {
         event.target.reset();
     }
 
+    // event handler for reviews form input change
     onInputChange(event) {
         const object = event.target;
         const { value: v, name: key } = object;
         this.setState({ [key]: v });
     }
 
+    // renders JSX content
     render () {
         let canDelete = false;
         if (this.userId === this.props.business.owner_id) {
@@ -123,6 +134,7 @@ class DetailBusinessView extends React.Component {
     }
 }
 
+// Maps state from store to props
 const mapStateToProps = state => {
     return {
         business: state.business,
@@ -131,6 +143,7 @@ const mapStateToProps = state => {
     };
 };
 
+// Maps actions to props
 const mapDispatchToProps = (dispatch) => {
     return {
         addReview: (accessToken, id, review) => dispatch(addReviews(accessToken, id, review)),
@@ -139,4 +152,5 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 
+// use connect to put mapStateToProps and mapDispatchToProps together
 export default connect(mapStateToProps, mapDispatchToProps)(DetailBusinessView);
