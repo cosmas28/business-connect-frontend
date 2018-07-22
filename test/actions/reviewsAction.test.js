@@ -19,7 +19,6 @@ describe('reviews tests', () => {
     const mockData = {};
     const mockAccessToken = 'thisismybesttokenin2018';
     const mockBusinesssId = 1;
-    const mockFetchedReviews = [];
 
     describe('add reviews tests', () => {
         it('should create ADD_RESPONSE_MESSAGE action', done => {
