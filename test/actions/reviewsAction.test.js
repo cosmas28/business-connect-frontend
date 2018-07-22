@@ -45,7 +45,7 @@ describe('reviews tests', () => {
                         id: 1,
                         review: 'this business is very far from Kitale town!'
                     },
-                    status: 201
+                    status: 200
                 });
             });
             const expectedAction = [
