@@ -37,7 +37,7 @@ class UserBusinessView extends React.Component {
                          <div className="row no-gutters">
                             <div className="col-md-12 col-sm-12 col-xs-12">
                                 <div className="main-view-page">
-                                    {this.props.userBusinesses.status_code === 204 ? (
+                                    {this.props.userBusinesses.status === 204 ? (
                                         <p>You have not registered a business.Please register one.</p>
                                     ) : (
                                         <div>
