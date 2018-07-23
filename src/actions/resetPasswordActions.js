@@ -1,33 +1,11 @@
 // ./src/actions/resetPasswordActions.js
 import axios from 'axios';
 import * as actionTypes from './actionTypes';
+import history from '../helpers/history';
+import { addResponseMessage } from './responseMessage';
 
 // API URL
 const apiUrl = 'http://127.0.0.1:5000/api/v2/auth/reset_password/';
-
-/**
- *
- * @param {Object} error - an object of error message and status code
- * @returns {Object} - an object of error message and action type
- */
-export const confirmEmailFailed = (error) => {
-    return {
-        error,
-        type: actionTypes.CONFIRM_EMAIL_FAIL
-    };
-};
-
-/**
- *
- * @param {Object} message - an object of success message and status code
- * @return {Object} - an object of success message and action type
- */
-export const confirmEmailSuccess = (message) => {
-    return {
-        message,
-        type: actionTypes.CONFIRM_EMAIL_SUCCESS
-    };
-};
 
 /**
  *
@@ -63,14 +41,14 @@ export const confirmEmail = (userInput) => {
         return axios.post(apiUrl + 'confirm_email', userInput)
         .then(response => {
             if (response.data.status_code === 200) {
-                dispatch(confirmEmailSuccess(response.data));
+                dispatch(addResponseMessage(response.data));
             } else {
-                dispatch(confirmEmailFailed(response.data));
+                dispatch(addResponseMessage(response.data));
             }
         })
         .catch(error => {
             if (error.response) {
-                dispatch(confirmEmailFailed(error.response.data));
+                dispatch(addResponseMessage(error.response.data));
             }
         });
     };
@@ -88,12 +66,15 @@ export const resetPassword = (accessToken, inputData) => {
         .then(response => {
             if (response.data.status_code === 200) {
                 dispatch(resetPasswordSuccess(response.data));
+                history.push('/login');
             } else {
                 dispatch(resetPasswordFailed(response.data));
             }
         })
         .catch(error => {
-            dispatch(resetPasswordFailed(error.response.data));
+            if (error.response) {
+                dispatch(resetPasswordFailed(error.response.data));
+            }
         });
     };
 };

@@ -7,14 +7,13 @@ import {
     deleteBusinessReducer
 } from './businessesReducers';
 import { responseMessageReducer } from './responseMsgReducers';
-import { confirmEmailReducer, resetPasswordReducer } from './resetPasswordReducers';
+import { resetPasswordReducer } from './resetPasswordReducers';
 
 // root reducer
 export default combineReducers({
     business: businessReducer,
     businessDelete: deleteBusinessReducer,
     businesses: businessesReducer,
-    mail: confirmEmailReducer,
     messages: responseMessageReducer,
     resetPassword: resetPasswordReducer,
     userBusinesses: userBusinessReducer

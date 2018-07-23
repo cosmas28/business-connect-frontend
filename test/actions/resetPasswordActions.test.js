@@ -20,7 +20,7 @@ describe('test reset password actions', () => {
     const mockToken = 'hereissometoken124';
 
     describe('test email confirmation action', () => {
-        it('should create CONFIRM_EMAIL_SUCCESS action after successfully sent email', done => {
+        it('should create ADD_RESPONSE_MESSAGE action after successfully sent email', done => {
             moxios.wait(() => {
                 const request = moxios.requests.mostRecent();
                 request.respondWith({
@@ -37,7 +37,7 @@ describe('test reset password actions', () => {
                         message: 'Confirmation email sent. Check your email!',
                         status_code: 200
                     },
-                    type: types.CONFIRM_EMAIL_SUCCESS
+                    type: types.ADD_RESPONSE_MESSAGE
                 }
             ];
 
@@ -49,7 +49,7 @@ describe('test reset password actions', () => {
             });
         });
 
-        it('should create CONFIRM_EMAIL_FAIL action after successfully sent email', done => {
+        it('should create ADD_RESPONSE_MESSAGE action after successfully sent email', done => {
             moxios.wait(() => {
                 const request = moxios.requests.mostRecent();
                 request.respondWith({
@@ -62,11 +62,11 @@ describe('test reset password actions', () => {
 
             const expectedActions = [
                 {
-                    error: {
+                    message: {
                         message: 'Email does not exist!',
                         status_code: 406
                     },
-                    type: types.CONFIRM_EMAIL_FAIL
+                    type: types.ADD_RESPONSE_MESSAGE
                 }
             ];
 
