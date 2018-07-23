@@ -16,9 +16,7 @@ const OneBusinessView = props => {
                         <h3 className="">{props.name}</h3>
                         <div>
                             <span className="badge badge-info">{props.category} </span>
-                            <span className="business-text"><span className="fa fa-map-marker"></span>  {props.location}</span> |
-                            <span className="business-text"><span className="fa fa-comments"></span>  4</span> |
-                            <span>By <span className="business-text">Business owner</span></span>
+                            <span className="business-text"><span className="fa fa-map-marker"></span>  {props.location}</span>
                         </div>
                         <p>
                         {props.summary}
@@ -26,10 +24,6 @@ const OneBusinessView = props => {
                     </div>
                 </div>
             </Link>
-            <div className="business-btn">
-                <button type="button" className="btn btn-danger">Delete</button>
-                <button type="button" className="btn btn-light">Update</button>
-            </div>
         </div>
     );
 };
