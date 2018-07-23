@@ -37,7 +37,7 @@ class ConfirmEmail extends React.Component {
     // renders JSX content
     render() {
         let responseMessage = null;
-        if (this.props.status_code === 200) {
+        if (this.props.response.status_code === 200) {
             responseMessage = <div className="alert alert-success alert-dismissible fade show" role="alert">
                 Check your email to confirm your account!
                 <button type="button" className="close" data-dismiss="alert" aria-label="Close">
@@ -46,7 +46,7 @@ class ConfirmEmail extends React.Component {
             </div>;
         } else {
             responseMessage = <div className="alert alert-danger alert-dismissible fade show" role="alert">
-                <strong>Error</strong> {this.props.message}
+                <strong>Error</strong> {this.props.response.response_message}
                 <button type="button" className="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -62,7 +62,7 @@ class ConfirmEmail extends React.Component {
                             <div className="col-md-12 col-sm-12 com-xs-12">
                                 <div className="main-login-page">
                                     <p>Confirm your email address</p>
-                                    {this.props.message &&
+                                    {this.props.response.response_message &&
                                         responseMessage
                                     }
                                     <form onSubmit={this.onSubmit}>
@@ -91,10 +91,7 @@ class ConfirmEmail extends React.Component {
 
 // Maps state from store to props
 const mapStateToProps = (state) => {
-    return {
-        message: state.mail.response_message,
-        status_code: state.mail.status_code
-    };
+    return { response: state.messages };
 };
 
 // Maps actions to props
