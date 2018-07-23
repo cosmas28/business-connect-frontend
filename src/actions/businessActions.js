@@ -137,7 +137,8 @@ export const fetchUserBusinessesById = (accessToken, userId) => {
             if (response.status === 200) {
                 dispatch(fetchUserBusinessesSuccess(response.data.business_list));
             } else {
-                dispatch(fetchUserBusinessesFail(response.data.response_message));
+                dispatch(fetchUserBusinessesFail(response));
+                history.push('/register_business');
             }
         })
         .catch(error => {
