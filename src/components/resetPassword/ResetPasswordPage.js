@@ -6,7 +6,7 @@ import * as actions from '../../actions/resetPasswordActions';
 import Header from '../common/Header';
 
 
-class ResetPasswordPage extends React.Component {
+export class ResetPasswordPage extends React.Component {
 
     /**
      *

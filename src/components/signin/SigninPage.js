@@ -7,7 +7,7 @@ import SignInForm from './SignInForm';
 import * as actions from '../../actions/loginActions';
 import { deleteResponseMessages } from '../../actions/responseMessage';
 
-class SignInPage extends React.Component {
+export class SignInPage extends React.Component {
 
     /**
      *

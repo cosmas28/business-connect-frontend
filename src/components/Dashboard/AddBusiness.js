@@ -7,7 +7,7 @@ import AddBusinessForm from './AddBusinessForm';
 import * as actions from '../../actions/businessActions';
 import { deleteResponseMessages } from '../../actions/responseMessage';
 
-class AddBusiness extends React.Component {
+export class AddBusiness extends React.Component {
 
     /**
      *

@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import Header from '../common/Header';
 import * as actions from '../../actions/resetPasswordActions';
 
-class ConfirmEmail extends React.Component {
+export class ConfirmEmail extends React.Component {
 
     /**
      *
