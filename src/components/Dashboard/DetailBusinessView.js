@@ -3,12 +3,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import DetailBusinessComponent from './DetailBusinessComponent';
 import DashboardNavBar from './../common/DashboardNavBar';
-import { fetchBusinessesById, deleteBusiness } from '../../actions/businessActions';
+import { fetchBusinessesById } from '../../actions/businessActions';
 import { addReviews } from '../../actions/reviewsActions';
 import AddReviewForm from './addReviewForm';
 
 
-class DetailBusinessView extends React.Component {
+export class DetailBusinessView extends React.Component {
 
     /**
      *
@@ -19,14 +19,8 @@ class DetailBusinessView extends React.Component {
         this.accessToken = sessionStorage.getItem('accessToken');
         this.userId = sessionStorage.getItem('userId');
         this.businessId = this.props.match.params.id;
-        this.handleDeleteBusiness = this.handleDeleteBusiness.bind(this);
         this.onSubmitReview = this.onSubmitReview.bind(this);
         this.onInputChange = this.onInputChange.bind(this);
-    }
-
-    // event handler for business delete button
-    handleDeleteBusiness() {
-        this.props.deleteBusiness(this.accessToken, this.businessId);
     }
 
     // execute fetchBusinessesById() after the component did mount on the dom
@@ -51,46 +45,17 @@ class DetailBusinessView extends React.Component {
 
     // renders JSX content
     render () {
-        let canDelete = false;
-        if (this.userId === this.props.business.owner_id) {
-            canDelete = true;
-        }
 
         return (
             <div className="page-wrapper">
                 <DashboardNavBar/>
                 <main className="main-body">
                     <div className="container-fluid">
-                        {this.props.deleteRes.status_code === 204 ? (
-                            <div>
-                                {this.props.deleteRes.response_message &&
-                                <div className="alert alert-success" role="alert">
-                                    {this.props.deleteRes.response_message}
-                                    <button type="button" className="close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                }
-                            </div>
-                        ) : (
-                            <div>
-                                {this.props.deleteRes.response_message &&
-                                <div className="alert alert-danger" role="alert">
-                                    {this.props.deleteRes.response_message}
-                                    <button type="button" className="close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                }
-                            </div>
-                        )}
                         <DetailBusinessComponent
                             category={this.props.business.category}
                             ownerName={this.props.business.created_by}
-                            canDelete={canDelete}
                             location={this.props.business.location}
                             name={this.props.business.name}
-                            onDelete={this.handleDeleteBusiness}
                             summary={this.props.business.summary}
                             totalReviews={
                                 this.props.business.reviews
@@ -138,7 +103,6 @@ class DetailBusinessView extends React.Component {
 const mapStateToProps = state => {
     return {
         business: state.business,
-        deleteRes: state.businessDelete,
         message: state.messages
     };
 };
@@ -147,7 +111,6 @@ const mapStateToProps = state => {
 const mapDispatchToProps = (dispatch) => {
     return {
         addReview: (accessToken, id, review) => dispatch(addReviews(accessToken, id, review)),
-        deleteBusiness: (accessToken, id) => dispatch(deleteBusiness(accessToken, id)),
         fetchBusinessesById: (accessToken, id) => dispatch(fetchBusinessesById(accessToken, id))
     };
 };

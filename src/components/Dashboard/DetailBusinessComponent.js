@@ -10,9 +10,6 @@ import DashboardTitle from './../common/DashboardTitle';
  */
 const DetailBusinessComponent = props => {
 
-    // get userId fro the local storage
-    const userId = sessionStorage.getItem('userId');
-
     return (
         <div>
             <DashboardTitle title={props.name}/>
@@ -29,9 +26,6 @@ const DetailBusinessComponent = props => {
                             {props.summary}
                         </p>
                     </div>
-                    <div className="business-btn">
-                        <button type="button" className="btn btn-danger" onClick={props.onDelete}>Delete</button>
-                    </div>
                 </div>
             </div>
         </div>
@@ -44,7 +38,6 @@ DetailBusinessComponent.propTypes = {
     'category': PropTypes.string,
     'location': PropTypes.string,
     'name': PropTypes.string,
-    'onDelete': PropTypes.func,
     'ownerName': PropTypes.string,
     'summary': PropTypes.string,
     'totalReviews': PropTypes.number
