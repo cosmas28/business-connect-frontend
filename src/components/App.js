@@ -10,6 +10,7 @@ import Dashboard from './Dashboard/Dashboard';
 import AddBusiness from './Dashboard/AddBusiness';
 import ProtectedRoute from './ProtectedRoute';
 import DetailBusinessView from './Dashboard/DetailBusinessView';
+import UpdateBusiness from './Dashboard/UpdateBusinessContainer';
 
 class App extends React.Component {
     constructor(props) {
@@ -30,6 +31,7 @@ class App extends React.Component {
                         <Route path="/user_business" component={UserBusinessView} />
                         <Route path="/businesses/:id" component={DetailBusinessView} />
                         <Route path="/register_business" component={AddBusiness} />
+                        <Route path="/business/update/:id" component={UpdateBusiness} />
                     </Switch>
                 </div>
             </BrowserRouter>
