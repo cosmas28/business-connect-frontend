@@ -81,30 +81,6 @@ export const fetchBusinessesByIdFail = (error) => {
 
 /**
  *
- * @param {Object} message - an object of success message and status code
- * @return {Object} - an object of success message and action type
- */
-export const deleteBusinessSuccess = (message) => {
-    return {
-        message,
-        type: actionTypes.DELETE_BUSINESS_SUCCESS
-    };
-};
-
-/**
- *
- * @param {Object} error - an object of error message and status code
- * @returns {Object} - an object of error message and action type
- */
-export const deleteBusinessFail = (error) => {
-    return {
-       error,
-        type: actionTypes.DELETE_BUSINESS_FAIL
-    };
-};
-
-/**
- *
  * @param {string} accessToken - API authorization access token
  * @returns {Function} - a function that takes dispatch as its only argument and dispatches an action when the promise resolves
  */
@@ -209,15 +185,44 @@ export const deleteBusiness = (accessToken, businessId) => {
         return axios.delete(apiUrl + '/' + businessId, { 'headers': { 'Authorization': `Bearer ${accessToken}` } })
         .then(response => {
             if (response.data.status_code === 204) {
-                dispatch(deleteBusinessSuccess(response.data));
+                dispatch(addResponseMessage(response.data));
                 history.push('/dashboard');
             } else {
-                dispatch(deleteBusinessFail(response.data));
+                dispatch(addResponseMessage(response.data));
             }
         })
         .catch(error => {
             if (error.response) {
-                dispatch(deleteBusinessFail(error.response.data));
+                dispatch(addResponseMessage(error.response.data));
+            }
+        });
+    };
+};
+
+/**
+ *
+ * @param {string} accessToken - API authorization access token
+ * @param {number} businessId - unique business ID for accessing business details
+ * @param {newData} newData - new data to update the current business details
+ * @returns {Function} - a function that takes dispatch as its only argument and dispatches an action when the promise resolves
+ */
+export const updateBusiness = (accessToken, businessId, newData) => {
+    return (dispatch) => {
+        return axios.put(apiUrl + '/' + businessId, newData, { 'headers': { 'Authorization': `Bearer ${accessToken}` } })
+        .then(response => {
+            if (response.data.status_code === 200) {
+                dispatch(addResponseMessage({
+                    response_message: 'Business successfuly updated!',
+                    status_code: 200
+                }));
+                history.push('/dashboard');
+            } else {
+                dispatch(addResponseMessage(response.data));
+            }
+        })
+        .catch(error => {
+            if (error.response) {
+                dispatch(addResponseMessage(error.response.data));
             }
         });
     };
