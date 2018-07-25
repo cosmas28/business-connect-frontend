@@ -51,20 +51,3 @@ export const userBusinessReducer = (currentState = [], action) => {
             return currentState;
     }
 };
-
-/**
- *
- * @param {Array} currentState - current store state of businessDelete object
- * @param {string} action - a store dispatched action type
- * @returns {Array} - next store state of businessDelete object
- */
-export const deleteBusinessReducer = (currentState = [], action) => {
-    switch (action.type) {
-        case 'DELETE_BUSINESS_SUCCESS':
-            return action.message;
-        case 'DELETE_BUSINESS_FAIL':
-            return action.error;
-        default:
-            return currentState;
-    }
-};
