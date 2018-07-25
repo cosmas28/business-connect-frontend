@@ -1,50 +1,21 @@
 import React from 'react';
+import renderer from 'react-test-renderer';
 import { MemoryRouter } from 'react-router-dom';
-import AddBusinessForm from '../../src/components/Dashboard/AddBusinessForm';
+import { AddBusiness } from '../../src/components/Dashboard/AddBusiness';
 
-describe('Add business form test specs', () => {
-    let mountedAddBusinessForm = null,
-        props = null;
-    const component = () => {
-        if (!mountedAddBusinessForm) {
-            mountedAddBusinessForm = mount(
-                <MemoryRouter><AddBusinessForm {...props} /></MemoryRouter>
-            );
-        }
+describe('tests for AddBusiness component', () => {
+    it('Render without crashing', () => {
+        const mockMessage = '';
 
-        return mountedAddBusinessForm;
-    },
-        mockAddBusinessHandler = jest.fn(),
-        mockInputChange = jest.fn();
-
-    beforeEach(() => {
-        props = {
-            'addBusinessHandler': mockAddBusinessHandler,
-            'errorMessage': null,
-            'handleInputChange': mockInputChange,
-            'successMessage': null
-        };
-        mountedAddBusinessForm = null;
-    });
-
-    it('renders without crashing', () => {
-        expect(component()).toHaveLength(1);
-    });
-
-    it('contains the form', () => {
-        expect(component().find('input')).toHaveLength(3);
-        expect(component().find('button')).toHaveLength(1);
-    });
-
-    it('should call `handleInputChange` when input field is changed', () => {
-        component().find('input.test')
-        .simulate('change');
-        expect(props.handleInputChange).toBeCalled();
-    });
-
-    it('should call `addBusinessHandler` when submit button is clicked', () => {
-        component().find('form')
-        .simulate('submit');
-        expect(props.addBusinessHandler).toBeCalled();
+        const mockDeleteMessage = jest.fn();
+        const mockRegisterBusiness = jest.fn();
+        const tree = renderer.create(
+            <MemoryRouter><AddBusiness
+                responseMessage={mockMessage}
+                deleteMessage={mockDeleteMessage}
+                registerBusiness={mockRegisterBusiness}
+            /></MemoryRouter>
+        );
+        expect(tree.toJSON()).toMatchSnapshot();
     });
 });
