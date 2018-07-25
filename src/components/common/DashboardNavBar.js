@@ -1,6 +1,7 @@
 // ./src/components/common/DashboardNavBar.js
 import React from 'react';
-import { Redirect, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import history from '../../helpers/history';
 import axios from 'axios';
 
 class DashboardNavBar extends React.Component {
@@ -17,7 +18,7 @@ class DashboardNavBar extends React.Component {
     }
 
     // event hander for logout link, when clicked
-    onClickLogout(event) {
+    onClickLogout() {
         sessionStorage.removeItem('accessToken');
         sessionStorage.removeItem('loggedIn');
         sessionStorage.removeItem('userId');
@@ -25,18 +26,13 @@ class DashboardNavBar extends React.Component {
             method: 'post',
             url: this.logoutUrl
         });
+        history.push('/login');
     }
 
     // renders JSX for dashboard navigation bar
     render() {
-        let isRedirect = null;
-        if (sessionStorage.getItem('loggedIn') === null) {
-            isRedirect = <Redirect to={{ pathname: '/login' }} />;
-        }
-
         return (
             <header>
-                {isRedirect}
                 <div className="row">
                     <div className="col-md-12 col-sm-12 col-xs-12">
                         <nav className="navbar fixed-top navbar-expand-lg account-menu navbar-light ">
