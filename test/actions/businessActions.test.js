@@ -245,7 +245,7 @@ describe('business interaction tests', () => {
     });
 
     describe('delete business action tests', () => {
-        it('should create DELETE_BUSINESS_SUCCESS action', done => {
+        it('should create ADD_RESPONSE_MESSAGE action when action succeded', done => {
             moxios.wait(() => {
                 const request = moxios.requests.mostRecent();
                 request.respondWith({
@@ -261,18 +261,18 @@ describe('business interaction tests', () => {
                         respond_message: 'Business is successfully deleted!',
                         status_code: 204
                     },
-                    type: types.DELETE_BUSINESS_SUCCESS
+                    type: types.ADD_RESPONSE_MESSAGE
                 }
             ];
 
-            const store = mockStore({ businessDelete: [] });
+            const store = mockStore({ message: [] });
 
             return store.dispatch(actions.deleteBusiness(mockAccessToken, mockBusinesssId)).then(() => {
                 expect(store.getActions()).toEqual(expectedAction);
                 done();
             });
         });
-        it('should create DELETE_BUSINESS_FAIL action', done => {
+        it('should create ADD_RESPONSE_MESSAGE action when delete action failed', done => {
             moxios.wait(() => {
                 const request = moxios.requests.mostRecent();
                 request.respondWith({
@@ -284,17 +284,74 @@ describe('business interaction tests', () => {
             });
             const expectedAction = [
                 {
-                    error: {
+                    message: {
                         respond_message: 'You have no permission to delete this business!',
                         status_code: 401
                     },
-                    type: types.DELETE_BUSINESS_FAIL
+                    type: types.ADD_RESPONSE_MESSAGE
                 }
             ];
 
-            const store = mockStore({ businessDelete: [] });
+            const store = mockStore({ messages: [] });
 
             return store.dispatch(actions.deleteBusiness(mockAccessToken, mockBusinesssId)).then(() => {
+                expect(store.getActions()).toEqual(expectedAction);
+                done();
+            });
+        });
+    });
+
+    describe('business update action tests', () => {
+        it('should create ADD_RESPONSE_MESSAGE action after successful update', done => {
+            moxios.wait(() => {
+                const request = moxios.requests.mostRecent();
+                request.respondWith({
+                    response: {
+                        response_message: 'Business successfuly updated!',
+                        status_code: 200
+                    }
+                });
+            });
+            const expectedAction = [
+                {
+                    message: {
+                        response_message: 'Business successfuly updated!',
+                        status_code: 200
+                    },
+                    type: types.ADD_RESPONSE_MESSAGE
+                }
+            ];
+
+            const store = mockStore({ messages: [] });
+
+            return store.dispatch(actions.updateBusiness(mockAccessToken, mockBusinesssId, dataInput)).then(() => {
+                expect(store.getActions()).toEqual(expectedAction);
+                done();
+            });
+        });
+        it('should create ADD_RESPONSE_MESSAGE action when update fail', done => {
+            moxios.wait(() => {
+                const request = moxios.requests.mostRecent();
+                request.respondWith({
+                    response: {
+                        response_message: 'The business does not exists!',
+                        status_code: 406
+                    }
+                });
+            });
+            const expectedAction = [
+                {
+                    message: {
+                        response_message: 'The business does not exists!',
+                        status_code: 406
+                    },
+                    type: types.ADD_RESPONSE_MESSAGE
+                }
+            ];
+
+            const store = mockStore({ messages: [] });
+
+            return store.dispatch(actions.updateBusiness(mockAccessToken, mockBusinesssId, dataInput)).then(() => {
                 expect(store.getActions()).toEqual(expectedAction);
                 done();
             });
