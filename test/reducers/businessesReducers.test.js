@@ -157,36 +157,4 @@ describe('business reducers tests suites', () => {
             });
         });
     });
-
-    describe('delete business reducer', () => {
-        it('should return the initial state', () => {
-            expect(deleteBusinessReducer(undefined, {})).toEqual([]);
-        });
-
-        it('should handle DELETE_BUSINESS_SUCCESS action', () => {
-            expect(deleteBusinessReducer([], {
-                message: {
-                    response_message: 'You have successfully deleted this business!',
-                    status_code: 204
-                },
-                type: types.DELETE_BUSINESS_SUCCESS
-            })).toEqual({
-                response_message: 'You have successfully deleted this business!',
-                status_code: 204
-            });
-        });
-
-        it('should handle DELETE_BUSINESS_FAIL action', () => {
-            expect(deleteBusinessReducer([], {
-                error: {
-                    response_message: 'You do not have permision to delete this business!',
-                    status_code: 401
-                },
-                type: types.DELETE_BUSINESS_FAIL
-            })).toEqual({
-                response_message: 'You do not have permision to delete this business!',
-                status_code: 401
-            });
-        });
-    });
 });
