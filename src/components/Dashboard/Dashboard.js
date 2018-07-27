@@ -1,6 +1,7 @@
 // ./src/components/Dashboard/Dashboard.js
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import DashboardNavBar from './../common/DashboardNavBar';
 import Footer from './../common/Footer';
@@ -8,6 +9,7 @@ import DashboardTitle from './../common/DashboardTitle';
 import OneBusinessView from './ViewBusiness/OneBusinessView';
 import { fetchBusinesses, deleteBusiness } from '../../actions/businessActions';
 import { deleteResponseMessages } from '../../actions/responseMessage';
+import BusinessNav from './../common/BusinessNav';
 
 export class Dashboard extends React.Component {
 
@@ -63,19 +65,12 @@ export class Dashboard extends React.Component {
                                 }
                             </div>
                         )}
-                        <DashboardTitle title="Registered Business List"/>
+                        <DashboardTitle title="All Businesses"/>
                         <div className="row no-gutters">
                             <div className="col-md-12 col-sm-12 col-xs-12">
                                 <div className="main-view-page">
                                 <div className="category-tags">
-                                    <a href="single-business.html"><span className="badge">Category</span></a>
-                                    <a href="#"><span className="badge">Category</span></a>
-                                    <a href="#"><span className="badge">Category</span></a>
-                                    <a href="#"><span className="badge">Category</span></a>
-                                    <a href="#"><span className="badge">Category</span></a>
-                                    <a href="#"><span className="badge">Category</span></a>
-                                    <a href="#"><span className="badge">Category</span></a>
-                                    <a href="#"><span className="badge">Category</span></a>
+                                    <BusinessNav businessList={this.props.businesses} />
                                 </div>
                                 {!this.props.businesses &&
                                         <p>You have not registered a business.Please register one.</p>
