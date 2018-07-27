@@ -5,12 +5,14 @@ import SignUpPage from './signup/SignupPage';
 import SignInPage from './signin/SigninPage';
 import ResetPasswordPage from './resetPassword/ResetPasswordPage';
 import ConfirmEmail from './resetPassword/ConfirmEmail';
-import UserBusinessView from './Dashboard/UserBusinessView';
 import Dashboard from './Dashboard/Dashboard';
 import AddBusiness from './Dashboard/AddBusiness';
 import ProtectedRoute from './ProtectedRoute';
 import DetailBusinessView from './Dashboard/DetailBusinessView';
 import UpdateBusiness from './Dashboard/UpdateBusinessContainer';
+import BusinessCategory from './Dashboard/BusinessCategory';
+import MyBusinesses from './Dashboard/MyBusinesses';
+import BusinessByLocation from './Dashboard/BusinessByLocation';
 
 class App extends React.Component {
     constructor(props) {
@@ -28,10 +30,12 @@ class App extends React.Component {
                         <Route exact path="/reset_password/password/:token" component={ResetPasswordPage}/>
                         <Route exact path="/reset_password/confirm_email" component={ConfirmEmail}/>
                         <ProtectedRoute path="/dashboard" loggedIn={this.loggedIn} component={Dashboard} />
-                        <Route path="/user_business" component={UserBusinessView} />
                         <Route path="/businesses/:id" component={DetailBusinessView} />
                         <Route path="/register_business" component={AddBusiness} />
                         <Route path="/business/update/:id" component={UpdateBusiness} />
+                        <ProtectedRoute exact path="/category/:category" loggedIn={this.loggedIn} component={BusinessCategory} />
+                        <ProtectedRoute exact path="/location/:location" loggedIn={this.loggedIn} component={BusinessByLocation} />
+                        <ProtectedRoute exact path="/user/businesses/:userId" loggedIn={this.loggedIn} component={MyBusinesses} />
                     </Switch>
                 </div>
             </BrowserRouter>
