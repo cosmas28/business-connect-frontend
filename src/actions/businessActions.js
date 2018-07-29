@@ -5,7 +5,7 @@ import history from '../helpers/history';
 import { addResponseMessage } from './responseMessage';
 
 // API URL
-const apiUrl = 'http://127.0.0.1:5000/api/v2/businesses';
+const apiUrl = process.env.REACT_APP_API_URL + '/api/v2/businesses';
 
 /**
  *
@@ -79,6 +79,19 @@ export const fetchBusinessesByIdFail = (error) => {
     };
 };
 
+export const doLogout = () => {
+    sessionStorage.removeItem('accessToken');
+    sessionStorage.removeItem('loggedIn');
+    sessionStorage.removeItem('userId');
+    axios({
+        method: 'post',
+        url: process.env.REACT_APP_API_URL + '/api/v2/auth/logout'
+    });
+    history.push('/login');
+
+    return true;
+};
+
 /**
  *
  * @param {string} accessToken - API authorization access token
@@ -95,6 +108,9 @@ export const fetchBusinesses = (accessToken) => {
             }
         })
         .catch(error => {
+            if (error.response.status === 422 || error.response.status === 401) {
+                dispatch(doLogout());
+            }
             dispatch(fetchBusinessesFail(error.response.data));
         });
     };
@@ -119,6 +135,9 @@ export const fetchUserBusinessesById = (accessToken, userId) => {
         })
         .catch(error => {
             if (error.response) {
+                if (error.response.status === 422 || error.response.status === 401) {
+                    dispatch(doLogout());
+                }
                 dispatch(fetchUserBusinessesFail(error.response.data));
             }
         });
@@ -143,6 +162,9 @@ export const fetchBusinessesById = (accessToken, businessId) => {
         })
         .catch(error => {
             if (error.response) {
+                if (error.response.status === 422 || error.response.status === 401) {
+                    dispatch(doLogout());
+                }
                 dispatch(fetchBusinessesByIdFail(error.response.data));
             }
         });
@@ -168,6 +190,9 @@ export const registerBusiness = (accessToken, inputData) => {
         })
         .catch(error => {
             if (error.response) {
+                if (error.response.status === 422 || error.response.status === 401) {
+                    dispatch(doLogout());
+                }
                 dispatch(addResponseMessage(error.response.data));
             }
         });
@@ -193,6 +218,9 @@ export const deleteBusiness = (accessToken, businessId) => {
         })
         .catch(error => {
             if (error.response) {
+                if (error.response.status === 422 || error.response.status === 401) {
+                    dispatch(doLogout());
+                }
                 dispatch(addResponseMessage(error.response.data));
             }
         });
@@ -222,6 +250,9 @@ export const updateBusiness = (accessToken, businessId, newData) => {
         })
         .catch(error => {
             if (error.response) {
+                if (error.response.status === 422 || error.response.status === 401) {
+                    dispatch(doLogout());
+                }
                 dispatch(addResponseMessage(error.response.data));
             }
         });
