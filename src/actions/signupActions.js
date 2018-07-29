@@ -5,7 +5,7 @@ import history from '../helpers/history';
 import { addResponseMessage } from './responseMessage';
 
 // API URL
-const apiUrl = 'http://127.0.0.1:5000/api/v2/auth/register';
+const apiUrl = process.env.REACT_APP_API_URL + '/api/v2/auth/register';
 
 /**
  *
