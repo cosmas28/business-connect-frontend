@@ -6,7 +6,7 @@ import DashboardNavBar from './../common/DashboardNavBar';
 import Footer from './../common/Footer';
 import DashboardTitle from './../common/DashboardTitle';
 import OneBusinessView from './ViewBusiness/OneBusinessView';
-import { fetchBusinesses, deleteBusiness } from '../../actions/businessActions';
+import { fetchBusinesses, deleteBusiness, searchBusinesses } from '../../actions/businessActions';
 import { deleteResponseMessages } from '../../actions/responseMessage';
 import BusinessNav from './../common/BusinessNav';
 
@@ -21,6 +21,8 @@ export class MyBusinesses extends React.Component {
         this.authUser = sessionStorage.getItem('userId');
         this.accessToken = sessionStorage.getItem('accessToken');
         this.myId = this.props.match.params.userId;
+        this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleSearch = this.handleSearch.bind(this);
     }
 
     // execute fetchBusinesses() after the component did mount on the dom
@@ -33,6 +35,22 @@ export class MyBusinesses extends React.Component {
 
         // delete any flash message on responseMessage props
         this.props.deleteMessage();
+    }
+
+    // event handler for business registration input change
+    handleInputChange(event) {
+        const object = event.target;
+        const { value: v, name: key } = object;
+        this.setState({ [key]: v });
+    }
+
+    // event handler for business registration form onSubmit event
+    handleSearch(event) {
+        event.preventDefault();
+        // this.props.searchBusinesses(this.accessToken, this.state.search);
+        this.props.searchBusinesses(this.accessToken, this.state.search).then(() => {
+            this.props.history.push('/search/results/' + this.state.search);
+        });
     }
 
     // renders JSX content
@@ -67,7 +85,11 @@ export class MyBusinesses extends React.Component {
                                 }
                             </div>
                         )}
-                        <DashboardTitle title="My Business List"/>
+                        <DashboardTitle
+                            handleInputChange={this.handleInputChange}
+                            handleSearch={this.handleSearch}
+                            title="My Business List"
+                        />
                         <div className="row no-gutters">
                             <div className="col-md-12 col-sm-12 col-xs-12">
                                 <div className="main-view-page">
@@ -116,7 +138,8 @@ const mapDispatchToProps = (dispatch) => {
     return {
         deleteBusiness: (accessToken, id) => dispatch(deleteBusiness(accessToken, id)),
         deleteMessage: () => dispatch(deleteResponseMessages()),
-        fetchBusinesses: accessToken => dispatch(fetchBusinesses(accessToken))
+        fetchBusinesses: accessToken => dispatch(fetchBusinesses(accessToken)),
+        searchBusinesses: (accessToken, search) => dispatch(searchBusinesses(accessToken, search))
     };
 };
 
