@@ -9,17 +9,32 @@ import PropTypes from 'prop-types';
  */
 const DashboardTitle = props => {
     return (
-        <div className="row">
-            <div className="col-md-12 col-xs-12">
-                <div className="account-title">
-                    <h5>{props.title}</h5>
-                </div>
+        <div className="row account-title">
+            <div className="col-md-4 col-sm-12 col-xs-12">
+                <h5>{props.title}</h5>
+            </div>
+            <div className="col-md-4 col-sm-12 col-xs-12 offset-md-4">
+                <form onSubmit={props.handleSearch}>
+                    <div className="form-group">
+                        <input
+                            type="text"
+                            name="search"
+                            className="form-text-input form-control"
+                            placeholder="Search..."
+                            onChange={props.handleInputChange}
+                        />
+                    </div>
+                </form>
             </div>
         </div>
     );
 };
 
 // define prop types for DashboardTitle
-DashboardTitle.propTypes = { 'title': PropTypes.string };
+DashboardTitle.propTypes = {
+    'handleInputChange': PropTypes.func,
+    'handleSearch': PropTypes.func,
+    'title': PropTypes.string
+};
 
 export default DashboardTitle;
