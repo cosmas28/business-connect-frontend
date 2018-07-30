@@ -132,6 +132,92 @@ describe('business interaction tests', () => {
         });
     });
 
+    describe('search businesses tests', () => {
+
+        const mockSearchQuery = 'tech';
+        it('should create SEARCH_BUSINESSES_SUCCESS when businesses are found', done => {
+            moxios.wait(() => {
+                const request = moxios.requests.mostRecent();
+                request.respondWith({
+                    response: mockFetchedBusinesses,
+                    status: 200
+                });
+            });
+
+            const expectedAction = [
+                {
+                    businesses: mockFetchedBusinesses,
+                    type: types.SEARCH_BUSINESSES_SUCCESS
+                }
+            ];
+
+            const store = mockStore({ searchResults: [] });
+
+            return store.dispatch(actions.searchBusinesses(mockAccessToken, mockSearchQuery)).then(() => {
+                expect(store.getActions()).toEqual(expectedAction);
+                done();
+            });
+        });
+
+        it('should create ADD_RESPONSE_MESSAGE when no business found', done => {
+            moxios.wait(() => {
+                const request = moxios.requests.mostRecent();
+                request.respondWith({
+                    response: {
+                        respond_message: 'Business not found!',
+                        status_code: 404
+                    },
+                    status: 200
+                });
+            });
+            const expectedAction = [
+                {
+                    message: {
+                        respond_message: 'Business not found!',
+                        status_code: 404
+                    },
+                    type: types.ADD_RESPONSE_MESSAGE
+                }
+            ];
+
+            const store = mockStore({ messages: [] });
+
+            return store.dispatch(actions.searchBusinesses(mockAccessToken, mockSearchQuery)).then(() => {
+                expect(store.getActions()).toEqual(expectedAction);
+                done();
+            });
+        });
+
+        it('should create ADD_RESPONSE_MESSAGE when there', done => {
+            moxios.wait(() => {
+                const request = moxios.requests.mostRecent();
+                request.respondWith({
+                    response: {
+                        respond_message: 'Bad Authorization header',
+                        status_code: 500
+                    },
+                    status: 400
+                });
+            });
+            const expectedAction = [
+                {
+                    message: {
+                        respond_message: 'Bad Authorization header',
+                        status_code: 500
+                    },
+                    type: types.ADD_RESPONSE_MESSAGE
+                }
+            ];
+
+            const store = mockStore({ messages: [] });
+
+            return store.dispatch(actions.searchBusinesses(mockSearchQuery)).then(() => {
+                expect(store.getActions()).toEqual(expectedAction);
+                done();
+            });
+        });
+    });
+
     describe('fetch business by ID tests', () => {
         it('should create FETCH_BUSINESSES_BY_ID_SUCCESS action after successfuly fetched a busiess', done => {
             moxios.wait(() => {
