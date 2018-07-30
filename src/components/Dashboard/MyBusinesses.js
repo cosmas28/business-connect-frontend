@@ -74,7 +74,7 @@ export class MyBusinesses extends React.Component {
                                 <div className="category-tags">
                                     <BusinessNav businessList={this.props.businesses} />
                                 </div>
-                                {!filteredBusinesses &&
+                                {filteredBusinesses.length === 0 &&
                                         <p>You have not registered a business.Please register one.</p>
                                     }
                                     {filteredBusinesses.map((business, id) => {
