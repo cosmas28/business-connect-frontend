@@ -2,8 +2,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import DashboardTitle from './../common/DashboardTitle';
-
 /**
  *
  * @param {Object} props - properties from parent component
@@ -29,7 +27,13 @@ const AddBusinessForm = props => {
     return (
         <main className="main-body">
             <div className="container-fluid">
-                <DashboardTitle title="Add Business"/>
+                <div className="row">
+                    <div className="col-md-12 col-xs-12">
+                        <div className="account-title">
+                            <h5>Add Business</h5>
+                        </div>
+                    </div>
+                </div>
                 <div className="row no-gutters">
                     <div className="col-md-12 col-sm-12 col-xs-12">
                         <div className="create-business-page">

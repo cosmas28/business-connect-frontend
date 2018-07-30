@@ -12,7 +12,13 @@ const DetailBusinessComponent = props => {
 
     return (
         <div>
-            <DashboardTitle title={props.name}/>
+            <div className="row">
+                <div className="col-md-12 col-xs-12">
+                    <div className="account-title">
+                        <h5>{props.name}</h5>
+                    </div>
+                </div>
+            </div>
             <div className="row no-gutters">
                 <div className="col-md-12">
                     <div className="view-right-side">
