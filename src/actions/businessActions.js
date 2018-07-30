@@ -155,6 +155,9 @@ export const fetchBusinessesById = (accessToken, businessId) => {
         return axios.get(apiUrl + '/' + businessId, { 'headers': { 'Authorization': `Bearer ${accessToken}` } })
         .then(response => {
             if (response.status === 200) {
+                if (response.data.status_code === 404) {
+                    history.push('/404');
+                }
                 dispatch(fetchBusinessesByIdSuccess(response.data));
             } else {
                 dispatch(fetchBusinessesByIdFail(response.data.response_message));
