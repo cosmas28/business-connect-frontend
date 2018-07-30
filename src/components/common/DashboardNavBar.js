@@ -43,6 +43,7 @@ class DashboardNavBar extends React.Component {
 
                             <div className="collapse navbar-collapse" id="sideNavbar">
                                 <ul className="navbar-nav ml-auto">
+                                    <li><NavLink className="nav-link" to="/dashboard">Dashboard</NavLink></li>
                                     <li><a className="nav-link" href="" onClick={this.onClickLogout} >Logout</a></li>
                                 </ul>
                             </div>
