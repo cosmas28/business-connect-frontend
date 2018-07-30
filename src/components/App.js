@@ -14,6 +14,7 @@ import BusinessCategory from './Dashboard/BusinessCategory';
 import MyBusinesses from './Dashboard/MyBusinesses';
 import BusinessByLocation from './Dashboard/BusinessByLocation';
 import PageNotFound from './common/NotFoundPage';
+import SearchPage from './Dashboard/SearchPage';
 
 class App extends React.Component {
     constructor(props) {
@@ -37,8 +38,10 @@ class App extends React.Component {
                         <ProtectedRoute exact path="/category/:category" loggedIn={this.loggedIn} component={BusinessCategory} />
                         <ProtectedRoute exact path="/location/:location" loggedIn={this.loggedIn} component={BusinessByLocation} />
                         <ProtectedRoute exact path="/user/businesses/:userId" loggedIn={this.loggedIn} component={MyBusinesses} />
+                        <ProtectedRoute exact path="/search/results/:search" loggedIn={this.loggedIn} component={SearchPage} />
                         <Route component={PageNotFound} />
                         <Route path="/404" component={PageNotFound} />
+                        <ProtectedRoute exact path="/results" loggedIn={this.loggedIn} component={SearchPage} />
                     </Switch>
                 </div>
             </BrowserRouter>
