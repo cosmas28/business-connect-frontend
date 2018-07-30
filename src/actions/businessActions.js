@@ -94,6 +94,18 @@ export const doLogout = () => {
 
 /**
  *
+ * @param {Array} businesses - an array of business objects
+ * @returns {Object} - an object of action type and array of businesses
+ */
+export const searchBusinessesSuccess = (businesses) => {
+    return {
+        businesses,
+        type: actionTypes.SEARCH_BUSINESSES_SUCCESS
+    };
+};
+
+/**
+ *
  * @param {string} accessToken - API authorization access token
  * @returns {Function} - a function that takes dispatch as its only argument and dispatches an action when the promise resolves
  */
@@ -112,6 +124,35 @@ export const fetchBusinesses = (accessToken) => {
                 dispatch(doLogout());
             }
             dispatch(fetchBusinessesFail(error.response.data));
+        });
+    };
+};
+
+/**
+ *
+ * @param {string} accessToken - API authorization access token
+ * @param {string} searchQuery - search criteria for business
+ * @returns {Function} - a function that takes dispatch as its only argument and dispatches an action when the promise resolves
+ */
+export const searchBusinesses = (accessToken, searchQuery) => {
+    return (dispatch) => {
+        return axios.get(apiUrl + '/search?q=' + searchQuery + '&start=1&limit=5', { 'headers': { 'Authorization': `Bearer ${accessToken}` } })
+        .then(response => {
+            if (response.status === 200) {
+                if (response.data.status_code === 404) {
+                    dispatch(addResponseMessage(response.data));
+                } else {
+                    dispatch(searchBusinessesSuccess(response.data));
+                }
+            } else {
+                dispatch(addResponseMessage(response.data));
+            }
+        })
+        .catch(error => {
+            if (error.response.status === 422 || error.response.status === 401) {
+                dispatch(doLogout());
+            }
+            dispatch(addResponseMessage(error.response.data));
         });
     };
 };
