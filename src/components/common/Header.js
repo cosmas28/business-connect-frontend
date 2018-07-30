@@ -17,10 +17,16 @@ const Header = () => <header>
                 </button>
 
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul className="navbar-nav ml-auto">
-                        <li className="nav-item"><Link className="nav-link" to="/">Signup</Link></li>
-                        <li className="nav-item"><Link className="nav-link" to="/login">Login</Link></li>
-                    </ul>
+                        {sessionStorage.getItem('loggedIn') === 'true' ? (
+                            <ul className="navbar-nav ml-auto">
+                                <li className="nav-item"><Link className="nav-link" to="/dashboard">Dashboard</Link></li>
+                            </ul>
+                        ) : (
+                            <ul className="navbar-nav ml-auto">
+                                <li className="nav-item"><Link className="nav-link" to="/">Signup</Link></li>
+                                <li className="nav-item"><Link className="nav-link" to="/login">Login</Link></li>
+                            </ul>
+                        )}
                 </div>
             </nav>
         </div>
