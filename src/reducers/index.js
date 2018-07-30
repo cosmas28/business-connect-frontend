@@ -3,7 +3,8 @@ import { combineReducers } from 'redux';
 import {
     businessesReducer,
     userBusinessReducer,
-    businessReducer
+    businessReducer,
+    searchReducer
 } from './businessesReducers';
 import { responseMessageReducer } from './responseMsgReducers';
 import { resetPasswordReducer } from './resetPasswordReducers';
@@ -14,5 +15,6 @@ export default combineReducers({
     businesses: businessesReducer,
     messages: responseMessageReducer,
     resetPassword: resetPasswordReducer,
+    searchResults: searchReducer,
     userBusinesses: userBusinessReducer
 });

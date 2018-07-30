@@ -51,3 +51,12 @@ export const userBusinessReducer = (currentState = [], action) => {
             return currentState;
     }
 };
+
+export const searchReducer = (currentState = [], action) => {
+    switch (action.type) {
+        case 'SEARCH_BUSINESSES_SUCCESS':
+            return action.businesses;
+        default:
+            return currentState;
+    }
+};
