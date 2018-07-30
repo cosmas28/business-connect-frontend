@@ -1,4 +1,4 @@
-import { businessesReducer, businessReducer, userBusinessReducer, registerBusinessReducer, deleteBusinessReducer } from '../../src/reducers/businessesReducers';
+import { businessesReducer, businessReducer, userBusinessReducer, searchReducer } from '../../src/reducers/businessesReducers';
 import * as types from '../../src/actions/actionTypes';
 
 describe('business reducers tests suites', () => {
@@ -155,6 +155,57 @@ describe('business reducers tests suites', () => {
                 response_message: 'You have not registered a business!',
                 status_code: 204
             });
+        });
+    });
+
+    describe('test search businesses reducer', () => {
+        it('it should return the initial state', () => {
+            expect(searchReducer(undefined, {})).toEqual([]);
+        });
+
+        it('should handle SEARCH_BUSINESSES_SUCCESS action type', () => {
+            expect(searchReducer([], {
+                businesses: [
+                    {
+                        category: 'Technology',
+                        location: 'Nairobi',
+                        name: 'Andela',
+                        summary: 'A description for this business goes here'
+                    },
+                    {
+                        category: 'Technology',
+                        location: 'Carlifonia',
+                        name: 'Facebook',
+                        summary: 'A description for this business goes here'
+                    },
+                    {
+                        category: 'Motorcars',
+                        location: 'Carlifonia',
+                        name: 'Tesla',
+                        summary: 'A description for this business goes here'
+                    }
+                ],
+                type: types.SEARCH_BUSINESSES_SUCCESS
+            })).toEqual([
+                {
+                    category: 'Technology',
+                    location: 'Nairobi',
+                    name: 'Andela',
+                    summary: 'A description for this business goes here'
+                },
+                {
+                    category: 'Technology',
+                    location: 'Carlifonia',
+                    name: 'Facebook',
+                    summary: 'A description for this business goes here'
+                },
+                {
+                    category: 'Motorcars',
+                    location: 'Carlifonia',
+                    name: 'Tesla',
+                    summary: 'A description for this business goes here'
+                }
+            ]);
         });
     });
 });
