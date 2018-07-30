@@ -17,6 +17,7 @@ const AddReviewForm = props => {
                     placeholder="Write a review"
                     rows="2"
                     onChange={props.handleInputChange}
+                    required
                     >
                 </textarea>
             </div>
