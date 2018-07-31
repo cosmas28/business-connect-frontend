@@ -83,10 +83,6 @@ export const doLogout = () => {
     sessionStorage.removeItem('accessToken');
     sessionStorage.removeItem('loggedIn');
     sessionStorage.removeItem('userId');
-    axios({
-        method: 'post',
-        url: process.env.REACT_APP_API_URL + '/auth/logout'
-    });
     history.push('/login');
 
     return true;

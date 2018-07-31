@@ -13,19 +13,17 @@ class DashboardNavBar extends React.Component {
     constructor(props) {
         super(props);
         this.state = {};
+        this.accessToken = sessionStorage.getItem('accessToken');
         this.logoutUrl = process.env.REACT_APP_API_URL + '/auth/logout';
         this.onClickLogout = this.onClickLogout.bind(this);
     }
 
     // event hander for logout link, when clicked
     onClickLogout() {
+        axios.post(this.logoutUrl, {}, { 'headers': { 'Authorization': `Bearer ${this.accessToken}`, 'content-type': 'application/json' } });
         sessionStorage.removeItem('accessToken');
         sessionStorage.removeItem('loggedIn');
         sessionStorage.removeItem('userId');
-        axios({
-            method: 'post',
-            url: this.logoutUrl
-        });
         history.push('/login');
     }
 
@@ -54,5 +52,6 @@ class DashboardNavBar extends React.Component {
         );
     }
 }
+
 
 export default DashboardNavBar;
