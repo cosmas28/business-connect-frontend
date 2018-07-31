@@ -2,7 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { filterCategories, filterLocations } from '../../helpers/filterMethods';
+import { filterCategories } from '../../helpers/filterMethods';
 
 /**
  *
@@ -30,18 +30,8 @@ const BusinessNav = props => {
                     })}
                 </div>
             </li>
-            <li className="nav-item dropdown">
-                <a className="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Locations</a>
-                <div className="dropdown-menu">
-                    {filterLocations(props.businessList).map((location, id) => {
-                        return (
-                            <Link key={id} to={`/location/${location}`} className="dropdown-item">{location}</Link>
-                        );
-                    })}
-                </div>
-            </li>
             <li className="nav-item">
-                <Link className="nav-link" to="/register_business" >Add business</Link>
+                <Link className="nav-link btn btn-primary" to="/register_business" >Add business</Link>
             </li>
         </ul>
     );

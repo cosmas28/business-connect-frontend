@@ -12,7 +12,6 @@ import DetailBusinessView from './Dashboard/DetailBusinessView';
 import UpdateBusiness from './Dashboard/UpdateBusinessContainer';
 import BusinessCategory from './Dashboard/BusinessCategory';
 import MyBusinesses from './Dashboard/MyBusinesses';
-import BusinessByLocation from './Dashboard/BusinessByLocation';
 import PageNotFound from './common/NotFoundPage';
 import SearchPage from './Dashboard/SearchPage';
 
@@ -36,7 +35,6 @@ class App extends React.Component {
                         <Route path="/register_business" component={AddBusiness} />
                         <Route path="/business/update/:id" component={UpdateBusiness} />
                         <ProtectedRoute exact path="/category/:category" loggedIn={this.loggedIn} component={BusinessCategory} />
-                        <ProtectedRoute exact path="/location/:location" loggedIn={this.loggedIn} component={BusinessByLocation} />
                         <ProtectedRoute exact path="/user/businesses/:userId" loggedIn={this.loggedIn} component={MyBusinesses} />
                         <ProtectedRoute exact path="/search/results/:search" loggedIn={this.loggedIn} component={SearchPage} />
                         <Route component={PageNotFound} />
