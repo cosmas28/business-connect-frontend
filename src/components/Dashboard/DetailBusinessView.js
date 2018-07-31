@@ -6,6 +6,7 @@ import DashboardNavBar from './../common/DashboardNavBar';
 import { fetchBusinessesById } from '../../actions/businessActions';
 import { addReviews } from '../../actions/reviewsActions';
 import AddReviewForm from './addReviewForm';
+import Footer from './../common/Footer';
 
 
 export class DetailBusinessView extends React.Component {
@@ -94,6 +95,7 @@ export class DetailBusinessView extends React.Component {
                         </div>
                     </div>
                 </main>
+                <Footer />
             </div>
         );
     }
