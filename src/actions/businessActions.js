@@ -5,7 +5,7 @@ import history from '../helpers/history';
 import { addResponseMessage } from './responseMessage';
 
 // API URL
-const apiUrl = process.env.REACT_APP_API_URL + '/api/v2/businesses';
+const apiUrl = process.env.REACT_APP_API_URL + '/businesses';
 
 /**
  *
@@ -85,7 +85,7 @@ export const doLogout = () => {
     sessionStorage.removeItem('userId');
     axios({
         method: 'post',
-        url: process.env.REACT_APP_API_URL + '/api/v2/auth/logout'
+        url: process.env.REACT_APP_API_URL + '/auth/logout'
     });
     history.push('/login');
 

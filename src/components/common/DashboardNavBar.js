@@ -13,7 +13,7 @@ class DashboardNavBar extends React.Component {
     constructor(props) {
         super(props);
         this.state = {};
-        this.logoutUrl = process.env.REACT_APP_API_URL + '/api/v2/auth/logout';
+        this.logoutUrl = process.env.REACT_APP_API_URL + '/auth/logout';
         this.onClickLogout = this.onClickLogout.bind(this);
     }
 

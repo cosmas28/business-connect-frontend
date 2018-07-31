@@ -4,7 +4,7 @@ import { addResponseMessage } from './responseMessage';
 import history from '../helpers/history';
 
 // API URL
-const apiUrl = process.env.REACT_APP_API_URL + '/api/v2/businesses';
+const apiUrl = process.env.REACT_APP_API_URL + '/businesses';
 
 /**
  *
