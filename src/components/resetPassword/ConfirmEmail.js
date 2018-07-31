@@ -29,7 +29,7 @@ export class ConfirmEmail extends React.Component {
         event.preventDefault();
         const input = {
             email: this.state.email,
-            url: 'http://localhost:3000/reset_password/password'
+            url: process.env.REACT_APP_PASSWORD_RESET_URL
         };
         this.props.doConfirmEmail(input);
     }
