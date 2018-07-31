@@ -20,7 +20,12 @@ class DashboardNavBar extends React.Component {
 
     // event hander for logout link, when clicked
     onClickLogout() {
-        axios.post(this.logoutUrl, {}, { 'headers': { 'Authorization': `Bearer ${this.accessToken}`, 'content-type': 'application/json' } });
+        axios.post(this.logoutUrl, {}, {
+                'headers': {
+                'Authorization': `Bearer ${this.accessToken}`,
+                'content-type': 'application/json'
+            }
+        });
         sessionStorage.removeItem('accessToken');
         sessionStorage.removeItem('loggedIn');
         sessionStorage.removeItem('userId');
