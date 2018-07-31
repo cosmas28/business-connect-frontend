@@ -1,7 +1,6 @@
 // ./src/components/Dashboard/Dashboard.js
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 
 import DashboardNavBar from './../common/DashboardNavBar';
 import Footer from './../common/Footer';

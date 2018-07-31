@@ -21,7 +21,7 @@ const BusinessNav = props => {
                 <Link className="nav-link active" to={`/user/businesses/${authUser}`}>Mine</Link>
             </li>
             <li className="nav-item dropdown">
-                <a className="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Categories</a>
+                <a className="nav-link dropdown-toggle" data-toggle="dropdown" href="" role="button" aria-haspopup="true" aria-expanded="false">Categories</a>
                 <div className="dropdown-menu">
                     {filterCategories(props.businessList).map((category, id) => {
                         return (

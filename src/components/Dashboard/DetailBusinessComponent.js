@@ -1,7 +1,6 @@
 // ./src/components/Dashboard/DetailBusinessComponent.js
 import React from 'react';
 import PropTypes from 'prop-types';
-import DashboardTitle from './../common/DashboardTitle';
 
 /**
  *

@@ -1,6 +1,5 @@
 // ./src/actions/signupActions.js
 import axios from 'axios';
-import * as actionTypes from './actionTypes';
 import history from '../helpers/history';
 import { addResponseMessage } from './responseMessage';
 
