@@ -20,7 +20,7 @@ const DashboardTitle = props => {
                             type="text"
                             name="search"
                             className="form-text-input form-control"
-                            placeholder="Search..."
+                            placeholder="...by name, location, category"
                             onChange={props.handleInputChange}
                         />
                     </div>
