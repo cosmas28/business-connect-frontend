@@ -92,27 +92,29 @@ export class Dashboard extends React.Component {
                         <div className="row no-gutters">
                             <div className="col-md-12 col-sm-12 col-xs-12">
                                 <div className="main-view-page">
-                                <div className="category-tags">
-                                    <BusinessNav businessList={this.props.businesses} />
-                                </div>
-                                {!this.props.businesses &&
-                                        <p>You have not registered a business.Please register one.</p>
-                                    }
-                                    {this.props.businesses.map((business, id) => {
-                                        return (
-                                            <OneBusinessView
-                                                key={id}
-                                                authUser={this.authUser}
-                                                name={business.name}
-                                                category={business.category}
-                                                location={business.location}
-                                                onDelete={this.props.deleteBusiness}
-                                                summary={business.summary}
-                                                id={business.id}
-                                                ownerId={business.created_by}
-                                            />
-                                        );
-                                    })}
+                                    <div className="category-tags">
+                                        <BusinessNav businessList={this.props.businesses} />
+                                    </div>
+                                    <div className="row no-gutters">
+                                        {!this.props.businesses &&
+                                            <p>You have not registered a business.Please register one.</p>
+                                        }
+                                        {this.props.businesses.map((business, id) => {
+                                            return (
+                                                <OneBusinessView
+                                                    key={id}
+                                                    authUser={this.authUser}
+                                                    name={business.name}
+                                                    category={business.category}
+                                                    location={business.location}
+                                                    onDelete={this.props.deleteBusiness}
+                                                    summary={business.summary}
+                                                    id={business.id}
+                                                    ownerId={business.created_by}
+                                                />
+                                            );
+                                        })}
+                                    </div>
                                 </div>
                             </div>
                         </div>

@@ -88,6 +88,18 @@ h1, h2, h3, h4, h5 {
     color: #DCDCDC;
 }
 
+.nav.business-nav > li > a {
+    color: #000080;
+}
+
+.nav.business-nav > li > a:hover {
+    color: #FFFFFF;
+}
+
+.nav.business-nav > .active > a:focus {
+    color: #FFFFFF;
+}
+
 /* Main content */
 .service-overflow,
 .main-content {
@@ -185,7 +197,7 @@ h1, h2, h3, h4, h5 {
     color: deepskyblue;
 }
 .main-view-page {
-    margin: 0 200px 0 200px;
+    margin: 0 5px 0 5px;
 }
 @media only screen and (max-width: 768px) {
     .main-view-page {
@@ -206,10 +218,13 @@ h1, h2, h3, h4, h5 {
     margin-bottom: 30px;
     border: 1px solid #e6e6e6;
     padding: 30px;
+    background: #FFFFFF;
+    border-radius: 15px;
   }
   
   .business-view .link-class {
     display: table;
+    margin: 10px;
     text-decoration: none;
   }
 
@@ -268,7 +283,9 @@ h1, h2, h3, h4, h5 {
   
   .business-view .link-class:hover {
     -webkit-box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.1);
-    box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.1);
+    /* box-shadow: 0 4px 20px 0 rgba(0, 0, 0.1, 0.1); */
+    box-shadow: 0 4px 20px 0 #9fcdff;
+    background: #e6e6e6;
   }
 
 .business-text {
@@ -314,7 +331,7 @@ h1, h2, h3, h4, h5 {
 .main-body {
     padding: 100px 100px 100px 100px;
     max-width: 100%;
-    background: #FFFFFF;
+    background: #C0C0C0;
     background-attachment: inherit;
     position: inherit;
 }
@@ -327,10 +344,10 @@ h1, h2, h3, h4, h5 {
     }
 }
 .account-title {
-    border-bottom: 1px solid #9fcdff;
+    border-bottom: 1px solid #FFFFFF;
     padding-bottom: 10px;
     margin-bottom: 60px;
-    color: #00A6FF;
+    color: #000000;
     font-weight: 400;
 }
 .register-form-input {
@@ -424,6 +441,9 @@ h1, h2, h3, h4, h5 {
 }
 
 .business-btn {
-    margin-top: 10px;
-    margin-top: 5px;
+    margin: 10px;
+}
+
+.business-btn a {
+    margin-right: 10px;
 }

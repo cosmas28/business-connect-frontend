@@ -1,7 +1,6 @@
 // ./src/components/Dashboard/BusinessCategory.js
 import React from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 
 import DashboardNavBar from './../common/DashboardNavBar';
 import Footer from './../common/Footer';
@@ -102,24 +101,26 @@ export class BusinessCategory extends React.Component {
                                 <div className="category-tags">
                                     <BusinessNav businessList={this.props.businesses} />
                                 </div>
-                                {!filteredBusinesses &&
-                                        <p>You have not registered a business.Please register one.</p>
-                                    }
-                                    {filteredBusinesses.map((business, id) => {
-                                        return (
-                                            <OneBusinessView
-                                                key={id}
-                                                authUser={this.authUser}
-                                                name={business.name}
-                                                category={business.category}
-                                                location={business.location}
-                                                onDelete={this.props.deleteBusiness}
-                                                summary={business.summary}
-                                                id={business.id}
-                                                ownerId={business.created_by}
-                                            />
-                                        );
-                                    })}
+                                    <div className="row no-gutters">
+                                        {!filteredBusinesses &&
+                                            <p>You have not registered a business.Please register one.</p>
+                                        }
+                                        {filteredBusinesses.map((business, id) => {
+                                            return (
+                                                <OneBusinessView
+                                                    key={id}
+                                                    authUser={this.authUser}
+                                                    name={business.name}
+                                                    category={business.category}
+                                                    location={business.location}
+                                                    onDelete={this.props.deleteBusiness}
+                                                    summary={business.summary}
+                                                    id={business.id}
+                                                    ownerId={business.created_by}
+                                                />
+                                            );
+                                        })}
+                                    </div>
                                 </div>
                             </div>
                         </div>

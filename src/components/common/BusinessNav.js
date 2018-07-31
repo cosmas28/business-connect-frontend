@@ -13,7 +13,7 @@ const BusinessNav = props => {
     const authUser = sessionStorage.getItem('userId');
 
     return (
-        <ul className="nav justify-content-center">
+        <ul className="nav justify-content-center business-nav">
             <li className="nav-item">
                 <Link className="nav-link active" to="/dashboard">All</Link>
             </li>

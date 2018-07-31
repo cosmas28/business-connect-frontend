@@ -96,24 +96,26 @@ export class MyBusinesses extends React.Component {
                                 <div className="category-tags">
                                     <BusinessNav businessList={this.props.businesses} />
                                 </div>
-                                {filteredBusinesses.length === 0 &&
-                                        <p>You have not registered a business.Please register one.</p>
-                                    }
-                                    {filteredBusinesses.map((business, id) => {
-                                        return (
-                                            <OneBusinessView
-                                                key={id}
-                                                authUser={this.authUser}
-                                                name={business.name}
-                                                category={business.category}
-                                                location={business.location}
-                                                onDelete={this.props.deleteBusiness}
-                                                summary={business.summary}
-                                                id={business.id}
-                                                ownerId={business.created_by}
-                                            />
-                                        );
-                                    })}
+                                    <div className="row no-gutters">
+                                        {filteredBusinesses.length === 0 &&
+                                            <p>You have not registered a business.Please register one.</p>
+                                        }
+                                        {filteredBusinesses.map((business, id) => {
+                                            return (
+                                                <OneBusinessView
+                                                    key={id}
+                                                    authUser={this.authUser}
+                                                    name={business.name}
+                                                    category={business.category}
+                                                    location={business.location}
+                                                    onDelete={this.props.deleteBusiness}
+                                                    summary={business.summary}
+                                                    id={business.id}
+                                                    ownerId={business.created_by}
+                                                />
+                                            );
+                                        })}
+                                    </div>
                                 </div>
                             </div>
                         </div>

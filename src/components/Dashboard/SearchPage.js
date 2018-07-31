@@ -101,7 +101,8 @@ export class SearchPage extends React.Component {
                                 <div className="category-tags">
                                     <BusinessNav businessList={this.props.businesses} />
                                 </div>
-                                {!this.props.searchResults &&
+                                <div className="row no-gutters">
+                                    {!this.props.searchResults &&
                                         <p>Business nof found</p>
                                     }
                                     {this.props.searchResults.business_list && this.props.searchResults.business_list.map((business, id) => {
@@ -119,6 +120,7 @@ export class SearchPage extends React.Component {
                                             />
                                         );
                                     })}
+                                </div>
                                 </div>
                             </div>
                         </div>
