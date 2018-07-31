@@ -22,9 +22,19 @@ export class AddBusiness extends React.Component {
 
     // event handler for business registration input change
     handleInputChange(event) {
-        const object = event.target;
-        const { value: v, name: key } = object;
-        this.setState({ [key]: v });
+        // const object = event.target;
+        // const { value: v, name: key } = object;
+        // this.setState({ [key]: v });
+        const target = event.target;
+        const options = target.options;
+        const indexx = options && options.selectedIndex;
+        const selectedValue = options && options[indexx].value;
+        const value = target.type === 'select-multiple'
+                                        ? selectedValue
+                                        : target.value;
+        const name = target.name;
+
+        this.setState({ [name]: value });
     }
 
     // event handler for business registration form onSubmit event

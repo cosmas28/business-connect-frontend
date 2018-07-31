@@ -51,13 +51,19 @@ const AddBusinessForm = props => {
                                     />
                                 </div>
                                 <div className="form-input-division">
-                                    <input type="text"
-                                           name="category"
-                                           className="register-form-input"
-                                           placeholder="Business Category"
-                                           onChange={props.handleInputChange}
-                                           required
-                                    />
+                                <div className="form-group">
+                                    <label>Category</label>
+                                    <select name="category" className="custom-select register-form-input" onChange={props.handleInputChange} multiple>
+                                        <option value="technology">Technology</option>
+                                        <option value="fashion">Fashion</option>
+                                        <option value="education">Education</option>
+                                        <option value="media">Media</option>
+                                        <option value="enternaiment">Enternaiment</option>
+                                        <option value="food">Food</option>
+                                        <option value="mobile">Mobile</option>
+                                        <option value="logistics">Logistics</option>
+                                    </select>
+                                </div>
                                 </div>
                                 <div className="form-input-division">
                                     <input type="text"
