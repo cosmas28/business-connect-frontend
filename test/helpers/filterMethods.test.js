@@ -1,4 +1,4 @@
-import { filterCategories, filterLocations } from '../../src/helpers/filterMethods';
+import { filterCategories } from '../../src/helpers/filterMethods';
 
 describe('tests for filter methods', () => {
     it('filter categories', () => {
@@ -26,32 +26,5 @@ describe('tests for filter methods', () => {
         ];
 
         expect(filterCategories(mockBusinesses)).toEqual(expectedCatgories);
-    });
-
-    it('filter locations', () => {
-        const mockBusinesses = [
-            {
-                id: 1,
-                location: 'nairobi',
-                name: 'andela'
-            },
-            {
-                id: 2,
-                location: 'kabul',
-                name: 'andela'
-            },
-            {
-                id: 3,
-                location: 'nairobi',
-                name: 'andela'
-            }
-        ];
-
-        const expectedCatgories = [
-            'nairobi',
-            'kabul'
-        ];
-
-        expect(filterLocations(mockBusinesses)).toEqual(expectedCatgories);
     });
 });
