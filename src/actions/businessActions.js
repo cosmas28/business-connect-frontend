@@ -132,7 +132,7 @@ export const fetchBusinesses = (accessToken) => {
  */
 export const searchBusinesses = (accessToken, searchQuery) => {
     return (dispatch) => {
-        return axios.get(apiUrl + '/search?q=' + searchQuery + '&start=1&limit=5', { 'headers': { 'Authorization': `Bearer ${accessToken}` } })
+        return axios.get(apiUrl + '/search?q=' + searchQuery, { 'headers': { 'Authorization': `Bearer ${accessToken}` } })
         .then(response => {
             if (response.status === 200) {
                 if (response.data.status_code === 404) {
