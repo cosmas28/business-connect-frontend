@@ -1,6 +1,7 @@
 // ./src/components/Dashboard/Dashboard.js
 import React from 'react';
 import { connect } from 'react-redux';
+import JwPagination from 'jw-react-pagination';
 
 import DashboardNavBar from './../common/DashboardNavBar';
 import Footer from './../common/Footer';
@@ -23,6 +24,12 @@ export class SearchPage extends React.Component {
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSearch = this.handleSearch.bind(this);
         this.state = { searchCriteria: this.props.match.params.search };
+
+        // bind the onChangePage method to this React component
+        this.onChangePage = this.onChangePage.bind(this);
+
+        // store example items and current page of items in local state
+        this.state = { pageOfItems: [] };
     }
 
     componentWillReceiveProps(nextProps) {
@@ -56,6 +63,11 @@ export class SearchPage extends React.Component {
         this.props.searchBusinesses(this.accessToken, this.state.search).then(() => {
             this.props.history.push('/search/results/' + this.state.search);
         });
+    }
+
+    onChangePage(pageOfItems) {
+        // update local state with new page of items
+        this.setState({ pageOfItems });
     }
 
     // renders JSX content
@@ -104,7 +116,7 @@ export class SearchPage extends React.Component {
                                     {!this.props.searchResults &&
                                         <p>Business nof found</p>
                                     }
-                                    {this.props.searchResults.business_list && this.props.searchResults.business_list.map((business, id) => {
+                                    {this.state.pageOfItems.map((business, id) => {
                                         return (
                                             <OneBusinessView
                                                 key={id}
@@ -122,6 +134,13 @@ export class SearchPage extends React.Component {
                                 </div>
                                 </div>
                             </div>
+                        </div>
+                        <div>
+                            <JwPagination
+                                items={this.props.searchResults.business_list}
+                                pageSize={5}
+                                onChangePage={this.onChangePage}
+                            />
                         </div>
                     </div>
                 </main>

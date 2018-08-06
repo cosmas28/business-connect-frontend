@@ -1,6 +1,7 @@
 // ./src/components/Dashboard/Dashboard.js
 import React from 'react';
 import { connect } from 'react-redux';
+import JwPagination from 'jw-react-pagination';
 
 import DashboardNavBar from './../common/DashboardNavBar';
 import Footer from './../common/Footer';
@@ -22,6 +23,12 @@ export class Dashboard extends React.Component {
         this.accessToken = sessionStorage.getItem('accessToken');
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSearch = this.handleSearch.bind(this);
+
+        // bind the onChangePage method to this React component
+        this.onChangePage = this.onChangePage.bind(this);
+
+        // store example items and current page of items in local state
+        this.state = { pageOfItems: [] };
     }
 
     // execute fetchBusinesses() after the component did mount on the dom
@@ -50,6 +57,11 @@ export class Dashboard extends React.Component {
         this.props.searchBusinesses(this.accessToken, this.state.search).then(() => {
             this.props.history.push('/search/results/' + this.state.search);
         });
+    }
+
+    onChangePage(pageOfItems) {
+        // update local state with new page of items
+        this.setState({ pageOfItems });
     }
 
     // renders JSX content
@@ -98,7 +110,7 @@ export class Dashboard extends React.Component {
                                         {!this.props.businesses &&
                                             <p>You have not registered a business.Please register one.</p>
                                         }
-                                        {this.props.businesses.map((business, id) => {
+                                        {this.state.pageOfItems.map((business, id) => {
                                             return (
                                                 <OneBusinessView
                                                     key={id}
@@ -116,6 +128,13 @@ export class Dashboard extends React.Component {
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <div>
+                            <JwPagination
+                                items={this.props.businesses}
+                                pageSize={5}
+                                onChangePage={this.onChangePage}
+                            />
                         </div>
                     </div>
                 </main>
