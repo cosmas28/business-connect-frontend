@@ -1,6 +1,7 @@
 [![Build Status](https://travis-ci.org/cosmas28/business-connect-frontend.svg?branch=develop)](https://travis-ci.org/cosmas28/business-connect-frontend)
 [![Coverage Status](https://coveralls.io/repos/github/cosmas28/business-connect-frontend/badge.svg?branch=develop)](https://coveralls.io/github/cosmas28/business-connect-frontend?branch=develop)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/33af87b24eff4740ab75bbc24caebee6)](https://www.codacy.com/project/cosmas28/business-connect-frontend/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=cosmas28/business-connect-frontend&amp;utm_campaign=Badge_Grade_Dashboard)
+[![Maintainability](https://api.codeclimate.com/v1/badges/8018f12e6bc25f420c03/maintainability)](https://codeclimate.com/github/cosmas28/business-connect-frontend/maintainability)
 # WeConnect(Front-end)
 WeConnect provides a platform that brings businesses and individuals together.
 This platform creates awareness for businesses and gives the users the ability
