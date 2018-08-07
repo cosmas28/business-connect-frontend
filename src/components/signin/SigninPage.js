@@ -1,6 +1,7 @@
 // ./src/components/sigin/SigninPage.js
 import React from 'react';
 import { connect } from 'react-redux';
+import AlertMessage from '../common/AlertMessage';
 
 import Header from '../common/Header';
 import SignInForm from './SignInForm';
@@ -52,12 +53,17 @@ export class SignInPage extends React.Component {
                     <div className="container">
                         <div className="row">
                             <div className="col-md-12 col-sm-12 com-xs-12">
-                                <SignInForm
-                                    handleLoginInputChange={this.handleLoginInputChange}
-                                    handleLoginSubmitForm={this.handleLoginSubmit}
-                                    loginMessage={this.props.loginResponse.response_message}
-                                    statusCode={this.props.loginResponse.status_code}
-                                />
+                                <div className="main-login-page">
+                                    <p>Sign in to your account</p>
+                                    <AlertMessage
+                                        alertMessage={this.props.loginResponse.response_message}
+                                        statusCode={this.props.loginResponse.status_code}
+                                    />
+                                    <SignInForm
+                                        handleLoginInputChange={this.handleLoginInputChange}
+                                        handleLoginSubmitForm={this.handleLoginSubmit}
+                                    />
+                                </div>
                             </div>
                         </div>
                     </div>
