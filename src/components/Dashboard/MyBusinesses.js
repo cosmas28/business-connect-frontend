@@ -3,6 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import DashboardNavBar from './../common/DashboardNavBar';
+import AlertMessage from './../common/AlertMessage';
 import Footer from './../common/Footer';
 import DashboardTitle from './../common/DashboardTitle';
 import OneBusinessView from './ViewBusiness/OneBusinessView';
@@ -62,29 +63,10 @@ export class MyBusinesses extends React.Component {
                 <DashboardNavBar/>
                 <main className="main-body">
                     <div className="container-fluid">
-                        {this.props.message.status_code === 204 ? (
-                            <div>
-                                {this.props.message.response_message &&
-                                <div className="alert alert-success" role="alert">
-                                    {this.props.message.response_message}
-                                    <button type="button" className="close" onClick={() => this.props.deleteMessage()} data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                }
-                            </div>
-                        ) : (
-                            <div>
-                                {this.props.message.response_message &&
-                                <div className="alert alert-danger" role="alert">
-                                    {this.props.message.response_message}
-                                    <button type="button" className="close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                }
-                            </div>
-                        )}
+                        <AlertMessage
+                            alertMessage={this.props.message.response_message}
+                            statusCode={this.props.message.status_code}
+                        />
                         <DashboardTitle
                             handleInputChange={this.handleInputChange}
                             handleSearch={this.handleSearch}
