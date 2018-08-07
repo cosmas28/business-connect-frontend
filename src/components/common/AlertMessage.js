@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 const AlertMessage = props => {
     return (
         <div>
-            {props.statusCode === 204 ? (
+            {props.statusCode <= 204 ? (
                 <div>
                     {props.alertMessage &&
                     <div className="alert alert-success" role="alert">
