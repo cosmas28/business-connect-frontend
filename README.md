@@ -4,12 +4,18 @@
 # WeConnect(Front-end)
 WeConnect provides a platform that brings businesses and individuals together.
 This platform creates awareness for businesses and gives the users the ability
-to write reviews about the businesses they have interacted with.
+to write reviews about the businesses they have interacted with. Click [WeConnect](https://weconnect-cosmas.herokuapp.com) to view it remotely
 
 ## Requirements
 
-For development, you will only need Node.js
+For development, you will need the server-side and Node.js
 installed on your environement.
+
+### Server-side repository
+Click [server-side repo](https://github.com/cosmas28/business-connect-v2) view it's repository.
+
+### Server-side heroku
+Click [server-side](https://weconnect-v2.herokuapp.com/apidocs/) to view server-side documentation.
 
 ### Node
 
@@ -22,7 +28,7 @@ below.
 
     $ npm --version
     v5.6.0
-    
+
 ## Install
 
     $ git clone https://github.com/cosmas28/business-connect-frontend.git
