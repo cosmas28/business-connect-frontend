@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import ResetPasswordForm from './ResetPasswordForm';
 import * as actions from '../../actions/resetPasswordActions';
 import Header from '../common/Header';
+import AlertMessage from '../common/AlertMessage';
 
 
 export class ResetPasswordPage extends React.Component {
@@ -45,12 +46,17 @@ export class ResetPasswordPage extends React.Component {
                     <div className="container">
                         <div className="row">
                             <div className="col-md-12 col-sm-12 col-xs-12">
-                                <ResetPasswordForm
-                                    responseMessage={this.props.response.response_message}
-                                    statusCode={this.props.response.status_code}
-                                    handleResetPasswordInputChange={this.handleInputChange}
-                                    handleResetPasswordSubmitForm={this.handleFormSubmit}
-                                />
+                                <div className="main-login-page">
+                                    <p>Reset your password</p>
+                                    <AlertMessage
+                                        alertMessage={this.props.response.response_message}
+                                        statusCode={this.props.response.status_code}
+                                    />
+                                    <ResetPasswordForm
+                                        handleResetPasswordInputChange={this.handleInputChange}
+                                        handleResetPasswordSubmitForm={this.handleFormSubmit}
+                                    />
+                                </div>
                             </div>
                         </div>
                     </div>

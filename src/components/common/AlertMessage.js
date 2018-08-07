@@ -15,7 +15,7 @@ const AlertMessage = props => {
                     {props.alertMessage &&
                     <div className="alert alert-success" role="alert">
                         {props.alertMessage}
-                        <button type="button" className="close" onClick={() => this.props.deleteMessage()} data-dismiss="alert" aria-label="Close">
+                        <button type="button" className="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>

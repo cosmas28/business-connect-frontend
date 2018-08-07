@@ -6,6 +6,7 @@ import Home from './Home';
 import SignUpForm from './SignupForm';
 import * as signupActions from '../../actions/signupActions';
 import { deleteResponseMessages } from '../../actions/responseMessage';
+import AlertMessage from '../common/AlertMessage';
 
 export class SignUpPage extends React.Component {
 
@@ -56,12 +57,17 @@ export class SignUpPage extends React.Component {
                     <div className="container">
                         <div className="row">
                             <Home/>
-                            <SignUpForm
-                                handleInputChange={this.handleInputChange}
-                                handleSubmitForm={this.newUserSubmitHandler}
-                                outPutMessage={this.props.response.message}
-                                statusCode={this.props.response.status_code}
-                            />
+                            <div className="col-md-6 col-sm-12 col-xs-12 offset-md-2">
+                                <p>Sign up to register a business</p>
+                                <AlertMessage
+                                    alertMessage={this.props.response.message}
+                                    statusCode={this.props.response.status_code}
+                                />
+                                <SignUpForm
+                                    handleInputChange={this.handleInputChange}
+                                    handleSubmitForm={this.newUserSubmitHandler}
+                                />
+                            </div>
                         </div>
                     </div>
                 </main>

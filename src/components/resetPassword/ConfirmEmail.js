@@ -3,6 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import Header from '../common/Header';
+import AlertMessage from '../common/AlertMessage';
 import * as actions from '../../actions/resetPasswordActions';
 
 export class ConfirmEmail extends React.Component {
@@ -36,23 +37,6 @@ export class ConfirmEmail extends React.Component {
 
     // renders JSX content
     render() {
-        let responseMessage = null;
-        if (this.props.response.status_code === 200) {
-            responseMessage = <div className="alert alert-success alert-dismissible fade show" role="alert">
-                Check your email to confirm your account!
-                <button type="button" className="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>;
-        } else {
-            responseMessage = <div className="alert alert-danger alert-dismissible fade show" role="alert">
-                <strong>Error</strong> {this.props.response.response_message}
-                <button type="button" className="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>;
-        }
-
         return (
             <div>
                 <Header/>
@@ -62,9 +46,10 @@ export class ConfirmEmail extends React.Component {
                             <div className="col-md-12 col-sm-12 com-xs-12">
                                 <div className="main-login-page">
                                     <p>Confirm your email address</p>
-                                    {this.props.response.response_message &&
-                                        responseMessage
-                                    }
+                                    <AlertMessage
+                                        alertMessage={this.props.response.response_message}
+                                        statusCode={this.props.response.status_code}
+                                    />
                                     <form onSubmit={this.onSubmit}>
                                         <div className="form-input-division">
                                             <input type="email"
