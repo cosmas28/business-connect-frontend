@@ -1,0 +1,92 @@
+.toast-wrap {
+  visibility: hidden;
+  max-width: 400px;
+  height: 50px;
+  margin: auto;
+  color: #fff;
+  text-align: center;
+  border-radius: 5px;
+  position: fixed;
+  z-index: 1;
+  top: 10px;
+  left: 0;
+  right: 0;
+  font-size: 17px;
+  white-space: nowrap;
+}
+
+.icon-wrap {
+  width: 30px;
+  height: 50px;
+  float: left;
+  margin-left: 5px;
+  margin-left: 5px;
+  padding: 10px 5px 5px 5px;
+  box-sizing: border-box;
+  border-radius: 5px;
+}
+
+.message-wrap {
+  padding: 10px;
+  overflow: hidden;
+  white-space: nowrap;
+  color: #fff;
+}
+
+.success { 
+  background-color: #228B22;
+}
+
+.failure {
+  background-color: #DC143C;
+}
+
+.show-toast {
+  visibility: visible;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s;
+  animation: fadein 0.5s fadeout 0.5s;
+}
+
+@-webkit-keyframes fadein {
+  from {
+    top: 0;
+    opacity: 0;
+  }
+  to{
+    top: 30px;
+    opacity: 1;
+  }
+}
+
+@keyframes fadein {
+  from {
+    top: 0;
+    opacity: 0;
+  }
+  to{
+    top: 30px;
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadeout {
+  from {
+    top: 0px;
+    opacity: 1;
+  }
+  to {
+    top: 30px;
+    opacity: 0;
+  }
+}
+
+@keyframes fadeout {
+  from {
+    top: 0px;
+    opacity: 1;
+  }
+  to {
+    top: 30px;
+    opacity: 0;
+  }
+}

@@ -2,7 +2,7 @@
 import axios from 'axios';
 import * as actionTypes from './actionTypes';
 import history from '../helpers/history';
-import { addResponseMessage } from './responseMessage';
+import { showToast } from './showToast';
 
 // API URL
 const apiUrl = process.env.REACT_APP_API_URL + '/businesses';
@@ -136,19 +136,19 @@ export const searchBusinesses = (accessToken, searchQuery) => {
         .then(response => {
             if (response.status === 200) {
                 if (response.data.status_code === 404) {
-                    dispatch(addResponseMessage(response.data));
+                    dispatch(showToast(response.data));
                 } else {
                     dispatch(searchBusinessesSuccess(response.data));
                 }
             } else {
-                dispatch(addResponseMessage(response.data));
+                dispatch(showToast(response.data));
             }
         })
         .catch(error => {
             if (error.response.status === 422 || error.response.status === 401) {
                 dispatch(doLogout());
             }
-            dispatch(addResponseMessage(error.response.data));
+            dispatch(showToast(error.response.data));
         });
     };
 };
@@ -222,10 +222,10 @@ export const registerBusiness = (accessToken, inputData) => {
         return axios.post(apiUrl, inputData, { 'headers': { 'Authorization': `Bearer ${accessToken}` } })
         .then(response => {
             if (response.data.status_code === 201) {
-                dispatch(addResponseMessage(response.data));
+                dispatch(showToast(response.data));
                 history.push('/dashboard');
             } else {
-                dispatch(addResponseMessage(response.data));
+                dispatch(showToast(response.data));
             }
         })
         .catch(error => {
@@ -233,7 +233,7 @@ export const registerBusiness = (accessToken, inputData) => {
                 if (error.response.status === 422 || error.response.status === 401) {
                     dispatch(doLogout());
                 }
-                dispatch(addResponseMessage(error.response.data));
+                dispatch(showToast(error.response.data));
             }
         });
     };
@@ -250,10 +250,10 @@ export const deleteBusiness = (accessToken, businessId) => {
         return axios.delete(apiUrl + '/' + businessId, { 'headers': { 'Authorization': `Bearer ${accessToken}` } })
         .then(response => {
             if (response.data.status_code === 204) {
-                dispatch(addResponseMessage(response.data));
+                dispatch(showToast(response.data));
                 history.push('/dashboard');
             } else {
-                dispatch(addResponseMessage(response.data));
+                dispatch(showToast(response.data));
             }
         })
         .catch(error => {
@@ -261,7 +261,7 @@ export const deleteBusiness = (accessToken, businessId) => {
                 if (error.response.status === 422 || error.response.status === 401) {
                     dispatch(doLogout());
                 }
-                dispatch(addResponseMessage(error.response.data));
+                dispatch(showToast(error.response.data));
             }
         });
     };
@@ -279,13 +279,13 @@ export const updateBusiness = (accessToken, businessId, newData) => {
         return axios.put(apiUrl + '/' + businessId, newData, { 'headers': { 'Authorization': `Bearer ${accessToken}` } })
         .then(response => {
             if (response.data.status_code === 200) {
-                dispatch(addResponseMessage({
+                dispatch(showToast({
                     response_message: 'Business successfuly updated!',
                     status_code: 200
                 }));
                 history.push('/dashboard');
             } else {
-                dispatch(addResponseMessage(response.data));
+                dispatch(showToast(response.data));
             }
         })
         .catch(error => {
@@ -293,7 +293,7 @@ export const updateBusiness = (accessToken, businessId, newData) => {
                 if (error.response.status === 422 || error.response.status === 401) {
                     dispatch(doLogout());
                 }
-                dispatch(addResponseMessage(error.response.data));
+                dispatch(showToast(error.response.data));
             }
         });
     };

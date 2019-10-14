@@ -13,6 +13,7 @@ import UpdateBusiness from './Dashboard/UpdateBusinessContainer';
 import MyBusinesses from './Dashboard/MyBusinesses';
 import PageNotFound from './common/NotFoundPage';
 import SearchPage from './Dashboard/SearchPage';
+import ToastNotification from './ToastNotification';
 
 class App extends React.Component {
     constructor(props) {
@@ -24,6 +25,7 @@ class App extends React.Component {
         return (
             <BrowserRouter>
                 <div className="page-wrapper">
+                    <ToastNotification />
                     <Switch>
                         <Route exact path="/" component={SignUpPage}/>
                         <Route exact path="/login" component={SignInPage}/>

@@ -1,7 +1,7 @@
 // ./src/actions/signupActions.js
 import axios from 'axios';
 import history from '../helpers/history';
-import { addResponseMessage } from './responseMessage';
+import { showToast } from './showToast';
 
 // API URL
 const apiUrl = process.env.REACT_APP_API_URL + '/auth/register';
@@ -15,17 +15,11 @@ export const registerUser = (user) => {
     return (dispatch) => {
         return axios.post(apiUrl, user)
         .then(response => {
-            if (response.data.status_code === 201) {
-                dispatch(addResponseMessage(response.data));
-                history.push('/login');
-            } else {
-                dispatch(addResponseMessage(response.data));
-            }
+            dispatch(showToast(response.data.message, 'success'));
+            history.push('/login');
         })
         .catch(error => {
-            if (error.response) {
-                dispatch(addResponseMessage(error.response.data));
-            }
+            dispatch(showToast(error.response.data.message, 'failure'));
         });
     };
 };

@@ -6,17 +6,26 @@
  * @param {string} action - a store dispatched action type
  * @returns {Array} - next store state of messages object
  */
-export const responseMessageReducer = (currentState = [], action) => {
+const toastInitialState = {
+    message: '',
+    status: ''
+};
+
+export const responseMessageReducer = (state = toastInitialState, action) => {
     switch (action.type) {
         case 'ADD_RESPONSE_MESSAGE':
-            return action.message;
+            return {
+                ...state,
+                message: action.message,
+                status: action.status
+            };
         case 'DELETE_RESPONSE_MESSAGE':
-            for (const key in currentState) {
-                delete currentState[key];
+            for (const key in state) {
+                delete state[key];
             }
 
-            return currentState;
+            return state;
         default:
-            return currentState;
+            return state;
     }
 };

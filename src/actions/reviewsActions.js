@@ -1,6 +1,6 @@
 // ./src/actions/reviewsActions
 import axios from 'axios';
-import { addResponseMessage } from './responseMessage';
+import { showToast } from './showToast';
 import history from '../helpers/history';
 
 // API URL
@@ -20,12 +20,12 @@ export const addReviews = (accessToken, businessId, inputData) => {
             if (response.status === 200) {
                 history.push('/businesses/' + businessId);
             } else {
-                dispatch(addResponseMessage(response.data));
+                dispatch(showToast(response.data));
             }
         })
         .catch(error => {
             if (error.response) {
-                dispatch(addResponseMessage(error.response.data));
+                dispatch(showToast(error.response.data));
             }
         });
     };

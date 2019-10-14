@@ -1,10 +1,11 @@
 // ./src/components/resetPassword/ResetPasswordPage.js
 import React from 'react';
 import { connect } from 'react-redux';
-import ResetPasswordForm from './ResetPasswordForm';
 import * as actions from '../../actions/resetPasswordActions';
-import Header from '../common/Header';
-import AlertMessage from '../common/AlertMessage';
+
+import AuthLayout from '../AuthLayout';
+import InputBox from '../InputBox';
+import Button from '../Button';
 
 
 export class ResetPasswordPage extends React.Component {
@@ -40,28 +41,28 @@ export class ResetPasswordPage extends React.Component {
     // renders JSX content
     render() {
         return (
-            <div>
-                <Header/>
-                <main className="main-content">
-                    <div className="container">
-                        <div className="row">
-                            <div className="col-md-12 col-sm-12 col-xs-12">
-                                <div className="main-login-page">
-                                    <p>Reset your password</p>
-                                    <AlertMessage
-                                        alertMessage={this.props.response.response_message}
-                                        statusCode={this.props.response.status_code}
-                                    />
-                                    <ResetPasswordForm
-                                        handleResetPasswordInputChange={this.handleInputChange}
-                                        handleResetPasswordSubmitForm={this.handleFormSubmit}
-                                    />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </main>
-            </div>
+            <AuthLayout
+                header="Reset Password"
+                linkLabel="Back to Sign in"
+                linkUrl="/login"
+            >
+                <InputBox
+                    type="password"
+                    name="password"
+                    placeholder="Password"
+                />
+                <InputBox
+                    type="password"
+                    name="confirm_assword"
+                    placeholder="Confirm Password"
+                />
+                <div className="form-item">
+                    <Button
+                        typeColor="primary"
+                        label="Reset"
+                    />
+                </div>
+            </AuthLayout>
         );
     }
 }

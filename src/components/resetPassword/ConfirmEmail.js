@@ -2,74 +2,54 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import Header from '../common/Header';
-import AlertMessage from '../common/AlertMessage';
 import * as actions from '../../actions/resetPasswordActions';
 
-export class ConfirmEmail extends React.Component {
+import AuthLayout from '../AuthLayout';
+import InputBox from '../InputBox';
+import Button from '../Button';
 
-    /**
-     *
-     * @param {Object} props - passed properties from the store
-     */
+export class ConfirmEmail extends React.Component {
     constructor(props) {
         super(props);
-        this.onInputChange = this.onInputChange.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
+        this.state = { email: '' };
     }
 
     // event handler for reset password email confirmation form input change
-    onInputChange(event) {
-        const object = event.target;
-        const { name: key, value: v } = object;
-        this.setState({ [key]: v });
-    }
+    handleInputChange = (event) => this.setState({ email: event.target.value });
 
     // event handler for reset password email confirmation form onSubmit event
-    onSubmit(event) {
+    handleOnSubmit = (event) => {
         event.preventDefault();
         const input = {
             email: this.state.email,
             url: process.env.REACT_APP_PASSWORD_RESET_URL
         };
+
         this.props.doConfirmEmail(input);
     }
 
     // renders JSX content
     render() {
         return (
-            <div>
-                <Header/>
-                <main className="main-content">
-                    <div className="container">
-                        <div className="row">
-                            <div className="col-md-12 col-sm-12 com-xs-12">
-                                <div className="main-login-page">
-                                    <p>Confirm your email address</p>
-                                    <AlertMessage
-                                        alertMessage={this.props.response.response_message}
-                                        statusCode={this.props.response.status_code}
-                                    />
-                                    <form onSubmit={this.onSubmit}>
-                                        <div className="form-input-division">
-                                            <input type="email"
-                                                name="email"
-                                                className="form-text-input form-control"
-                                                placeholder="Email"
-                                                onChange={this.onInputChange}
-                                                required
-                                            />
-                                        </div>
-                                        <div className="form-input-division">
-                                            <button type="submit" className="btn btn-primary input-default form-btn">Send</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </main>
-            </div>
+            <AuthLayout
+                header="Confirm Email"
+                linkLabel="Back to Sign in"
+                linkUrl="/login"
+            >
+                <InputBox
+                    type="email"
+                    name="email"
+                    placeholder="Your Email"
+                    handleOnChange={this.handleInputChange}
+                />
+                <div className="form-item">
+                    <Button
+                        typeColor="primary"
+                        label="Send Reset Link"
+                        handleOnClick={this.handleOnSubmit}
+                    />
+                </div>
+            </AuthLayout>
         );
     }
 }

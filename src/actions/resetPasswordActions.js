@@ -2,7 +2,7 @@
 import axios from 'axios';
 import * as actionTypes from './actionTypes';
 import history from '../helpers/history';
-import { addResponseMessage } from './responseMessage';
+import { showToast } from './showToast';
 
 // API URL
 const apiUrl = process.env.REACT_APP_API_URL + '/auth/reset_password/';
@@ -41,14 +41,14 @@ export const confirmEmail = (userInput) => {
         return axios.post(apiUrl + 'confirm_email', userInput)
         .then(response => {
             if (response.data.status_code === 200) {
-                dispatch(addResponseMessage(response.data));
+                dispatch(showToast(response.data.response_message, 'success'));
             } else {
-                dispatch(addResponseMessage(response.data));
+                dispatch(showToast(response.data.response_message, 'failure'));
             }
         })
         .catch(error => {
             if (error.response) {
-                dispatch(addResponseMessage(error.response.data));
+                dispatch(showToast(error.response.data));
             }
         });
     };

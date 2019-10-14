@@ -1,0 +1,33 @@
+.form-item {
+  margin-bottom: 0.8rem;
+  padding: 0;
+}
+
+.secondary-item {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 0.8rem;
+  padding: 0;
+}
+
+.remember-me {
+  display: flex;
+  order: 0;
+  width: 50%;
+  text-align: left;
+}
+
+.checkbox-wrap input:checked {
+  background-color: #663399;
+}
+
+.checkbox-label {
+  padding-left: 1.0rem;
+  font-size: 1.1rem;
+}
+
+.forgot-password {
+  width: 50%;
+  text-align: right;
+}

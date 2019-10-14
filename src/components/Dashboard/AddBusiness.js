@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import DashboardNavBar from './../common/DashboardNavBar';
 import AddBusinessForm from './AddBusinessForm';
 import * as actions from '../../actions/businessActions';
-import { deleteResponseMessages } from '../../actions/responseMessage';
 
 export class AddBusiness extends React.Component {
 
@@ -49,13 +48,6 @@ export class AddBusiness extends React.Component {
         this.props.registerBusiness(this.accessToken, input);
     }
 
-    // executed just before the component gets removed from the DOM
-    componentWillUnmount() {
-
-        // delete any flash message on responseMessage props
-        this.props.deleteMessage();
-    }
-
     // renders JSX content
     render() {
         return (
@@ -82,7 +74,6 @@ const mapStateToProps = (state) => {
 // Maps actions to props
 const mapDispatchToProps = (dispatch) => {
     return {
-        deleteMessage: () => dispatch(deleteResponseMessages()),
         registerBusiness: (accessToken, inputData) => dispatch(actions.registerBusiness(accessToken, inputData))
     };
 };

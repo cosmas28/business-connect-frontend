@@ -1,0 +1,19 @@
+.link-item {
+  text-decoration: none;
+  color: #663399;
+  font-weight: 700px;
+  cursor: pointer;
+}
+
+.link-item:hover {
+  text-decoration: none;
+  color: #0000CD;
+}
+
+.large {
+  font-size: 1.4rem;
+}
+
+.small {
+  font-size: 1.1rem;
+}

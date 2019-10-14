@@ -1,0 +1,29 @@
+.main-button {
+  width: 100%;
+  height: 40px;
+  padding: 0 20px 0 20px;
+  border-radius: 1.2rem;
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 700px;
+  cursor: pointer;
+  border: none;
+}
+
+.main-button:focus {
+  outline: none;
+}
+
+.main-button:disabled {
+  background: #663399;
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.primary-button {
+  background: #663399;
+}
+
+.secondary-button {
+  background: #0000CD;
+}

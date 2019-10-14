@@ -3,15 +3,15 @@ import * as actionTypes from './actionTypes';
 
 /**
  *
- * @param {Object} message - an object of success message and status code
+ * @param {string} message - main message
+ * @param {string} status - success or failure status
  * @return {Object} - an object of success message and action type
  */
-export const addResponseMessage = message => {
-    return {
-        message,
-        type: actionTypes.ADD_RESPONSE_MESSAGE
-    };
-};
+export const showToast = (message, status) => ({
+    message,
+    status,
+    type: actionTypes.ADD_RESPONSE_MESSAGE
+});
 
 /**
  * @returns {Object} - an object containing action type

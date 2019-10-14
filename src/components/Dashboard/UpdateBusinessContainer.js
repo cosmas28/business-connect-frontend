@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import DashboardNavBar from './../common/DashboardNavBar';
 import DashboardTitle from './../common/DashboardTitle';
 import * as actions from '../../actions/businessActions';
-import { deleteResponseMessages } from '../../actions/responseMessage';
 
 export class UpdateBusiness extends React.Component {
 
@@ -48,13 +47,6 @@ export class UpdateBusiness extends React.Component {
 
     componentDidMount() {
         this.props.fetchBusinessesById(this.accessToken, this.businessId);
-    }
-
-    // executed just before the component gets removed from the DOM
-    componentWillUnmount() {
-
-        // delete any flash message on responseMessage props
-        this.props.deleteMessage();
     }
 
     componentWillReceiveProps(nextProps) {
@@ -165,7 +157,6 @@ const mapStateToProps = state => {
 // Maps actions to props
 const mapDispatchToProps = (dispatch) => {
     return {
-        deleteMessage: () => dispatch(deleteResponseMessages()),
         fetchBusinessesById: (accessToken, id) => dispatch(actions.fetchBusinessesById(accessToken, id)),
         updateBusiness: (accessToken, id, newData) => dispatch(actions.updateBusiness(accessToken, id, newData))
     };

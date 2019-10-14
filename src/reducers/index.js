@@ -13,8 +13,8 @@ import { resetPasswordReducer } from './resetPasswordReducers';
 export default combineReducers({
     business: businessReducer,
     businesses: businessesReducer,
-    messages: responseMessageReducer,
     resetPassword: resetPasswordReducer,
     searchResults: searchReducer,
+    toast: responseMessageReducer,
     userBusinesses: userBusinessReducer
 });

@@ -4,12 +4,10 @@ import { connect } from 'react-redux';
 import JwPagination from 'jw-react-pagination';
 
 import DashboardNavBar from './../common/DashboardNavBar';
-import AlertMessage from './../common/AlertMessage';
 import Footer from './../common/Footer';
 import DashboardTitle from './../common/DashboardTitle';
 import OneBusinessView from './ViewBusiness/OneBusinessView';
 import { fetchBusinesses, deleteBusiness, searchBusinesses } from '../../actions/businessActions';
-import { deleteResponseMessages } from '../../actions/responseMessage';
 import BusinessNav from './../common/BusinessNav';
 
 export class Dashboard extends React.Component {
@@ -72,10 +70,6 @@ export class Dashboard extends React.Component {
                 <DashboardNavBar/>
                 <main className="main-body">
                     <div className="container-fluid">
-                        <AlertMessage
-                            alertMessage={this.props.message.response_message}
-                            statusCode={this.props.message.status_code}
-                        />
                         <DashboardTitle
                             handleInputChange={this.handleInputChange}
                             handleSearch={this.handleSearch}
@@ -139,7 +133,6 @@ const mapStateToProps = state => {
 const mapDispatchToProps = (dispatch) => {
     return {
         deleteBusiness: (accessToken, id) => dispatch(deleteBusiness(accessToken, id)),
-        deleteMessage: () => dispatch(deleteResponseMessages()),
         fetchBusinesses: accessToken => dispatch(fetchBusinesses(accessToken)),
         searchBusinesses: (accessToken, search) => dispatch(searchBusinesses(accessToken, search))
     };

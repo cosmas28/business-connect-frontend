@@ -1,34 +1,35 @@
 // ./src/components/sigin/SigninPage.js
 import React from 'react';
 import { connect } from 'react-redux';
-import AlertMessage from '../common/AlertMessage';
 
-import Header from '../common/Header';
-import SignInForm from './SignInForm';
 import * as actions from '../../actions/loginActions';
-import { deleteResponseMessages } from '../../actions/responseMessage';
+import { deleteResponseMessages } from '../../actions/showToast';
+
+import AuthLayout from '../AuthLayout';
+import InputBox from '../InputBox';
+import Button from '../Button';
+import LinkButton from '../LinkButton';
+
+import './SigninPage.css';
 
 export class SignInPage extends React.Component {
-
-    /**
-     *
-     * @param {Object} props - passed properties
-     */
     constructor(props) {
         super(props);
-        this.handleLoginInputChange = this.handleLoginInputChange.bind(this);
-        this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
+        this.state = {
+            email: '',
+            password: ''
+        };
     }
 
     // event handler for login input change
-    handleLoginInputChange(event) {
+    handleLoginInputChange = event => {
         const object = event.target;
         const { name: key, value: v } = object;
         this.setState({ [key]: v });
     }
 
      // event handler for login form onSubmit event
-    handleLoginSubmit(event) {
+    handleLoginSubmit = (event) => {
         event.preventDefault();
         const input = {
             email: this.state.email,
@@ -37,38 +38,50 @@ export class SignInPage extends React.Component {
         this.props.doLogin(input);
     }
 
-    // executed just before the component gets removed from the DOM
-    componentWillUnmount() {
-
-        // delete any flash message on responseMessage props
-        this.props.deleteMessage();
-    }
-
     // renders JSX content
     render () {
         return (
-            <div>
-                <Header/>
-                <main className="main-content">
-                    <div className="container">
-                        <div className="row">
-                            <div className="col-md-12 col-sm-12 com-xs-12">
-                                <div className="main-login-page">
-                                    <p>Sign in to your account</p>
-                                    <AlertMessage
-                                        alertMessage={this.props.loginResponse.response_message}
-                                        statusCode={this.props.loginResponse.status_code}
-                                    />
-                                    <SignInForm
-                                        handleLoginInputChange={this.handleLoginInputChange}
-                                        handleLoginSubmitForm={this.handleLoginSubmit}
-                                    />
-                                </div>
-                            </div>
+            <AuthLayout
+                footer="You don't have an Account?"
+                header="Sign In"
+                linkLabel="Create Account"
+                linkUrl="/"
+            >
+                <InputBox
+                    type="email"
+                    name="email"
+                    placeholder="Your Email"
+                    handleOnChange={this.handleLoginInputChange}
+                />
+                <InputBox
+                    type="password"
+                    name="password"
+                    placeholder="Password"
+                    handleOnChange={this.handleLoginInputChange}
+                />
+                <div className="secondary-item">
+                    <div className="remember-me">
+                        <div className="checkbox-wrap">
+                            <input type="checkbox" />
                         </div>
+                        <div className="checkbox-label">Remember me</div>
                     </div>
-                </main>
-            </div>
+                    <div className="forgot-password">
+                        <LinkButton
+                            label="Forgot Password?"
+                            url="/reset_password/confirm_email"
+                            size="small"
+                        />
+                    </div>
+                </div>
+                <div className="form-item">
+                    <Button
+                        typeColor="primary"
+                        label="Sign in"
+                        handleOnClick={this.handleLoginSubmit}
+                    />
+                </div>
+            </AuthLayout>
         );
     }
 }

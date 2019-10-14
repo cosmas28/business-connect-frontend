@@ -8,7 +8,6 @@ import Footer from './../common/Footer';
 import DashboardTitle from './../common/DashboardTitle';
 import OneBusinessView from './ViewBusiness/OneBusinessView';
 import { fetchBusinesses, deleteBusiness, searchBusinesses } from '../../actions/businessActions';
-import { deleteResponseMessages } from '../../actions/responseMessage';
 import BusinessNav from './../common/BusinessNav';
 
 export class MyBusinesses extends React.Component {
@@ -121,7 +120,6 @@ const mapStateToProps = state => {
 const mapDispatchToProps = (dispatch) => {
     return {
         deleteBusiness: (accessToken, id) => dispatch(deleteBusiness(accessToken, id)),
-        deleteMessage: () => dispatch(deleteResponseMessages()),
         fetchBusinesses: accessToken => dispatch(fetchBusinesses(accessToken)),
         searchBusinesses: (accessToken, search) => dispatch(searchBusinesses(accessToken, search))
     };

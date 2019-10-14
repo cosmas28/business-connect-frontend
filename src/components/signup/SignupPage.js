@@ -1,77 +1,200 @@
 // ./src/components/signup/SignupPage.js
 import React from 'react';
 import { connect } from 'react-redux';
-import Header from '../common/Header';
-import Home from './Home';
-import SignUpForm from './SignupForm';
 import * as signupActions from '../../actions/signupActions';
-import { deleteResponseMessages } from '../../actions/responseMessage';
-import AlertMessage from '../common/AlertMessage';
+import { deleteResponseMessages } from '../../actions/showToast';
+
+import AuthLayout from '../AuthLayout';
+import InputBox from '../InputBox';
+import Button from '../Button';
+
+import {
+    authFields,
+    isAllValid,
+    isAllFilled,
+    validateEmail,
+    validateConfirmPwd,
+    validatePassword,
+    validateText
+} from '../../helpers/validators';
+
+import './SignupPage.css';
 
 export class SignUpPage extends React.Component {
-
-    /**
-     *
-     * @param {Object} props - passed properties from the store
-     */
     constructor(props) {
         super(props);
-        this.handleInputChange = this.handleInputChange.bind(this);
-        this.newUserSubmitHandler = this.newUserSubmitHandler.bind(this);
+        this.state = {
+            'confirm_password': '',
+            'confirm_password_error': '',
+            'email': '',
+            'email_error': '',
+            'first_name': '',
+            'first_name_error': '',
+            'last_name': '',
+            'last_name_error': '',
+            'password': '',
+            'password_error': '',
+            'username': '',
+            'username_error': ''
+        };
     }
 
-    // event handler for sign up form input change
-    handleInputChange(event) {
+    handleInputChange = (event) => {
         const object = event.target;
         const { name: key, value: v } = object;
-        this.setState({ [key]: v });
+        this.setState({ [key]: v }, () => {
+            this.validateInput(key)();
+        });
     }
 
-    // event handler for signup form onSubmit event
-    newUserSubmitHandler(event) {
+    validateInput = (name) => () => {
+        const value = this.state[name];
+        let errorMessage = '';
+        if(value === '') {
+            this.setState({
+                [`${name}_error`]: value.length < 1 ? `Your ${authFields[name]} is required` : ''
+            });
+
+            return;
+        }
+
+        switch(name) {
+            case 'email':
+                errorMessage = validateEmail(value);
+                break;
+            case 'username':
+                errorMessage = validateText(value, name);
+                break;
+            case 'first_name':
+                errorMessage = validateText(value, name);
+                break;
+            case 'last_name':
+                errorMessage = validateText(value, name);
+                break;
+            case 'password':
+                errorMessage = validatePassword(value);
+                break;
+            case 'confirm_password':
+                errorMessage = validateConfirmPwd(value, this.state.password);
+                break;
+            default:
+                errorMessage = '';
+                break;
+        }
+
+        this.setState({
+            [`${name}_error`]: errorMessage
+        });
+    }
+
+    hanldeOnClickButton = (event) => {
         event.preventDefault();
-        const input = {
-            confirm_password: this.state.confirm_password,
-            email: this.state.email,
-            first_name: this.state.first_name,
-            last_name: this.state.last_name,
-            password: this.state.password,
-            username: this.state.username
-        };
-        this.props.registerUser(input);
+        const { email, username, first_name, last_name, password, confirm_password } = this.state;
+        const userInput = {
+            confirm_password: confirm_password,
+            email: email,
+            first_name: first_name,
+            last_name: last_name,
+            password: password,
+            username: username
+        }
+
+        if (isAllFilled(userInput)) {
+            this.props.registerUser(userInput);
+        } else {
+            this.setState({
+                email_error: 'Email is required',
+                username_error: 'Username is required',
+                first_name_error: 'First Name is required',
+                last_name_error: 'Last Name is required',
+                password_error: 'Password is required',
+                confirm_password_error: 'Confirm Password is required'
+            });
+        }
     }
 
-    //  executed just before the component gets removed from the DOM
-    componentWillUnmount() {
-
-        // delete any flash message on responseMessage props
-        this.props.deleteMessage();
-    }
-
-    // renders JSX content
     render() {
+        const {
+            email_error,
+            username_error,
+            first_name_error,
+            last_name_error,
+            password_error,
+            confirm_password_error
+        } = this.state;
+        const allValid = isAllValid([
+            email_error,
+            username_error,
+            first_name_error,
+            last_name_error,
+            password_error,
+            confirm_password_error
+        ]);
+
         return (
-            <div>
-                <Header />
-                <main className="main-content">
-                    <div className="container">
-                        <div className="row">
-                            <Home/>
-                            <div className="col-md-6 col-sm-12 col-xs-12 offset-md-2">
-                                <p>Sign up to register a business</p>
-                                <AlertMessage
-                                    alertMessage={this.props.response.message}
-                                    statusCode={this.props.response.status_code}
-                                />
-                                <SignUpForm
-                                    handleInputChange={this.handleInputChange}
-                                    handleSubmitForm={this.newUserSubmitHandler}
-                                />
-                            </div>
-                        </div>
-                    </div>
-                </main>
-            </div>
+            <AuthLayout
+                footer="You already have an Account?"
+                header="Create Account"
+                linkLabel="Sign in"
+                linkUrl="/login"
+            >
+                <InputBox
+                    type="email"
+                    name="email"
+                    placeholder="Your Email"
+                    errorMessage={email_error}
+                    handleOnChange={this.handleInputChange}
+                    handleOnBlur={this.validateInput('email')}
+                />
+                <InputBox
+                    type="text"
+                    name="username"
+                    placeholder="Your Username"
+                    errorMessage={username_error}
+                    handleOnChange={this.handleInputChange}
+                    handleOnBlur={this.validateInput('username')}
+                />
+                <InputBox
+                    type="text"
+                    name="first_name"
+                    placeholder="First Name"
+                    errorMessage={first_name_error}
+                    handleOnChange={this.handleInputChange}
+                    handleOnBlur={this.validateInput('first_name')}
+                />
+                <InputBox
+                    type="text"
+                    name="last_name"
+                    placeholder="Last Name"
+                    errorMessage={last_name_error}
+                    handleOnChange={this.handleInputChange}
+                    handleOnBlur={this.validateInput('last_name')}
+                />
+                <InputBox
+                    type="password"
+                    name="password"
+                    placeholder="Password"
+                    errorMessage={password_error}
+                    handleOnChange={this.handleInputChange}
+                    handleOnBlur={this.validateInput('password')}
+                />
+                <InputBox
+                    type="password"
+                    name="confirm_password"
+                    placeholder="Confirm Password"
+                    errorMessage={confirm_password_error}
+                    handleOnChange={this.handleInputChange}
+                    handleOnBlur={this.validateInput('confirm_password')}
+                />
+                <div className="form-item">
+                    <Button
+                        typeColor="primary"
+                        label="Create"
+                        disabled={!allValid ? 'disabled' : ''}
+                        handleOnClick={this.hanldeOnClickButton}
+                    />
+                </div>
+            </AuthLayout>
         );
     }
 }

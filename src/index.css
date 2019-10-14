@@ -1,5 +1,9 @@
-body {
-    overflow-x: hidden;
+#root {
+    background-position: top right;
+    background-size: top center;
+    width: 100%;
+    margin: 0;
+    font-family: "Gill Sans", sans-serif;
 }
 #body-wrapper {
     max-width: 100%;
