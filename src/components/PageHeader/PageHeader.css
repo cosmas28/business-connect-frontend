@@ -1,0 +1,42 @@
+.header-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 100%;
+  height: 3.4rem;
+  padding: 5% 0 1% 0;
+}
+
+.logo {
+  order: 0;
+  width: 70%;
+  text-align: left;
+}
+
+.logo__text {
+  color: #663399;
+  font-weight: 700;
+}
+
+.search-wrap {
+  order: 1;
+  width: 29%;
+}
+
+.form-item {
+  display: flex;
+  width: 100%;
+  height: 2.2rem;
+  border: 0.1rem solid #DCDCDC;
+  border-radius: 0.4rem;
+}
+
+.form-item__input {
+  border: none;
+}
+
+.form-item__icon {
+  padding-top: 0.44rem;
+  padding-left: 0.58rem;
+  padding-right: 0.58rem;
+}

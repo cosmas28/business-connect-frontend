@@ -1,0 +1,34 @@
+.nav-item {
+  display: flex;
+  margin-bottom: 1.4rem;
+  padding-left: 2rem;
+  padding-top: 0.2rem;
+  padding-bottom: 0.2rem;
+  color: #C0C0C0;
+}
+
+.nav-item a {
+  margin-left: 0.3rem;
+  text-decoration: none;
+  color: #C0C0C0;
+  font-size: 1.4rem;
+  font-weight: 200;
+  line-height: 2rem;
+}
+
+.nav-item--active {
+  border-left: 0.18rem solid #fff;
+  color: #ffffff;
+}
+
+.nav-item--dropdown {
+  color: #663399;
+}
+
+.nav-item--dropdown a {
+  color: #663399;
+}
+
+.nav-item--active a {
+  color: #ffffff;
+}

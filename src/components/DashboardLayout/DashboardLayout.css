@@ -1,0 +1,26 @@
+.page-wrapper {
+  background-color: #ffffff;
+  display: flex;
+  justify-content: space-between;
+  width: 100%
+}
+
+.side-navbar {
+  background-color: #663399;
+  order: 0;
+  width: 13%;
+  height: 100vh;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.wrap-logo {
+  height: 10vh;
+  text-align: center;
+  color: #ffffff;
+}
+
+.overview {
+  padding-left: 2%;
+  padding-right: 10%;
+}

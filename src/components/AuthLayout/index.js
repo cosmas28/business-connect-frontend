@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { FaConnectdevelop } from 'react-icons/fa';
 
 import LinkButton from '../LinkButton';
 
@@ -11,7 +12,7 @@ const AuthLayout = (props) => {
   return (
     <div className="container">
         <div className="auth-wrap">
-            <div className="auth-logo"><h2>WeConnect</h2></div>
+            <div className="auth-logo"><FaConnectdevelop size={40} color="#663399" /></div>
             <div className="auth-box">
                 <div className="header"><h4>{header}</h4></div>
                 <div className="content">

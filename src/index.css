@@ -332,13 +332,7 @@ h1, h2, h3, h4, h5 {
     color: white;
     text-transform: capitalize;
 }
-.main-body {
-    padding: 100px 100px 100px 100px;
-    max-width: 100%;
-    background: #C0C0C0;
-    background-attachment: inherit;
-    position: inherit;
-}
+
 @media only screen and (max-width: 768px) {
     .main-body {
         padding-right: 10px;

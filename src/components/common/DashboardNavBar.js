@@ -4,6 +4,8 @@ import { NavLink } from 'react-router-dom';
 import history from '../../helpers/history';
 import axios from 'axios';
 
+import './DashboardNavBar.css';
+
 class DashboardNavBar extends React.Component {
 
     /**
@@ -35,25 +37,23 @@ class DashboardNavBar extends React.Component {
     // renders JSX for dashboard navigation bar
     render() {
         return (
-            <header>
-                <div className="row">
-                    <div className="col-md-12 col-sm-12 col-xs-12">
-                        <nav className="navbar fixed-top navbar-expand-lg account-menu navbar-light ">
-                            <NavLink className="navbar-brand we-logo" to="/dashboard">WeConnect</NavLink>
-                            <button className="navbar-toggler we-toggler" type="button" data-toggle="collapse" data-target="#sideNavbar" aria-controls="sideNavbar" aria-expanded="false" aria-label="Toggle navigation">
-                                <span className="navbar-toggler-icon"> </span>
-                            </button>
-
-                            <div className="collapse navbar-collapse" id="sideNavbar">
-                                <ul className="navbar-nav ml-auto">
-                                    <li><NavLink className="nav-link" to="/dashboard">Dashboard</NavLink></li>
-                                    <li><a className="nav-link" href="" onClick={this.onClickLogout} >Logout</a></li>
-                                </ul>
-                            </div>
-                        </nav>
-                    </div>
+            <div className="navbar-wrap">
+                <div className="logo-wrap">
+                    <NavLink className="logo-text" to="/dashboard">Home</NavLink>
                 </div>
-            </header>
+                <div className="search-wrap">
+                    <form>
+                        <div className="form-item">
+                            <input
+                                type="text"
+                                name="search"
+                                className="form-text-input form-control"
+                                placeholder="search"
+                            />
+                        </div>
+                    </form>
+                </div>
+            </div>
         );
     }
 }

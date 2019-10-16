@@ -3,12 +3,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import JwPagination from 'jw-react-pagination';
 
-import DashboardNavBar from './../common/DashboardNavBar';
-import Footer from './../common/Footer';
-import DashboardTitle from './../common/DashboardTitle';
+import DashboardLayout from '../../components/DashboardLayout';
 import OneBusinessView from './ViewBusiness/OneBusinessView';
 import { fetchBusinesses, deleteBusiness, searchBusinesses } from '../../actions/businessActions';
-import BusinessNav from './../common/BusinessNav';
+
+import './Dashboard.css';
 
 export class Dashboard extends React.Component {
 
@@ -65,24 +64,16 @@ export class Dashboard extends React.Component {
 
     // renders JSX content
     render() {
+        const authUser = sessionStorage.getItem('userId');
+
         return (
-            <div className="page-wrapper">
-                <DashboardNavBar/>
+            <DashboardLayout pageTitle="Home">
                 <main className="main-body">
                     <div className="container-fluid">
-                        <DashboardTitle
-                            handleInputChange={this.handleInputChange}
-                            handleSearch={this.handleSearch}
-                            title="All Businesses"
-
-                        />
                         <div className="row no-gutters">
                             <div className="col-md-12 col-sm-12 col-xs-12">
                                 <div className="main-view-page">
-                                    <div className="category-tags">
-                                        <BusinessNav businessList={this.props.businesses} />
-                                    </div>
-                                    <div className="row no-gutters">
+                                    <div onclassName="row no-gutters">
                                         {!this.props.businesses &&
                                             <p>You have not registered a business.Please register one.</p>
                                         }
@@ -114,8 +105,7 @@ export class Dashboard extends React.Component {
                         </div>
                     </div>
                 </main>
-                <Footer />
-            </div>
+            </DashboardLayout>
         );
     }
 }
