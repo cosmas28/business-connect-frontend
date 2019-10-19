@@ -5,7 +5,7 @@ import JwPagination from 'jw-react-pagination';
 
 import DashboardLayout from '../../components/DashboardLayout';
 import OneBusinessView from './ViewBusiness/OneBusinessView';
-import { fetchBusinesses, deleteBusiness, searchBusinesses } from '../../actions/businessActions';
+import { fetchBusinesses, deleteBusiness, searchBusinesses, registerBusiness } from '../../actions/businessActions';
 
 import './Dashboard.css';
 
@@ -34,13 +34,6 @@ export class Dashboard extends React.Component {
         this.props.fetchBusinesses(this.accessToken);
     }
 
-    // executed just before the component gets removed from the DOM
-    componentWillUnmount() {
-
-        // delete any flash message on responseMessage props
-        this.props.deleteMessage();
-    }
-
     // event handler for business registration input change
     handleInputChange(event) {
         const object = event.target;
@@ -67,13 +60,16 @@ export class Dashboard extends React.Component {
         const authUser = sessionStorage.getItem('userId');
 
         return (
-            <DashboardLayout pageTitle="Home">
+            <DashboardLayout
+                pageTitle="Home"
+                handleAddBusiness={this.props.registerBusiness}
+            >
                 <main className="main-body">
                     <div className="container-fluid">
                         <div className="row no-gutters">
                             <div className="col-md-12 col-sm-12 col-xs-12">
                                 <div className="main-view-page">
-                                    <div onclassName="row no-gutters">
+                                    <div className="row no-gutters">
                                         {!this.props.businesses &&
                                             <p>You have not registered a business.Please register one.</p>
                                         }
@@ -124,6 +120,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         deleteBusiness: (accessToken, id) => dispatch(deleteBusiness(accessToken, id)),
         fetchBusinesses: accessToken => dispatch(fetchBusinesses(accessToken)),
+        registerBusiness: (accessToken, inputData) => dispatch(registerBusiness(accessToken, inputData)),
         searchBusinesses: (accessToken, search) => dispatch(searchBusinesses(accessToken, search))
     };
 };

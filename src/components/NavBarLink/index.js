@@ -20,7 +20,11 @@ const NavBarLink = (props) => {
   return (
     <div className={`nav-item nav-item--${type} ${isActive && 'nav-item--active'}`}>
         <div>{Icons[`${iconName}`]}</div>
-        <NavLink onClick={onClickLink} to={url}>{label}</NavLink>
+        {
+          label === 'Add Business'
+            ? <a onClick={onClickLink}>Add Business</a>
+            : <NavLink onClick={onClickLink} to={url}>{label}</NavLink>
+        }
     </div>
   );
 };
@@ -31,7 +35,7 @@ NavBarLink.propTypes = {
   'label': PropTypes.string.isRequired,
   'onClickLink': PropTypes.func,
   'type': PropTypes.string,
-  'url': PropTypes.string.isRequired
+  'url': PropTypes.string
 };
 
 export default NavBarLink;

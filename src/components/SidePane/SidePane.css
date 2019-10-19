@@ -1,0 +1,41 @@
+.sidepane {
+  background-color: #DCDCDC;
+  display: none;
+  position: fixed;
+  width: 24rem;
+  height: 100vh;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  padding: 4rem 1rem 2rem 1rem;
+  box-shadow: -3px 0 5px 0 #ccc;
+  overflow-x: hidden;
+  transition: 0.5s;
+}
+
+.sidepane--show {
+  display: block;
+}
+
+.sidepane__header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.sidepane__header__title {
+  width: 90%;
+  font-weight: 340;
+  color: #663399
+}
+
+.sidepane__header__cancel-button {
+  width: 9%;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+}
+
+.sidepane__header__cancel-button:focus {
+  outline: none;
+}

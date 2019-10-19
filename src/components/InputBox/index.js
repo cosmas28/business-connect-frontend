@@ -4,7 +4,15 @@ import PropTypes from 'prop-types';
 import './InputBox.css';
 
 const InputBox = props => {
-  const { type, placeholder, name, errorMessage, handleOnChange, handleOnBlur } = props;
+  const {
+    name,
+    errorMessage,
+    handleOnChange,
+    handleOnBlur,
+    type,
+    placeholder,
+    value
+  } = props;
 
   return (
     <div className="container">
@@ -12,6 +20,7 @@ const InputBox = props => {
         className={
           `text-input ${errorMessage && 'invalid-input'}`}
         type={type}
+        value={value}
         name={name}
         placeholder={placeholder}
         onChange={handleOnChange}
@@ -33,7 +42,8 @@ InputBox.propTypes = {
   'handleOnChange': PropTypes.func,
   'name': PropTypes.string.isRequired,
   'placeholder': PropTypes.string.isRequired,
-  'type': PropTypes.string.isRequired
+  'type': PropTypes.string.isRequired,
+  'value': PropTypes.string
 };
 
 export default InputBox;

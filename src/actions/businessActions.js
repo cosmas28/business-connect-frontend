@@ -211,6 +211,11 @@ export const fetchBusinessesById = (accessToken, businessId) => {
     };
 };
 
+const registerBusinessSuccess = (business) => ({
+    business,
+    type: actionTypes.REGISTER_BUSINESS_SUCCESS
+});
+
 /**
  *
  * @param {string} accessToken - API authorization access token
@@ -222,10 +227,10 @@ export const registerBusiness = (accessToken, inputData) => {
         return axios.post(apiUrl, inputData, { 'headers': { 'Authorization': `Bearer ${accessToken}` } })
         .then(response => {
             if (response.data.status_code === 201) {
-                dispatch(showToast(response.data));
-                history.push('/dashboard');
+                dispatch(registerBusinessSuccess(response.data.data));
+                dispatch(showToast(response.data.response_message, 'success'));
             } else {
-                dispatch(showToast(response.data));
+                dispatch(showToast(response.data.response_message, 'failure'));
             }
         })
         .catch(error => {

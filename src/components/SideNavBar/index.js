@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import NavBarLink from '../../components/NavBarLink';
 
@@ -32,15 +33,16 @@ class SideNavBar extends React.Component {
           onClickLink={this.toggleActiveLink('My Businesses')}
         />
         <NavBarLink
-          isActive={this.state.activeLink === 'Add Business' && true}
           iconName="Add Business"
-          url="/dashboard"
+          url=""
           label="Add Business"
-          onClickLink={this.toggleActiveLink('Add Business')}
+          onClickLink={this.props.handleAddButton}
         />
       </div>
     );
   }
 }
+
+SideNavBar.propTypes = { 'handleAddButton': PropTypes.func.isRequired }
 
 export default SideNavBar;

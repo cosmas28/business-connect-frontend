@@ -8,6 +8,11 @@
  */
 export const businessesReducer = (currentState = [], action) => {
     switch (action.type) {
+        case 'REGISTER_BUSINESS_SUCCESS':
+            return [
+                action.business,
+                ...currentState
+            ];
         case 'FETCH_ALL_BUSINESSES_SUCCESS':
             return action.businesses;
 
