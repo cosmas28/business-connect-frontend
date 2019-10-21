@@ -1,0 +1,128 @@
+.business-card {
+  width: 49.5%;
+  padding: 1% 1% 2% 0;
+}
+
+.business-card__wrap {
+  background: #fff;
+  width: 100%;
+  height: 18.12rem;
+  padding: 0.31rem 0.7rem 0 1.9rem;
+  border-radius: 0.25rem;
+  box-shadow: 0 0.125rem 0.625rem 0 rgba(0, 0, 0, 0.1);
+}
+
+.business-card__header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding-top: 0.7rem;
+  padding-bottom: 0.7rem;
+}
+
+.header__left {
+  display: flex;
+  order: 0;
+  width: 84%;
+  text-align: left;
+}
+
+.header__left__avator {
+  width: 4.3rem;
+  height: 4.3rem;
+  background: none;
+  margin-right: 1rem;
+  padding-top: 0.34rem;
+  border: 0.2rem solid #f0f0f5;
+  border-radius: 50%;
+  text-align: center;
+  color: #ffffff
+}
+
+.header__left > h2 {
+  padding-top: 1rem;
+  font-weight: 300;
+}
+
+.header__right {
+  order: 1;
+  width: 15%;
+  padding-top: 1.5rem;
+  text-align: center;
+}
+button  {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+button:focus {
+  outline: none;
+}
+
+.content__head__bottom {
+  display: flex;
+  font-size: 1.2rem;
+  font-weight: 100;
+}
+
+.business-location {
+  display: flex;
+  margin-left: 1rem;
+  color: #808080;
+}
+
+.business-location__icon {
+  padding-top: 0.16rem;
+}
+
+.business-category, .business-location__name {
+  color: #663399;
+}
+
+.content__head__bottom, .content__head__bottom h5 {
+  padding: none;
+}
+
+.content__body {
+  font-size: 1.2rem;
+  font-weight: 200;
+}
+
+.business-card__footer {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 1rem;
+  padding-top: 0.7rem;
+  border-top: 0.012rem solid #808080;
+}
+
+.comment-button {
+  order: 0;
+  width: 49%;
+  text-align: left;
+}
+
+.comment__button {
+  display: flex;
+}
+
+.comment__button__icon {
+  padding-top: 0.1rem;
+}
+
+.comment-button__count {
+  padding-left: 0.3rem;
+  color: #663399;
+}
+
+.read-more {
+  order: 1;
+  width: 49%;
+  text-align: right;
+}
+
+.read-more__button {
+  color: #663399;
+}

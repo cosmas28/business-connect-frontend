@@ -1,6 +1,7 @@
-#root {
-    background-position: top right;
-    background-size: top center;
+:root {
+    /* background-position: top right; */
+    background-size: cover;
+    background: #F8F8FF;
     width: 100%;
     margin: 0;
     font-family: "Gill Sans", sans-serif;

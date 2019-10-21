@@ -5,6 +5,8 @@ import JwPagination from 'jw-react-pagination';
 
 import DashboardLayout from '../../components/DashboardLayout';
 import OneBusinessView from './ViewBusiness/OneBusinessView';
+import BusinessCard from '../BusinessCard';
+
 import { fetchBusinesses, deleteBusiness, searchBusinesses, registerBusiness } from '../../actions/businessActions';
 
 import './Dashboard.css';
@@ -64,41 +66,33 @@ export class Dashboard extends React.Component {
                 pageTitle="Home"
                 handleAddBusiness={this.props.registerBusiness}
             >
-                <main className="main-body">
-                    <div className="container-fluid">
-                        <div className="row no-gutters">
-                            <div className="col-md-12 col-sm-12 col-xs-12">
-                                <div className="main-view-page">
-                                    <div className="row no-gutters">
-                                        {!this.props.businesses &&
-                                            <p>You have not registered a business.Please register one.</p>
-                                        }
-                                        {this.state.pageOfItems.map((business, id) => {
-                                            return (
-                                                <OneBusinessView
-                                                    key={id}
-                                                    authUser={this.authUser}
-                                                    name={business.name}
-                                                    category={business.category}
-                                                    location={business.location}
-                                                    onDelete={this.props.deleteBusiness}
-                                                    summary={business.summary}
-                                                    id={business.id}
-                                                    ownerId={business.created_by}
-                                                />
-                                            );
-                                        })}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <JwPagination
-                                items={this.props.businesses}
-                                pageSize={5}
-                                onChangePage={this.onChangePage}
-                            />
-                        </div>
+                <main className="overview-page">
+                    <div className="business-card-wrapper">
+                        {!this.props.businesses &&
+                            <p>You have not registered a business.Please register one.</p>
+                        }
+                        {this.state.pageOfItems.map((business, id) => {
+                            return (
+                                <BusinessCard
+                                    key={id}
+                                    authUser={this.authUser}
+                                    name={business.name}
+                                    category={business.category}
+                                    location={business.location}
+                                    onDelete={this.props.deleteBusiness}
+                                    summary={business.summary}
+                                    id={business.id}
+                                    ownerId={business.created_by}
+                                />
+                            );
+                        })}
+                    </div>
+                    <div>
+                        <JwPagination
+                            items={this.props.businesses}
+                            pageSize={5}
+                            onChangePage={this.onChangePage}
+                        />
                     </div>
                 </main>
             </DashboardLayout>

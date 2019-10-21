@@ -1,5 +1,11 @@
-.main-body {
+.overview-page {
   max-width: 100%;
-  background-attachment: inherit;
-  position: inherit;
+  padding-top: 1rem;
+}
+
+.business-card-wrapper {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 100%
 }

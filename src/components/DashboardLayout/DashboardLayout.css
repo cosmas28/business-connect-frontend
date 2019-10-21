@@ -1,5 +1,5 @@
 .page-wrapper {
-  background-color: #ffffff;
+  background: #F8F8FF;
   display: flex;
   justify-content: space-between;
   width: 100%
@@ -21,6 +21,8 @@
 }
 
 .overview {
+  display: flex;
+  flex-direction: column;
   padding-left: 2%;
   padding-right: 10%;
 }

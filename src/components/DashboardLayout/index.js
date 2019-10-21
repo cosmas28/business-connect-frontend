@@ -33,7 +33,7 @@ class DashboardLayout extends React.Component {
           <PageHeader pageTitle={this.props.pageTitle} />
           {this.props.children}
           <BusinessPane
-            title="Add Business"
+            title="Add Business Idea"
             handleCancelButton={this.toggleSidePane}
             showSidePane={this.state.showSidePane}
             addBusiness={this.props.handleAddBusiness}
