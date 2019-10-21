@@ -22,14 +22,17 @@
   color: #ffffff;
 }
 
-.nav-item--dropdown {
+.nav-item--edit,
+.nav-item--settings,
+.nav-item--logout  {
   color: #663399;
 }
 
-.nav-item--dropdown a {
-  color: #663399;
+.nav-item--delete {
+  color: #DC143C;
 }
 
+.nav-item--add,
 .nav-item--active a {
   color: #ffffff;
 }

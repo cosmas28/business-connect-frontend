@@ -46,16 +46,14 @@ class UserAvator extends React.Component {
           </div>
           <div className={`dropdown-content ${this.state.showDropDown && 'dropdown-content--active'}`}>
             <NavBarLink
-              iconName="Settings"
-              url="/dashboard"
+              iconName="settings"
               label="Settings"
-              type="dropdown"
+              type="button"
             />
             <NavBarLink
-              iconName="Logout"
-              url="/dashboard"
+              iconName="logout"
               label="Logout"
-              type="dropdown"
+              type="button"
               onClickLink={this.handleLogout}
             />
           </div>

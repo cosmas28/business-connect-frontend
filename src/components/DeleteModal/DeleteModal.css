@@ -1,0 +1,54 @@
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  padding-top: 18rem;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4);
+}
+
+.modal--display {
+  display: block;
+}
+
+.modal__content {
+  background-color: #F8F8FF;
+  width: 30%;
+  height: 11rem;
+  margin: auto;
+  padding: 20px;
+  border-radius: 0.2rem;
+  border: 1px solid #888;
+  text-align: center;
+}
+
+.modal__content__header {
+  margin-bottom: 1rem;
+  color: #DC143C;
+}
+
+.modal__content__warning {
+  font-weight: 300;
+}
+
+.modal__content__footer {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.modal__cancel {
+  color: #A9A9A9;
+}
+
+.modal__delete {
+  color: #DC143C;
+}
+
+.modal__cancel,
+.modal__delete {
+  font-weight: 600;
+}
