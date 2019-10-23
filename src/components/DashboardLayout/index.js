@@ -1,12 +1,12 @@
-import React from 'react';
-import { FaConnectdevelop } from 'react-icons/fa';
-import PropTypes from 'prop-types';
+import React from "react";
+import { FaConnectdevelop } from "react-icons/fa";
+import PropTypes from "prop-types";
 
-import PageHeader from '../PageHeader/';
-import SideNavBar from '../../components/SideNavBar';
-import UserAvator from '../UserAvator';
+import PageHeader from "../PageHeader/";
+import SideNavBar from "../../components/SideNavBar";
+import UserAvator from "../UserAvator";
 
-import './DashboardLayout.css';
+import "./DashboardLayout.css";
 
 const DashboardLayout = props => {
   const { toggleSidePane, pageTitle, children } = props;
@@ -18,9 +18,7 @@ const DashboardLayout = props => {
           <FaConnectdevelop size={30} />
         </div>
         <SideNavBar handleAddButton={toggleSidePane} />
-        <UserAvator
-          userName="Cosmas Billa"
-        />
+        <UserAvator userName="Cosmas Billa" />
       </div>
       <div className="overview">
         <PageHeader pageTitle={pageTitle} />

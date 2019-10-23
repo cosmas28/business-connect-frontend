@@ -5,7 +5,7 @@ module.exports = {
         "es6": true,
         "node": true
     },
-    "extends": "eslint:recommended",
+    "extends": ['airbnb', 'plugin:jest/recommended', 'jest-enzyme'],
     "parserOptions": {
         "ecmaVersion": 6,
         "parser": "babel-eslint",
@@ -16,7 +16,11 @@ module.exports = {
         "sourceType": "module"
     },
     "plugins": [
-        "react"
+        "react",
+        "babel",
+        "import",
+        "jsx-a11y",
+        "prettier"
     ],
     "rules": {
         "accessor-pairs": "error",

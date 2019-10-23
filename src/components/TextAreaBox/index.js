@@ -1,7 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
-import './TextAreaBox.css';
+import "./TextAreaBox.css";
 
 const TextAreaBox = props => {
   const { placeholder, rowsCount, name, handleOnChange, value } = props;

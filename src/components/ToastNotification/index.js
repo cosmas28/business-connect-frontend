@@ -1,17 +1,17 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { FaRegTimesCircle, FaRegCheckCircle } from 'react-icons/fa'
+import React from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { FaRegTimesCircle, FaRegCheckCircle } from "react-icons/fa";
 
-import './ToastNotification.css';
+import "./ToastNotification.css";
 
-const renderIcon = (status) => {
-  if (status !== 'success') {
-    return (<FaRegTimesCircle size={30} color="#fff"/>)
+const renderIcon = status => {
+  if (status !== "success") {
+    return <FaRegTimesCircle size={30} color="#fff" />;
   }
 
-  return (<FaRegCheckCircle  size={30} color="#fff"/>)
-}
+  return <FaRegCheckCircle size={30} color="#fff" />;
+};
 
 class ToastNotification extends React.Component {
   constructor(props) {
@@ -40,29 +40,25 @@ class ToastNotification extends React.Component {
   hideToast = () => {
     this.setState({
       showToast: false,
-      status: '',
-      message: ''
+      status: "",
+      message: ""
     });
-  }
+  };
 
-  render () {
+  render() {
     const { showToast, message, status } = this.state;
 
     return (
-      <div className={`toast-wrap ${status} ${showToast && 'show-toast'}`}>
-        <div className={`icon-wrap ${status}`}>
-          {renderIcon(status)}
-        </div>
-        <div className={`message-wrap`}>
-          {message}
-        </div>
+      <div className={`toast-wrap ${status} ${showToast && "show-toast"}`}>
+        <div className={`icon-wrap ${status}`}>{renderIcon(status)}</div>
+        <div className={`message-wrap`}>{message}</div>
       </div>
     );
   }
 }
 
 ToastNotification.propTypes = {
-  'toast': PropTypes.object,
+  toast: PropTypes.object
 };
 
 const mapStateToProps = state => ({

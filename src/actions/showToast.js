@@ -1,5 +1,5 @@
 // ./src/actions/responseMessage.js
-import * as actionTypes from './actionTypes';
+import * as actionTypes from "./actionTypes";
 
 /**
  *
@@ -8,14 +8,14 @@ import * as actionTypes from './actionTypes';
  * @return {Object} - an object of success message and action type
  */
 export const showToast = (message, status) => ({
-    message,
-    status,
-    type: actionTypes.ADD_RESPONSE_MESSAGE
+  message,
+  status,
+  type: actionTypes.ADD_RESPONSE_MESSAGE
 });
 
 /**
  * @returns {Object} - an object containing action type
  */
 export const deleteResponseMessages = () => {
-    return { type: actionTypes.DELETE_RESPONSE_MESSAGE };
+  return { type: actionTypes.DELETE_RESPONSE_MESSAGE };
 };

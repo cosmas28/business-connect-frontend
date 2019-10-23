@@ -1,7 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
-import './Button.css';
+import "./Button.css";
 
 const Button = ({ typeColor, label, handleOnClick, disabled }) => (
   <button
@@ -14,10 +14,10 @@ const Button = ({ typeColor, label, handleOnClick, disabled }) => (
 );
 
 Button.propTypes = {
-  'disabled': PropTypes.string,
-  'handleOnClick': PropTypes.func,
-  'label': PropTypes.string.isRequired,
-  'typeColor': PropTypes.string.isRequired
+  disabled: PropTypes.string,
+  handleOnClick: PropTypes.func,
+  label: PropTypes.string.isRequired,
+  typeColor: PropTypes.string.isRequired
 };
 
 export default Button;
