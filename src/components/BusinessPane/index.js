@@ -8,6 +8,28 @@ import TextAreaBox from '../TextAreaBox';
 
 import './BusinessPane.css';
 
+const renderSubmitButton = (mode, addModeHandler, editModeHandler) => {
+  if (mode === 'Add') {
+    return (
+      <Button
+        typeColor="primary"
+        label="ADD IDEA"
+        disabled={''}
+        handleOnClick={addModeHandler}
+      />
+    )
+  }
+
+  return (
+    <Button
+      typeColor="primary"
+      label="EDIT IDEA"
+      disabled={''}
+      handleOnClick={editModeHandler}
+    />
+  )
+}
+
 class BusinessPane extends React.Component {
   constructor(props) {
     super(props);
@@ -19,6 +41,25 @@ class BusinessPane extends React.Component {
       name: ''
     };
   }
+
+  componentDidUpdate({ businessToEdit }) {
+    if(this.props.businessToEdit !== businessToEdit) {
+      const { name, summary, location, category} = this.props.businessToEdit
+      this.setState({
+        category: category,
+        description: summary,
+        location: location,
+        name: name
+      })
+    }
+  }
+
+  resetState = () => this.setState({
+    category: 'education',
+    description: '',
+    location: '',
+    name: ''
+  }, () => this.props.handleCancelButton())
 
   handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -37,21 +78,22 @@ class BusinessPane extends React.Component {
       summary: description
     }
 
-    this.props.addBusiness(this.accessToken, input).then(() => this.setState({
-      category: 'education',
-      description: '',
-      location: '',
-      name: ''
-    }))
+    if (this.props.mode === 'Add') {
+      this.props.addBusiness(this.accessToken, input).then(() => this.resetState())
+    } else {
+      this.props.editBusiness(this.accessToken, this.props.businessToEdit.id, input)
+      .then(() => this.resetState())
+    }
   }
 
   render() {
-    const { title, handleCancelButton, showSidePane, businessToEdit } = this.props;
+    const { mode, showSidePane } = this.props;
     const { category, description, location, name } = this.state;
+    const title = mode === 'Add' ? 'ADD BUSINESS IDEA' : `Edit ${name}`;
 
     return (
       <SidePane
-        handleCancelButton={handleCancelButton}
+        handleCancelButton={this.resetState}
         title={title}
         showSidePane={showSidePane}
       >
@@ -92,12 +134,7 @@ class BusinessPane extends React.Component {
             handleOnChange={this.handleInputChange}
           />
           <div className="form-item">
-            <Button
-              typeColor="primary"
-              label="ADD BUSINESS"
-              disabled={''}
-              handleOnClick={this.handleAddBusiness}
-            />
+            {renderSubmitButton(mode, this.handleAddBusiness, this.handleAddBusiness)}
           </div>
         </form>
       </SidePane>
@@ -108,9 +145,10 @@ class BusinessPane extends React.Component {
 BusinessPane.propTypes = {
   addBusiness: PropTypes.func,
   businessToEdit: PropTypes.object,
+  editBusiness: PropTypes.func.isRequired,
   handleCancelButton: PropTypes.func.isRequired,
   showSidePane: PropTypes.bool.isRequired,
-  title: PropTypes.string.isRequired
+  mode: PropTypes.string.isRequired
 };
 
 export default BusinessPane;

@@ -153,12 +153,6 @@ export const searchBusinesses = (accessToken, searchQuery) => {
     };
 };
 
-/**
- *
- * @param {string} accessToken - API authorization access token
- * @param {number} userId - unique user ID for accessing user businesses
- * @returns {Function} - a function that takes dispatch as its only argument and dispatches an action when the promise resolves
- */
 export const fetchUserBusinessesById = (accessToken, userId) => {
     return (dispatch) => {
         return axios.get(apiUrl + '/user/' + userId, { 'headers': { 'Authorization': `Bearer ${accessToken}` } })
@@ -181,12 +175,6 @@ export const fetchUserBusinessesById = (accessToken, userId) => {
     };
 };
 
-/**
- *
- * @param {string} accessToken - API authorization access token
- * @param {number} businessId - unique business ID for accessing business details
- * @returns {Function} - a function that takes dispatch as its only argument and dispatches an action when the promise resolves
- */
 export const fetchBusinessesById = (accessToken, businessId) => {
     return (dispatch) => {
         return axios.get(apiUrl + '/' + businessId, { 'headers': { 'Authorization': `Bearer ${accessToken}` } })
@@ -216,12 +204,6 @@ const registerBusinessSuccess = (business) => ({
     type: actionTypes.REGISTER_BUSINESS_SUCCESS
 });
 
-/**
- *
- * @param {string} accessToken - API authorization access token
- * @param {Object} inputData - an object of business registration data
- * @returns {Function} - a function that takes dispatch as its only argument and dispatches an action when the promise resolves
- */
 export const registerBusiness = (accessToken, inputData) => {
     return (dispatch) => {
         return axios.post(apiUrl, inputData, { 'headers': { 'Authorization': `Bearer ${accessToken}` } })
@@ -244,19 +226,18 @@ export const registerBusiness = (accessToken, inputData) => {
     };
 };
 
-/**
- *
- * @param {string} accessToken - API authorization access token
- * @param {number} businessId - unique business ID for accessing business details
- * @returns {Function} - a function that takes dispatch as its only argument and dispatches an action when the promise resolves
- */
+const deleteBusinessSuccess = (business) => ({
+    business,
+    type: actionTypes.DELETE_BUSINESS_SUCCESS
+});
+
 export const deleteBusiness = (accessToken, businessId) => {
     return (dispatch) => {
         return axios.delete(apiUrl + '/' + businessId, { 'headers': { 'Authorization': `Bearer ${accessToken}` } })
         .then(response => {
             if (response.data.status_code === 204) {
-                dispatch(showToast(response.data));
-                history.push('/dashboard');
+                dispatch(deleteBusinessSuccess(response.data.data));
+                dispatch(showToast(response.data.message, 'success'));
             } else {
                 dispatch(showToast(response.data));
             }
@@ -272,6 +253,11 @@ export const deleteBusiness = (accessToken, businessId) => {
     };
 };
 
+const updateBusinessSuccess = (business) => ({
+    business,
+    type: actionTypes.UPDATE_BUSINESS_SUCCESS
+});
+
 /**
  *
  * @param {string} accessToken - API authorization access token
@@ -284,13 +270,10 @@ export const updateBusiness = (accessToken, businessId, newData) => {
         return axios.put(apiUrl + '/' + businessId, newData, { 'headers': { 'Authorization': `Bearer ${accessToken}` } })
         .then(response => {
             if (response.data.status_code === 200) {
-                dispatch(showToast({
-                    response_message: 'Business successfuly updated!',
-                    status_code: 200
-                }));
-                history.push('/dashboard');
+                dispatch(updateBusinessSuccess(response.data.data));
+                dispatch(showToast(response.data.message, 'success'));
             } else {
-                dispatch(showToast(response.data));
+                dispatch(showToast(response.data.response_message, 'failure'));
             }
         })
         .catch(error => {

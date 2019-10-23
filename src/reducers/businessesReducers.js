@@ -1,34 +1,43 @@
-// ./src/reducers/businessReducers.js
 
-/**
- *
- * @param {Array} currentState - current store state of businesses object
- * @param {string} action - a store dispatched action type
- * @returns {Array} - next store state of businesses object
- */
-export const businessesReducer = (currentState = [], action) => {
+const businessesInitialState = {
+    data: [],
+    isLoading: false
+};
+
+export const businessesReducer = (state = businessesInitialState, action) => {
     switch (action.type) {
         case 'REGISTER_BUSINESS_SUCCESS':
-            return [
-                action.business,
-                ...currentState
-            ];
+            return {
+                ...state,
+                data: [
+                    action.business,
+                    ...state.data
+                ]
+            };
         case 'FETCH_ALL_BUSINESSES_SUCCESS':
-            return action.businesses;
-
+            return {
+                ...state,
+                data: action.businesses
+            };
+        case 'UPDATE_BUSINESS_SUCCESS':
+            return {
+                ...state,
+                data: state.data.map(business => business.id === action.business.id
+                    ? action.business
+                    : business)
+            };
+        case 'DELETE_BUSINESS_SUCCESS':
+            return {
+                ...state,
+                data: state.data.filter(business => business.id !== action.business.id)
+            };
         case 'FETCH_ALL_BUSINESSES_FAIL':
             return action.error;
         default:
-            return currentState;
+            return state;
     }
 };
 
-/**
- *
- * @param {Object} currentState - current store state of business object
- * @param {string} action - a store dispatched action type
- * @returns {Array} - next store state of business object
- */
 export const businessReducer = (currentState = {}, action) => {
     switch (action.type) {
         case 'FETCH_BUSINESSES_BY_ID_SUCCESS':
@@ -40,12 +49,6 @@ export const businessReducer = (currentState = {}, action) => {
     }
 };
 
-/**
- *
- * @param {Array} currentState - current store state of userBusinesses object
- * @param {string} action - a store dispatched action type
- * @returns {Array} - next store state of userBusinesses object
- */
 export const userBusinessReducer = (currentState = [], action) => {
     switch (action.type) {
         case 'FETCH_BUSINESSES_BY_USER_ID_SUCCESS':

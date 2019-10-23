@@ -20,22 +20,22 @@ class SideNavBar extends React.Component {
       <div className="nav-links">
         <NavBarLink
           isActive={this.state.activeLink === 'Home' && true}
-          iconName="Home"
+          iconName="home"
           url="/dashboard"
           label="Home"
           onClickLink={this.toggleActiveLink('Home')}
         />
         <NavBarLink
           isActive={this.state.activeLink === 'My Businesses' && true}
-          iconName="My Businesses"
+          iconName="ideas"
           url="/dashboard"
-          label="My Businesses"
+          label="My Ideas"
           onClickLink={this.toggleActiveLink('My Businesses')}
         />
         <NavBarLink
-          iconName="Add Business"
-          url=""
-          label="Add Business"
+          iconName="add"
+          type="button"
+          label="Add Idea"
           onClickLink={this.props.handleAddButton}
         />
       </div>
