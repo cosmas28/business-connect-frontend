@@ -1,8 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { IoIosTrash } from 'react-icons/io';
+import React from "react";
+import PropTypes from "prop-types";
+import { IoIosTrash } from "react-icons/io";
 
-import './DeleteModal.css';
+import "./DeleteModal.css";
 
 const DeleteModal = props => {
   const {
@@ -13,15 +13,21 @@ const DeleteModal = props => {
   } = props;
 
   return (
-    <div className={`modal ${showDeleteModal && 'modal--display'}`}>
+    <div className={`modal ${showDeleteModal && "modal--display"}`}>
       <div className="modal__content">
-        <div className="modal__content__header"><IoIosTrash size={50} fontWeight={300} /></div>
+        <div className="modal__content__header">
+          <IoIosTrash size={50} fontWeight={300} />
+        </div>
         <div className="modal__content__warning">
           {`Are you sure you want to delete ${businessName}?`}
         </div>
         <div className="modal__content__footer">
-          <button onClick={handleCancelButton} className="modal__cancel">CANCEL</button>
-          <button onClick={handleOnDeleteButton} className="modal__delete">DELETE</button>
+          <button onClick={handleCancelButton} className="modal__cancel">
+            CANCEL
+          </button>
+          <button onClick={handleOnDeleteButton} className="modal__delete">
+            DELETE
+          </button>
         </div>
       </div>
     </div>

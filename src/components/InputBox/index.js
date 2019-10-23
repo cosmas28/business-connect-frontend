@@ -1,7 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
-import './InputBox.css';
+import "./InputBox.css";
 
 const InputBox = props => {
   const {
@@ -17,8 +17,7 @@ const InputBox = props => {
   return (
     <div className="container">
       <input
-        className={
-          `text-input ${errorMessage && 'invalid-input'}`}
+        className={`text-input ${errorMessage && "invalid-input"}`}
         type={type}
         value={value}
         name={name}
@@ -26,24 +25,19 @@ const InputBox = props => {
         onChange={handleOnChange}
         onBlur={handleOnBlur}
       />
-      {
-        errorMessage &&
-        <div className="error-wrap">
-          {errorMessage}
-        </div>
-      }
-  </div>
+      {errorMessage && <div className="error-wrap">{errorMessage}</div>}
+    </div>
   );
 };
 
 InputBox.propTypes = {
-  'errorMessage': PropTypes.string,
-  'handleOnBlur': PropTypes.func,
-  'handleOnChange': PropTypes.func,
-  'name': PropTypes.string.isRequired,
-  'placeholder': PropTypes.string.isRequired,
-  'type': PropTypes.string.isRequired,
-  'value': PropTypes.string
+  errorMessage: PropTypes.string,
+  handleOnBlur: PropTypes.func,
+  handleOnChange: PropTypes.func,
+  name: PropTypes.string.isRequired,
+  placeholder: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+  value: PropTypes.string
 };
 
 export default InputBox;

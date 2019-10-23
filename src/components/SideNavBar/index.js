@@ -1,36 +1,37 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
-import NavBarLink from '../../components/NavBarLink';
+import NavBarLink from "../../components/NavBarLink";
 
-import './SideNavBar.css';
+import "./SideNavBar.css";
 
 class SideNavBar extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { activeLink: 'Home' };
+    this.state = { activeLink: "Home" };
   }
 
-  toggleActiveLink = (linkName) => () => this.setState({
-    activeLink: linkName
-  })
+  toggleActiveLink = linkName => () =>
+    this.setState({
+      activeLink: linkName
+    });
 
-  render () {
+  render() {
     return (
       <div className="nav-links">
         <NavBarLink
-          isActive={this.state.activeLink === 'Home' && true}
+          isActive={this.state.activeLink === "Home" && true}
           iconName="home"
           url="/dashboard"
           label="Home"
-          onClickLink={this.toggleActiveLink('Home')}
+          onClickLink={this.toggleActiveLink("Home")}
         />
         <NavBarLink
-          isActive={this.state.activeLink === 'My Businesses' && true}
+          isActive={this.state.activeLink === "My Businesses" && true}
           iconName="ideas"
           url="/dashboard"
           label="My Ideas"
-          onClickLink={this.toggleActiveLink('My Businesses')}
+          onClickLink={this.toggleActiveLink("My Businesses")}
         />
         <NavBarLink
           iconName="add"
@@ -43,6 +44,6 @@ class SideNavBar extends React.Component {
   }
 }
 
-SideNavBar.propTypes = { 'handleAddButton': PropTypes.func.isRequired }
+SideNavBar.propTypes = { handleAddButton: PropTypes.func.isRequired };
 
 export default SideNavBar;
