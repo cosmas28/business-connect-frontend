@@ -60,15 +60,7 @@
     "babel-jest": "^24.9.0",
     "babel-loader": "^8.0.6",
     "babel-plugin-transform-class-properties": "^6.24.1",
-<<<<<<< HEAD
-    "babel-plugin-transform-es2015-destructuring": "^6.23.0",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-react": "^6.24.1",
-||||||| merged common ancestors
-    "babel-preset-env": "^1.6.1",
-=======
-    "babel-preset-react": "^6.24.1",
->>>>>>> b5e96f0a4dd6ce0d4027eed364b46ad9130185ca
     "babel-preset-stage-2": "^6.24.1",
     "coveralls": "^3.0.7",
     "enzyme": "^3.10.0",
