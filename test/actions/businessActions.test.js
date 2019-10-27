@@ -7,7 +7,7 @@ import * as types from "../../src/actions/actionTypes";
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
-describe("Bussines thunks", () => {
+describe("business interaction tests", () => {
   beforeEach(() => {
     moxios.install();
   });
@@ -21,26 +21,23 @@ describe("Bussines thunks", () => {
   const mockAccessToken = "thisismybesttokenin2018";
   const mockBusinesssId = 1;
 
-  describe("Business registration thunks", () => {
-    it("should dispatch the success toast action", done => {
+  describe("business registration action tests", () => {
+    it("should create ADD_RESPONSE_MESSAGE action", done => {
       moxios.wait(() => {
         const request = moxios.requests.mostRecent();
         request.respondWith({
           response: {
-            data: {},
-            response_message: "Business is successfully registered!",
+            respond_message: "Business is successfully registered!",
             status_code: 201
           }
         });
       });
       const expectedAction = [
         {
-          business: {},
-          type: types.REGISTER_BUSINESS_SUCCESS
-        },
-        {
-          message: "Business is successfully registered!",
-          status: "success",
+          message: {
+            respond_message: "Business is successfully registered!",
+            status_code: 201
+          },
           type: types.ADD_RESPONSE_MESSAGE
         }
       ];
@@ -54,20 +51,22 @@ describe("Bussines thunks", () => {
           done();
         });
     });
-    it("should dispatch showToast on failure", done => {
+    it("should create ADD_RESPONSE_MESSAGE action", done => {
       moxios.wait(() => {
         const request = moxios.requests.mostRecent();
         request.respondWith({
           response: {
-            response_message: "The business name already exists!",
+            respond_message: "The business name already exists!",
             status_code: 406
           }
         });
       });
       const expectedAction = [
         {
-          message: "The business name already exists!",
-          status: "failure",
+          message: {
+            respond_message: "The business name already exists!",
+            status_code: 406
+          },
           type: types.ADD_RESPONSE_MESSAGE
         }
       ];

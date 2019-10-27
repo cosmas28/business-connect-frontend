@@ -233,7 +233,7 @@ export const registerBusiness = (accessToken, inputData) => {
           if (error.response.status === 422 || error.response.status === 401) {
             dispatch(doLogout());
           }
-          dispatch(showToast(error.response.data.response_message, "failure"));
+          dispatch(showToast(error.response.data));
         }
       });
   };

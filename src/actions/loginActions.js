@@ -23,7 +23,9 @@ export const doLogin = loginInput => {
           sessionStorage.setItem("userId", response.data.user_id);
           history.push("/dashboard");
         } else {
-          dispatch(showToast(response.data.response_message, "failure"));
+          dispatch(
+            showToast("Invalid email or password. Please try again!", "failure")
+          );
         }
       })
       .catch(error => {

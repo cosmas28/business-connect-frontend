@@ -32,8 +32,10 @@ describe("sign up actions", () => {
 
     const expectedActions = [
       {
-        message: "You have successfully created an account!",
-        status: "success",
+        message: {
+          message: "You have successfully created an account!",
+          status_code: 201
+        },
         type: types.ADD_RESPONSE_MESSAGE
       }
     ];
@@ -60,8 +62,10 @@ describe("sign up actions", () => {
 
     const expectedActions = [
       {
-        message: "This user already exists!",
-        status: "failure",
+        message: {
+          message: "This user already exists!",
+          status_code: 406
+        },
         type: types.ADD_RESPONSE_MESSAGE
       }
     ];

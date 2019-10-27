@@ -23,7 +23,7 @@ describe("login action tests", () => {
       const request = moxios.requests.mostRecent();
       request.respondWith({
         response: {
-          response_message: "You have successfully login!",
+          message: "You have successfully login!",
           status_code: 200
         }
       });
@@ -31,8 +31,10 @@ describe("login action tests", () => {
 
     const expectedAction = [
       {
-        message: "You have successfully login!",
-        status: "success",
+        message: {
+          message: "You have successfully login!",
+          status_code: 200
+        },
         type: types.ADD_RESPONSE_MESSAGE
       }
     ];
@@ -50,7 +52,7 @@ describe("login action tests", () => {
       const request = moxios.requests.mostRecent();
       request.respondWith({
         response: {
-          response_message: "Invalid username or password!",
+          message: "Invalid username or password!",
           status_code: 401
         }
       });
@@ -58,8 +60,10 @@ describe("login action tests", () => {
 
     const expectedAction = [
       {
-        message: "Invalid username or password!",
-        status: "failure",
+        message: {
+          message: "Invalid username or password!",
+          status_code: 401
+        },
         type: types.ADD_RESPONSE_MESSAGE
       }
     ];

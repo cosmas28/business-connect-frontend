@@ -19,13 +19,13 @@ describe("test reset password actions", () => {
   const userInput = {};
   const mockToken = "hereissometoken124";
 
-  describe("Email confirmation action", () => {
-    it("should return success toast on success", done => {
+  describe("test email confirmation action", () => {
+    it("should create ADD_RESPONSE_MESSAGE action after successfully sent email", done => {
       moxios.wait(() => {
         const request = moxios.requests.mostRecent();
         request.respondWith({
           response: {
-            response_message: "Confirmation email sent. Check your email!",
+            message: "Confirmation email sent. Check your email!",
             status_code: 200
           }
         });
@@ -33,8 +33,10 @@ describe("test reset password actions", () => {
 
       const expectedActions = [
         {
-          message: "Confirmation email sent. Check your email!",
-          status: "success",
+          message: {
+            message: "Confirmation email sent. Check your email!",
+            status_code: 200
+          },
           type: types.ADD_RESPONSE_MESSAGE
         }
       ];
@@ -47,12 +49,12 @@ describe("test reset password actions", () => {
       });
     });
 
-    it("should return a failure toast on failure", done => {
+    it("should create ADD_RESPONSE_MESSAGE action after successfully sent email", done => {
       moxios.wait(() => {
         const request = moxios.requests.mostRecent();
         request.respondWith({
           response: {
-            response_message: "Email does not exist!",
+            message: "Email does not exist!",
             status_code: 406
           }
         });
@@ -60,8 +62,10 @@ describe("test reset password actions", () => {
 
       const expectedActions = [
         {
-          message: "Email does not exist!",
-          status: "failure",
+          message: {
+            message: "Email does not exist!",
+            status_code: 406
+          },
           type: types.ADD_RESPONSE_MESSAGE
         }
       ];
@@ -75,14 +79,13 @@ describe("test reset password actions", () => {
     });
   });
 
-  describe("Reset password action", () => {
-    it("should return a success toast on successful password reset", done => {
+  describe("test reset password action", () => {
+    it("should create RESET_PASSWORD_SUCCESS action after successfully sent email", done => {
       moxios.wait(() => {
         const request = moxios.requests.mostRecent();
         request.respondWith({
           response: {
-            response_message:
-              "You have successfully reset your password. Please login!",
+            message: "You have successfully reset your password. Please login!",
             status_code: 200
           }
         });
@@ -90,9 +93,11 @@ describe("test reset password actions", () => {
 
       const expectedActions = [
         {
-          message: "You have successfully reset your password. Please login!",
-          status: "success",
-          type: types.ADD_RESPONSE_MESSAGE
+          message: {
+            message: "You have successfully reset your password. Please login!",
+            status_code: 200
+          },
+          type: types.RESET_PASSWORD_SUCCESS
         }
       ];
 
@@ -106,12 +111,12 @@ describe("test reset password actions", () => {
         });
     });
 
-    it("should return a failure toast on failed password reset", done => {
+    it("should create RESET_PASSWORD_FAIL action after successfully sent email", done => {
       moxios.wait(() => {
         const request = moxios.requests.mostRecent();
         request.respondWith({
           response: {
-            response_message: "Password does not match!",
+            message: "Password does not match!",
             status_code: 406
           }
         });
@@ -119,9 +124,11 @@ describe("test reset password actions", () => {
 
       const expectedActions = [
         {
-          message: "Password does not match!",
-          status: "failure",
-          type: types.ADD_RESPONSE_MESSAGE
+          error: {
+            message: "Password does not match!",
+            status_code: 406
+          },
+          type: types.RESET_PASSWORD_FAIL
         }
       ];
 
