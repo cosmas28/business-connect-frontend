@@ -3,7 +3,6 @@ import thunk from "redux-thunk";
 import moxios from "moxios";
 import * as actions from "../../src/actions/signupActions";
 import * as types from "../../src/actions/actionTypes";
-import expect from "expect";
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
