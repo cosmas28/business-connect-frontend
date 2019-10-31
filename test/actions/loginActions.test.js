@@ -18,12 +18,12 @@ describe("login action tests", () => {
 
   const loginInput = {};
 
-  it("creates ADD_RESPONSE_MESSAGE action after successfully login", done => {
+  it("dispatch showToast with success status", done => {
     moxios.wait(() => {
       const request = moxios.requests.mostRecent();
       request.respondWith({
         response: {
-          message: "You have successfully login!",
+          response_message: "You have successfully login!",
           status_code: 200
         }
       });
@@ -31,10 +31,8 @@ describe("login action tests", () => {
 
     const expectedAction = [
       {
-        message: {
-          message: "You have successfully login!",
-          status_code: 200
-        },
+        message: "You have successfully login!",
+        status: "success",
         type: types.ADD_RESPONSE_MESSAGE
       }
     ];
@@ -47,12 +45,12 @@ describe("login action tests", () => {
     });
   });
 
-  it("creates ADD_RESPONSE_MESSAGE action after successfully login", done => {
+  it("dispatch showToast with failure status", done => {
     moxios.wait(() => {
       const request = moxios.requests.mostRecent();
       request.respondWith({
         response: {
-          message: "Invalid username or password!",
+          response_message: "Invalid email or password. Please try again!",
           status_code: 401
         }
       });
@@ -60,10 +58,8 @@ describe("login action tests", () => {
 
     const expectedAction = [
       {
-        message: {
-          message: "Invalid username or password!",
-          status_code: 401
-        },
+        message: "Invalid email or password. Please try again!",
+        status: "failure",
         type: types.ADD_RESPONSE_MESSAGE
       }
     ];

@@ -12,10 +12,3 @@ export const showToast = (message, status) => ({
   status,
   type: actionTypes.ADD_RESPONSE_MESSAGE
 });
-
-/**
- * @returns {Object} - an object containing action type
- */
-export const deleteResponseMessages = () => {
-  return { type: actionTypes.DELETE_RESPONSE_MESSAGE };
-};

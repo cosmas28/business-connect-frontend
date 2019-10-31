@@ -27,8 +27,6 @@ export const businessesReducer = (state = businessesInitialState, action) => {
         ...state,
         data: state.data.filter(business => business.id !== action.business.id)
       };
-    case "FETCH_ALL_BUSINESSES_FAIL":
-      return action.error;
     default:
       return state;
   }

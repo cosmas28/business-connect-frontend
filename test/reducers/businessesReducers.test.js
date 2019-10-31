@@ -5,9 +5,10 @@ import {
   searchReducer
 } from "../../src/reducers/businessesReducers";
 import * as types from "../../src/actions/actionTypes";
+import { businesses } from "../../fixtures/businesses";
 
-describe("business reducers tests suites", () => {
-  const businessesInitialState = { data: [], isLoading: false };
+describe("Business Reducer", () => {
+  let businessesInitialState = { data: [], isLoading: false };
 
   describe("fetch all businesses reducer", () => {
     it("should the initial state", () => {
@@ -17,68 +18,78 @@ describe("business reducers tests suites", () => {
     it("should handle FETCH_ALL_BUSINESSES_SUCCESS action type", () => {
       expect(
         businessesReducer(businessesInitialState, {
-          businesses: [
-            {
-              category: "Technology",
-              location: "Nairobi",
-              name: "Andela",
-              summary: "A description for this business goes here"
-            },
-            {
-              category: "Technology",
-              location: "Carlifonia",
-              name: "Facebook",
-              summary: "A description for this business goes here"
-            },
-            {
-              category: "Motorcars",
-              location: "Carlifonia",
-              name: "Tesla",
-              summary: "A description for this business goes here"
-            }
-          ],
+          businesses: businesses,
           type: types.FETCH_ALL_BUSINESSES_SUCCESS
         })
       ).toEqual({
-        data: [
-          {
-            category: "Technology",
-            location: "Nairobi",
-            name: "Andela",
-            summary: "A description for this business goes here"
-          },
-          {
-            category: "Technology",
-            location: "Carlifonia",
-            name: "Facebook",
-            summary: "A description for this business goes here"
-          },
-          {
-            category: "Motorcars",
-            location: "Carlifonia",
-            name: "Tesla",
-            summary: "A description for this business goes here"
-          }
-        ],
+        data: businesses,
         isLoading: false
       });
     });
 
-    it("should handle FETCH_ALL_BUSINESSES_FAIL action", () => {
+    it("should handle REGISTER_BUSINESS_SUCCESS", () => {
+      const newBusiness = {
+        id: 4,
+        category: "Education",
+        location: "Kigali",
+        name: "Slang",
+        summary: "A description for this business goes here"
+      };
+
       expect(
-        businessesReducer(
-          {},
-          {
-            error: {
-              response_message: "There is an internal server error!",
-              status_code: 500
-            },
-            type: types.FETCH_ALL_BUSINESSES_FAIL
-          }
-        )
+        businessesReducer(businessesInitialState, {
+          business: newBusiness,
+          type: types.REGISTER_BUSINESS_SUCCESS
+        })
       ).toEqual({
-        response_message: "There is an internal server error!",
-        status_code: 500
+        data: [newBusiness],
+        isLoading: false
+      });
+    });
+
+    it("should handle UPDATE_BUSINESS_SUCCESS", () => {
+      businessesInitialState = { data: businesses, isLoading: false };
+      const businessToUpdate = {
+        id: 3,
+        category: "Motorcars",
+        location: "Kampala",
+        name: "Tesla",
+        summary: "A description for this business goes here"
+      };
+
+      expect(
+        businessesReducer(businessesInitialState, {
+          business: businessToUpdate,
+          type: types.UPDATE_BUSINESS_SUCCESS
+        })
+      ).toEqual({
+        data: businessesInitialState.data.map(business =>
+          business.id === businessToUpdate.id ? businessToUpdate : business
+        ),
+        isLoading: false
+      });
+    });
+
+    it("should handle DELETE_BUSINESS_SUCCESS", () => {
+      businessesInitialState = { data: businesses, isLoading: false };
+      const businessToDelete = {
+        id: 3,
+        category: "Motorcars",
+        location: "Kampala",
+        name: "Tesla",
+        summary: "A description for this business goes here"
+      };
+
+      expect(
+        businessesReducer(businessesInitialState, {
+          business: businessToDelete,
+          type: types.DELETE_BUSINESS_SUCCESS
+        })
+      ).toEqual({
+        data: businessesInitialState.data.filter(
+          business => business.id !== businessToDelete.id
+        ),
+        isLoading: false
       });
     });
   });

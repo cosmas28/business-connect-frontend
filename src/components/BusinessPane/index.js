@@ -161,7 +161,7 @@ class BusinessPane extends React.Component {
 BusinessPane.propTypes = {
   addBusiness: PropTypes.func,
   businessToEdit: PropTypes.object,
-  editBusiness: PropTypes.func.isRequired,
+  editBusiness: PropTypes.func,
   handleCancelButton: PropTypes.func.isRequired,
   showSidePane: PropTypes.bool.isRequired,
   mode: PropTypes.string.isRequired

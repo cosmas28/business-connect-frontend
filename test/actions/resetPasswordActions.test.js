@@ -7,7 +7,7 @@ import * as types from "../../src/actions/actionTypes";
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
-describe("test reset password actions", () => {
+describe("Reset password actions", () => {
   beforeEach(() => {
     moxios.install();
   });
@@ -19,13 +19,13 @@ describe("test reset password actions", () => {
   const userInput = {};
   const mockToken = "hereissometoken124";
 
-  describe("test email confirmation action", () => {
-    it("should create ADD_RESPONSE_MESSAGE action after successfully sent email", done => {
+  describe("Email confirmation", () => {
+    it("should dispatch showToast with success status", done => {
       moxios.wait(() => {
         const request = moxios.requests.mostRecent();
         request.respondWith({
           response: {
-            message: "Confirmation email sent. Check your email!",
+            response_message: "Confirmation email sent. Check your email!",
             status_code: 200
           }
         });
@@ -33,15 +33,13 @@ describe("test reset password actions", () => {
 
       const expectedActions = [
         {
-          message: {
-            message: "Confirmation email sent. Check your email!",
-            status_code: 200
-          },
+          message: "Confirmation email sent. Check your email!",
+          status: "success",
           type: types.ADD_RESPONSE_MESSAGE
         }
       ];
 
-      const store = mockStore({ mail: [] });
+      const store = mockStore({ toast: {} });
 
       return store.dispatch(actions.confirmEmail(userInput)).then(() => {
         expect(store.getActions()).toEqual(expectedActions);
@@ -49,12 +47,12 @@ describe("test reset password actions", () => {
       });
     });
 
-    it("should create ADD_RESPONSE_MESSAGE action after successfully sent email", done => {
+    it("should dispatch showToast with failure status", done => {
       moxios.wait(() => {
         const request = moxios.requests.mostRecent();
         request.respondWith({
           response: {
-            message: "Email does not exist!",
+            response_message: "Email does not exist!",
             status_code: 406
           }
         });
@@ -62,15 +60,13 @@ describe("test reset password actions", () => {
 
       const expectedActions = [
         {
-          message: {
-            message: "Email does not exist!",
-            status_code: 406
-          },
+          message: "Email does not exist!",
+          status: "failure",
           type: types.ADD_RESPONSE_MESSAGE
         }
       ];
 
-      const store = mockStore({ mail: [] });
+      const store = mockStore({ toast: {} });
 
       return store.dispatch(actions.confirmEmail(userInput)).then(() => {
         expect(store.getActions()).toEqual(expectedActions);
@@ -79,13 +75,14 @@ describe("test reset password actions", () => {
     });
   });
 
-  describe("test reset password action", () => {
-    it("should create RESET_PASSWORD_SUCCESS action after successfully sent email", done => {
+  describe("Reset password", () => {
+    it("should dispatch showToast with success status", done => {
       moxios.wait(() => {
         const request = moxios.requests.mostRecent();
         request.respondWith({
           response: {
-            message: "You have successfully reset your password. Please login!",
+            response_message:
+              "You have successfully reset your password. Please login!",
             status_code: 200
           }
         });
@@ -93,11 +90,9 @@ describe("test reset password actions", () => {
 
       const expectedActions = [
         {
-          message: {
-            message: "You have successfully reset your password. Please login!",
-            status_code: 200
-          },
-          type: types.RESET_PASSWORD_SUCCESS
+          message: "You have successfully reset your password. Please login!",
+          status: "success",
+          type: types.ADD_RESPONSE_MESSAGE
         }
       ];
 
@@ -116,7 +111,7 @@ describe("test reset password actions", () => {
         const request = moxios.requests.mostRecent();
         request.respondWith({
           response: {
-            message: "Password does not match!",
+            response_message: "Password does not match!",
             status_code: 406
           }
         });
@@ -124,15 +119,13 @@ describe("test reset password actions", () => {
 
       const expectedActions = [
         {
-          error: {
-            message: "Password does not match!",
-            status_code: 406
-          },
-          type: types.RESET_PASSWORD_FAIL
+          message: "Password does not match!",
+          status: "failure",
+          type: types.ADD_RESPONSE_MESSAGE
         }
       ];
 
-      const store = mockStore({ resetPassword: [] });
+      const store = mockStore({ toast: {} });
 
       return store
         .dispatch(actions.resetPassword(userInput, mockToken))
