@@ -11,7 +11,7 @@ import DetailBusinessView from "./Dashboard/DetailBusinessView";
 import PageNotFound from "./common/NotFoundPage";
 import ToastNotification from "./ToastNotification";
 
-class App extends React.Component {
+export class App extends React.Component {
   constructor(props) {
     super(props);
     this.loggedIn = sessionStorage.getItem("loggedIn");

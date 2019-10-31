@@ -8,7 +8,7 @@ import expect from "expect";
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
-describe("sign up actions", () => {
+describe("Sign up actions", () => {
   beforeEach(() => {
     moxios.install();
   });
@@ -19,7 +19,7 @@ describe("sign up actions", () => {
 
   const signUpInput = {};
 
-  it("creates ADD_RESPONSE_MESSAGE after successfully user registration", done => {
+  it("should dispatch showToast with success status", done => {
     moxios.wait(() => {
       const request = moxios.requests.mostRecent();
       request.respondWith({
@@ -32,10 +32,8 @@ describe("sign up actions", () => {
 
     const expectedActions = [
       {
-        message: {
-          message: "You have successfully created an account!",
-          status_code: 201
-        },
+        message: "You have successfully created an account!",
+        status: "success",
         type: types.ADD_RESPONSE_MESSAGE
       }
     ];
@@ -48,7 +46,7 @@ describe("sign up actions", () => {
     });
   });
 
-  it("creates ADD_RESPONSE_MESSAGE when user registration failed", done => {
+  it("should dispatch showToast with failure status", done => {
     moxios.wait(() => {
       const request = moxios.requests.mostRecent();
       request.respondWith({
@@ -62,10 +60,8 @@ describe("sign up actions", () => {
 
     const expectedActions = [
       {
-        message: {
-          message: "This user already exists!",
-          status_code: 406
-        },
+        message: "This user already exists!",
+        status: "failure",
         type: types.ADD_RESPONSE_MESSAGE
       }
     ];

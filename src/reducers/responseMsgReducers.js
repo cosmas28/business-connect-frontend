@@ -19,12 +19,6 @@ export const responseMessageReducer = (state = toastInitialState, action) => {
         message: action.message,
         status: action.status
       };
-    case "DELETE_RESPONSE_MESSAGE":
-      for (const key in state) {
-        delete state[key];
-      }
-
-      return state;
     default:
       return state;
   }

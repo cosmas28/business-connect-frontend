@@ -3,11 +3,12 @@ import thunk from "redux-thunk";
 import moxios from "moxios";
 import * as actions from "../../src/actions/businessActions";
 import * as types from "../../src/actions/actionTypes";
+import { businesses } from "../../fixtures/businesses";
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
-describe("business interaction tests", () => {
+describe("Business Actions", () => {
   beforeEach(() => {
     moxios.install();
   });
@@ -21,23 +22,26 @@ describe("business interaction tests", () => {
   const mockAccessToken = "thisismybesttokenin2018";
   const mockBusinesssId = 1;
 
-  describe("business registration action tests", () => {
-    it("should create ADD_RESPONSE_MESSAGE action", done => {
+  describe("The registerBusiness thunk", () => {
+    it("should dispatch showToast and registerBusinessSuccess actions", done => {
       moxios.wait(() => {
         const request = moxios.requests.mostRecent();
         request.respondWith({
           response: {
-            respond_message: "Business is successfully registered!",
-            status_code: 201
+            response_message: "Business is successfully registered!",
+            status_code: 201,
+            data: businesses[0]
           }
         });
       });
       const expectedAction = [
         {
-          message: {
-            respond_message: "Business is successfully registered!",
-            status_code: 201
-          },
+          business: businesses[0],
+          type: types.REGISTER_BUSINESS_SUCCESS
+        },
+        {
+          message: "Business is successfully registered!",
+          status: "success",
           type: types.ADD_RESPONSE_MESSAGE
         }
       ];
@@ -51,22 +55,21 @@ describe("business interaction tests", () => {
           done();
         });
     });
-    it("should create ADD_RESPONSE_MESSAGE action", done => {
+
+    it("should dispatch showToast with failure status", done => {
       moxios.wait(() => {
         const request = moxios.requests.mostRecent();
         request.respondWith({
           response: {
-            respond_message: "The business name already exists!",
+            response_message: "The business name already exists!",
             status_code: 406
           }
         });
       });
       const expectedAction = [
         {
-          message: {
-            respond_message: "The business name already exists!",
-            status_code: 406
-          },
+          message: "The business name already exists!",
+          status: "failure",
           type: types.ADD_RESPONSE_MESSAGE
         }
       ];
@@ -82,8 +85,8 @@ describe("business interaction tests", () => {
     });
   });
 
-  describe("fetch all businesses tests", () => {
-    it("should create FETCH_ALL_BUSINESSES_SUCCESS action after successfuly fetched all busiesses", done => {
+  describe("The fetchBusinesses thunk", () => {
+    it("should dispatch fetchBusinessesSuccess on success", done => {
       moxios.wait(() => {
         const request = moxios.requests.mostRecent();
         request.respondWith({
@@ -109,38 +112,38 @@ describe("business interaction tests", () => {
         });
     });
 
-    it("should create FETCH_ALL_BUSINESSES_FAIL action after failing to fetch businesses", done => {
+    it("should dispatch showToast on failure", done => {
       moxios.wait(() => {
         const request = moxios.requests.mostRecent();
-        request.respondWith({
+        request.reject({
           response: {
-            respond_message: "There is an internal server error!",
-            status_code: 500
+            data: {
+              respond_message: "There is an internal server error!",
+              status_code: 500
+            }
           }
         });
       });
       const expectedAction = [
         {
-          error: {
-            respond_message: "There is an internal server error!",
-            status_code: 500
-          },
-          type: types.FETCH_ALL_BUSINESSES_FAIL
+          message: "There is an internal server error!",
+          status: "failure",
+          type: types.ADD_RESPONSE_MESSAGE
         }
       ];
 
-      const store = mockStore({ businesses: [] });
+      const store = mockStore({ toast: {} });
 
       return store
         .dispatch(actions.fetchBusinesses(mockAccessToken))
         .then(() => {
-          expect(store.getActions()[0].type).toEqual(expectedAction[0].type);
+          expect(store.getActions()).toEqual(expectedAction);
           done();
         });
     });
   });
 
-  describe("search businesses tests", () => {
+  describe("The searchBusinesses thunk", () => {
     const mockSearchQuery = "tech";
     it("should create SEARCH_BUSINESSES_SUCCESS when businesses are found", done => {
       moxios.wait(() => {
@@ -351,28 +354,31 @@ describe("business interaction tests", () => {
     });
   });
 
-  describe("delete business action tests", () => {
-    it("should create ADD_RESPONSE_MESSAGE action when action succeded", done => {
+  describe("The deleteBusiness thunk", () => {
+    it("should dispatch deleteBusinessSuccess and showToast", done => {
       moxios.wait(() => {
         const request = moxios.requests.mostRecent();
         request.respondWith({
           response: {
-            respond_message: "Business is successfully deleted!",
-            status_code: 204
+            message: "Business is successfully deleted!",
+            status_code: 204,
+            data: businesses[0]
           }
         });
       });
       const expectedAction = [
         {
-          message: {
-            respond_message: "Business is successfully deleted!",
-            status_code: 204
-          },
+          business: businesses[0],
+          type: types.DELETE_BUSINESS_SUCCESS
+        },
+        {
+          message: "Business is successfully deleted!",
+          status: "success",
           type: types.ADD_RESPONSE_MESSAGE
         }
       ];
 
-      const store = mockStore({ message: [] });
+      const store = mockStore({ toast: [] });
 
       return store
         .dispatch(actions.deleteBusiness(mockAccessToken, mockBusinesssId))
@@ -381,22 +387,20 @@ describe("business interaction tests", () => {
           done();
         });
     });
-    it("should create ADD_RESPONSE_MESSAGE action when delete action failed", done => {
+    it("should dispatch showToast on failure", done => {
       moxios.wait(() => {
         const request = moxios.requests.mostRecent();
         request.respondWith({
           response: {
-            respond_message: "You have no permission to delete this business!",
+            message: "You have no permission to delete this business!",
             status_code: 401
           }
         });
       });
       const expectedAction = [
         {
-          message: {
-            respond_message: "You have no permission to delete this business!",
-            status_code: 401
-          },
+          message: "You have no permission to delete this business!",
+          status: "failure",
           type: types.ADD_RESPONSE_MESSAGE
         }
       ];
@@ -412,23 +416,26 @@ describe("business interaction tests", () => {
     });
   });
 
-  describe("business update action tests", () => {
-    it("should create ADD_RESPONSE_MESSAGE action after successful update", done => {
+  describe("The updateBusiness thunk", () => {
+    it("should dispatch updateBusinessSuccess and showToast", done => {
       moxios.wait(() => {
         const request = moxios.requests.mostRecent();
         request.respondWith({
           response: {
-            response_message: "Business successfuly updated!",
-            status_code: 200
+            message: "Business successfuly updated!",
+            status_code: 200,
+            data: businesses[0]
           }
         });
       });
       const expectedAction = [
         {
-          message: {
-            response_message: "Business successfuly updated!",
-            status_code: 200
-          },
+          business: businesses[0],
+          type: types.UPDATE_BUSINESS_SUCCESS
+        },
+        {
+          message: "Business successfuly updated!",
+          status: "success",
           type: types.ADD_RESPONSE_MESSAGE
         }
       ];
@@ -444,7 +451,7 @@ describe("business interaction tests", () => {
           done();
         });
     });
-    it("should create ADD_RESPONSE_MESSAGE action when update fail", done => {
+    it("should dispatch showToast on failure", done => {
       moxios.wait(() => {
         const request = moxios.requests.mostRecent();
         request.respondWith({
@@ -456,15 +463,13 @@ describe("business interaction tests", () => {
       });
       const expectedAction = [
         {
-          message: {
-            response_message: "The business does not exists!",
-            status_code: 406
-          },
+          message: "The business does not exists!",
+          status: "failure",
           type: types.ADD_RESPONSE_MESSAGE
         }
       ];
 
-      const store = mockStore({ messages: [] });
+      const store = mockStore({ toast: [] });
 
       return store
         .dispatch(

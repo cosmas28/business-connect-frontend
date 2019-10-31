@@ -3,80 +3,32 @@ import * as actionTypes from "./actionTypes";
 import history from "../helpers/history";
 import { showToast } from "./showToast";
 
-// API URL
 const apiUrl = process.env.REACT_APP_API_URL + "/businesses";
 
-/**
- *
- * @param {Array} businesses - an array of business objects
- * @returns {Object} - an object of action type and array of businesses
- */
-export const fetchBusinessesSuccess = businesses => {
-  return {
-    businesses,
-    type: actionTypes.FETCH_ALL_BUSINESSES_SUCCESS
-  };
-};
+export const fetchBusinessesSuccess = businesses => ({
+  businesses,
+  type: actionTypes.FETCH_ALL_BUSINESSES_SUCCESS
+});
 
-/**
- *
- * @param {Object} error - an object of error message and status code
- * @returns {Object} - an object of error message and action type
- */
-export const fetchBusinessesFail = error => {
-  return {
-    error,
-    type: actionTypes.FETCH_ALL_BUSINESSES_FAIL
-  };
-};
+export const fetchUserBusinessesSuccess = userBusinesses => ({
+  type: actionTypes.FETCH_BUSINESSES_BY_USER_ID_SUCCESS,
+  userBusinesses
+});
 
-/**
- *
- * @param {Array} userBusinesses - an array of user businesses
- * @returns {Object} - an object of action type and array of user businesses
- */
-export const fetchUserBusinessesSuccess = userBusinesses => {
-  return {
-    type: actionTypes.FETCH_BUSINESSES_BY_USER_ID_SUCCESS,
-    userBusinesses
-  };
-};
+export const fetchUserBusinessesFail = error => ({
+  error,
+  type: actionTypes.FETCH_BUSINESSES_BY_USER_ID_FAIL
+});
 
-/**
- *
- * @param {Object} error - an object of error message and status code
- * @returns {Object} - an object of error message and action type
- */
-export const fetchUserBusinessesFail = error => {
-  return {
-    error,
-    type: actionTypes.FETCH_BUSINESSES_BY_USER_ID_FAIL
-  };
-};
+export const fetchBusinessesByIdSuccess = business => ({
+  business,
+  type: actionTypes.FETCH_BUSINESSES_BY_ID_SUCCESS
+});
 
-/**
- *
- * @param {Object} business - an object of business details
- * @returns {Object} - an object of business details and action type
- */
-export const fetchBusinessesByIdSuccess = business => {
-  return {
-    business,
-    type: actionTypes.FETCH_BUSINESSES_BY_ID_SUCCESS
-  };
-};
-
-/**
- *
- * @param {Object} error - an object of error message and status code
- * @returns {Object} - an object of error message and action type
- */
-export const fetchBusinessesByIdFail = error => {
-  return {
-    error,
-    type: actionTypes.FETCH_BUSINESSES_BY_ID_FAIL
-  };
-};
+export const fetchBusinessesByIdFail = error => ({
+  error,
+  type: actionTypes.FETCH_BUSINESSES_BY_ID_FAIL
+});
 
 export const doLogout = () => {
   sessionStorage.removeItem("accessToken");
@@ -87,50 +39,113 @@ export const doLogout = () => {
   return true;
 };
 
-/**
- *
- * @param {Array} businesses - an array of business objects
- * @returns {Object} - an object of action type and array of businesses
- */
-export const searchBusinessesSuccess = businesses => {
-  return {
-    businesses,
-    type: actionTypes.SEARCH_BUSINESSES_SUCCESS
-  };
+export const searchBusinessesSuccess = businesses => ({
+  businesses,
+  type: actionTypes.SEARCH_BUSINESSES_SUCCESS
+});
+
+export const fetchBusinesses = accessToken => dispatch => {
+  return axios
+    .get(apiUrl, { headers: { Authorization: `Bearer ${accessToken}` } })
+    .then(response => {
+      dispatch(fetchBusinessesSuccess(response.data.business_list));
+    })
+    .catch(error => {
+      if (error.response.status === 422 || error.response.status === 401) {
+        dispatch(doLogout());
+      }
+      dispatch(showToast(error.response.data.respond_message, "failure"));
+    });
 };
 
-/**
- *
- * @param {string} accessToken - API authorization access token
- * @returns {Function} - a function that takes dispatch as its only argument and dispatches an action when the promise resolves
- */
-export const fetchBusinesses = accessToken => {
-  return dispatch => {
-    return axios
-      .get(apiUrl, { headers: { Authorization: `Bearer ${accessToken}` } })
-      .then(response => {
-        if (response.status === 200) {
-          dispatch(fetchBusinessesSuccess(response.data.business_list));
-        } else {
-          dispatch(fetchBusinessesFail(response.data.response_message));
-        }
-      })
-      .catch(error => {
-        console.log(">>>>", error);
+const registerBusinessSuccess = business => ({
+  business,
+  type: actionTypes.REGISTER_BUSINESS_SUCCESS
+});
+
+export const registerBusiness = (accessToken, inputData) => dispatch => {
+  return axios
+    .post(apiUrl, inputData, {
+      headers: { Authorization: `Bearer ${accessToken}` }
+    })
+    .then(response => {
+      if (response.data.status_code === 201) {
+        dispatch(registerBusinessSuccess(response.data.data));
+        dispatch(showToast(response.data.response_message, "success"));
+      } else {
+        dispatch(showToast(response.data.response_message, "failure"));
+      }
+    })
+    .catch(error => {
+      if (error.response) {
         if (error.response.status === 422 || error.response.status === 401) {
           dispatch(doLogout());
         }
-        dispatch(fetchBusinessesFail(error.response.data));
-      });
-  };
+        dispatch(showToast(error.response.data.respond_message, "failure"));
+      }
+    });
 };
 
-/**
- *
- * @param {string} accessToken - API authorization access token
- * @param {string} searchQuery - search criteria for business
- * @returns {Function} - a function that takes dispatch as its only argument and dispatches an action when the promise resolves
- */
+const deleteBusinessSuccess = business => ({
+  business,
+  type: actionTypes.DELETE_BUSINESS_SUCCESS
+});
+
+export const deleteBusiness = (accessToken, businessId) => dispatch => {
+  return axios
+    .delete(apiUrl + "/" + businessId, {
+      headers: { Authorization: `Bearer ${accessToken}` }
+    })
+    .then(response => {
+      if (response.data.status_code === 204) {
+        dispatch(deleteBusinessSuccess(response.data.data));
+        dispatch(showToast(response.data.message, "success"));
+      } else {
+        dispatch(showToast(response.data.message, "failure"));
+      }
+    })
+    .catch(error => {
+      if (error.response) {
+        if (error.response.status === 422 || error.response.status === 401) {
+          dispatch(doLogout());
+        }
+        dispatch(showToast(error.response.data.message, "failure"));
+      }
+    });
+};
+
+const updateBusinessSuccess = business => ({
+  business,
+  type: actionTypes.UPDATE_BUSINESS_SUCCESS
+});
+
+export const updateBusiness = (
+  accessToken,
+  businessId,
+  newData
+) => dispatch => {
+  return axios
+    .put(apiUrl + "/" + businessId, newData, {
+      headers: { Authorization: `Bearer ${accessToken}` }
+    })
+    .then(response => {
+      if (response.data.status_code === 200) {
+        dispatch(updateBusinessSuccess(response.data.data));
+        dispatch(showToast(response.data.message, "success"));
+      } else {
+        dispatch(showToast(response.data.response_message, "failure"));
+      }
+    })
+    .catch(error => {
+      if (error.response) {
+        if (error.response.status === 422 || error.response.status === 401) {
+          dispatch(doLogout());
+        }
+        dispatch(showToast(error.response.data.response_message, "failure"));
+      }
+    });
+};
+
 export const searchBusinesses = (accessToken, searchQuery) => {
   return dispatch => {
     return axios
@@ -204,103 +219,6 @@ export const fetchBusinessesById = (accessToken, businessId) => {
             dispatch(doLogout());
           }
           dispatch(fetchBusinessesByIdFail(error.response.data));
-        }
-      });
-  };
-};
-
-const registerBusinessSuccess = business => ({
-  business,
-  type: actionTypes.REGISTER_BUSINESS_SUCCESS
-});
-
-export const registerBusiness = (accessToken, inputData) => {
-  return dispatch => {
-    return axios
-      .post(apiUrl, inputData, {
-        headers: { Authorization: `Bearer ${accessToken}` }
-      })
-      .then(response => {
-        if (response.data.status_code === 201) {
-          dispatch(registerBusinessSuccess(response.data.data));
-          dispatch(showToast(response.data.response_message, "success"));
-        } else {
-          dispatch(showToast(response.data.response_message, "failure"));
-        }
-      })
-      .catch(error => {
-        if (error.response) {
-          if (error.response.status === 422 || error.response.status === 401) {
-            dispatch(doLogout());
-          }
-          dispatch(showToast(error.response.data));
-        }
-      });
-  };
-};
-
-const deleteBusinessSuccess = business => ({
-  business,
-  type: actionTypes.DELETE_BUSINESS_SUCCESS
-});
-
-export const deleteBusiness = (accessToken, businessId) => {
-  return dispatch => {
-    return axios
-      .delete(apiUrl + "/" + businessId, {
-        headers: { Authorization: `Bearer ${accessToken}` }
-      })
-      .then(response => {
-        if (response.data.status_code === 204) {
-          dispatch(deleteBusinessSuccess(response.data.data));
-          dispatch(showToast(response.data.message, "success"));
-        } else {
-          dispatch(showToast(response.data));
-        }
-      })
-      .catch(error => {
-        if (error.response) {
-          if (error.response.status === 422 || error.response.status === 401) {
-            dispatch(doLogout());
-          }
-          dispatch(showToast(error.response.data));
-        }
-      });
-  };
-};
-
-const updateBusinessSuccess = business => ({
-  business,
-  type: actionTypes.UPDATE_BUSINESS_SUCCESS
-});
-
-/**
- *
- * @param {string} accessToken - API authorization access token
- * @param {number} businessId - unique business ID for accessing business details
- * @param {newData} newData - new data to update the current business details
- * @returns {Function} - a function that takes dispatch as its only argument and dispatches an action when the promise resolves
- */
-export const updateBusiness = (accessToken, businessId, newData) => {
-  return dispatch => {
-    return axios
-      .put(apiUrl + "/" + businessId, newData, {
-        headers: { Authorization: `Bearer ${accessToken}` }
-      })
-      .then(response => {
-        if (response.data.status_code === 200) {
-          dispatch(updateBusinessSuccess(response.data.data));
-          dispatch(showToast(response.data.message, "success"));
-        } else {
-          dispatch(showToast(response.data.response_message, "failure"));
-        }
-      })
-      .catch(error => {
-        if (error.response) {
-          if (error.response.status === 422 || error.response.status === 401) {
-            dispatch(doLogout());
-          }
-          dispatch(showToast(error.response.data));
         }
       });
   };

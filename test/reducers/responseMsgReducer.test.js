@@ -2,42 +2,26 @@ import { responseMessageReducer } from "../../src/reducers/responseMsgReducers";
 import * as types from "../../src/actions/actionTypes";
 
 describe("response message reducer tests", () => {
+  const toastInitialState = {
+    message: "",
+    status: ""
+  };
   it("should return the initial state", () => {
-    expect(responseMessageReducer(undefined, {})).toEqual([]);
+    expect(responseMessageReducer(toastInitialState, {})).toEqual(
+      toastInitialState
+    );
   });
 
   it("should handle ADD_RESPONSE_MESSAGE  action", () => {
     expect(
-      responseMessageReducer(
-        {},
-        {
-          message: {
-            response_message:
-              "Email sent. Confirm you are the owner of this email address!",
-            status_code: 200
-          },
-          type: types.ADD_RESPONSE_MESSAGE
-        }
-      )
+      responseMessageReducer(toastInitialState, {
+        message: "Email sent. Confirm you are the owner of this email address!",
+        status: "success",
+        type: types.ADD_RESPONSE_MESSAGE
+      })
     ).toEqual({
-      response_message:
-        "Email sent. Confirm you are the owner of this email address!",
-      status_code: 200
+      message: "Email sent. Confirm you are the owner of this email address!",
+      status: "success"
     });
-  });
-
-  it("should handle DELETE_RESPONSE_MESSAGE", () => {
-    expect(
-      responseMessageReducer(
-        {},
-        {
-          error: {
-            response_message: "Email does not exist!",
-            status_code: 406
-          },
-          type: types.DELETE_RESPONSE_MESSAGE
-        }
-      )
-    ).toEqual({});
   });
 });
