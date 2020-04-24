@@ -2,7 +2,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import * as signupActions from "../../actions/signupActions";
-import { deleteResponseMessages } from "../../actions/showToast";
 
 import AuthLayout from "../AuthLayout";
 import InputBox from "../InputBox";
@@ -24,14 +23,8 @@ export class SignUpPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      confirm_password: "",
-      confirm_password_error: "",
       email: "",
       email_error: "",
-      first_name: "",
-      first_name_error: "",
-      last_name: "",
-      last_name_error: "",
       password: "",
       password_error: "",
       username: "",
@@ -59,28 +52,8 @@ export class SignUpPage extends React.Component {
       return;
     }
 
-    switch (name) {
-      case "email":
-        errorMessage = validateEmail(value);
-        break;
-      case "username":
-        errorMessage = validateText(value, name);
-        break;
-      case "first_name":
-        errorMessage = validateText(value, name);
-        break;
-      case "last_name":
-        errorMessage = validateText(value, name);
-        break;
-      case "password":
-        errorMessage = validatePassword(value);
-        break;
-      case "confirm_password":
-        errorMessage = validateConfirmPwd(value, this.state.password);
-        break;
-      default:
-        errorMessage = "";
-        break;
+    if (name === "email") {
+      errorMessage = validateEmail(value);
     }
 
     this.setState({
@@ -90,19 +63,9 @@ export class SignUpPage extends React.Component {
 
   hanldeOnClickButton = event => {
     event.preventDefault();
-    const {
-      email,
-      username,
-      first_name,
-      last_name,
-      password,
-      confirm_password
-    } = this.state;
+    const { email, username, password } = this.state;
     const userInput = {
-      confirm_password: confirm_password,
       email: email,
-      first_name: first_name,
-      last_name: last_name,
       password: password,
       username: username
     };
@@ -113,31 +76,14 @@ export class SignUpPage extends React.Component {
       this.setState({
         email_error: "Email is required",
         username_error: "Username is required",
-        first_name_error: "First Name is required",
-        last_name_error: "Last Name is required",
-        password_error: "Password is required",
-        confirm_password_error: "Confirm Password is required"
+        password_error: "Password is required"
       });
     }
   };
 
   render() {
-    const {
-      email_error,
-      username_error,
-      first_name_error,
-      last_name_error,
-      password_error,
-      confirm_password_error
-    } = this.state;
-    const allValid = isAllValid([
-      email_error,
-      username_error,
-      first_name_error,
-      last_name_error,
-      password_error,
-      confirm_password_error
-    ]);
+    const { email_error, username_error, password_error } = this.state;
+    const allValid = isAllValid([email_error, username_error, password_error]);
 
     return (
       <AuthLayout
@@ -163,36 +109,12 @@ export class SignUpPage extends React.Component {
           handleOnBlur={this.validateInput("username")}
         />
         <InputBox
-          type="text"
-          name="first_name"
-          placeholder="First Name"
-          errorMessage={first_name_error}
-          handleOnChange={this.handleInputChange}
-          handleOnBlur={this.validateInput("first_name")}
-        />
-        <InputBox
-          type="text"
-          name="last_name"
-          placeholder="Last Name"
-          errorMessage={last_name_error}
-          handleOnChange={this.handleInputChange}
-          handleOnBlur={this.validateInput("last_name")}
-        />
-        <InputBox
           type="password"
           name="password"
           placeholder="Password"
           errorMessage={password_error}
           handleOnChange={this.handleInputChange}
           handleOnBlur={this.validateInput("password")}
-        />
-        <InputBox
-          type="password"
-          name="confirm_password"
-          placeholder="Confirm Password"
-          errorMessage={confirm_password_error}
-          handleOnChange={this.handleInputChange}
-          handleOnBlur={this.validateInput("confirm_password")}
         />
         <div className="form-item">
           <Button
@@ -215,7 +137,6 @@ export const mapStateToProps = (state, ownProps) => {
 // Maps actions to props
 export const mapDispatchToProps = dispatch => {
   return {
-    deleteMessage: () => dispatch(deleteResponseMessages()),
     registerUser: user => dispatch(signupActions.registerUser(user))
   };
 };

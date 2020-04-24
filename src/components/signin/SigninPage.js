@@ -3,7 +3,6 @@ import React from "react";
 import { connect } from "react-redux";
 
 import * as actions from "../../actions/loginActions";
-import { deleteResponseMessages } from "../../actions/showToast";
 
 import AuthLayout from "../AuthLayout";
 import InputBox from "../InputBox";
@@ -94,7 +93,6 @@ const mapStateToProps = (state, ownProps) => {
 // Maps actions to props
 const mapDispatchToProps = dispatch => {
   return {
-    deleteMessage: () => dispatch(deleteResponseMessages()),
     doLogin: loginInput => dispatch(actions.doLogin(loginInput))
   };
 };

@@ -44,17 +44,3 @@ export const validateText = (value, name) => {
 
   return errorMessage;
 };
-
-export const validatePassword = password => {
-  const re = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&])(?=.{8,})/;
-  const errorMessages = re.test(password) ? "" : "Password is too weak";
-
-  return errorMessages;
-};
-
-export const validateConfirmPwd = (confirm_password, password) => {
-  const errorMessage =
-    confirm_password === password ? "" : "Password does not match";
-
-  return errorMessage;
-};
