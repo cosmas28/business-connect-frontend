@@ -100,8 +100,6 @@ export class Dashboard extends React.Component {
       .then(() => this.toggleDeleteModal());
 
   render() {
-    const authUser = sessionStorage.getItem("userId");
-    console.log(">>>>>>", this.props.businesses);
     return (
       <DashboardLayout
         pageTitle="Home"
@@ -116,9 +114,7 @@ export class Dashboard extends React.Component {
               return (
                 <BusinessCard
                   key={business.id}
-                  business={business}
-                  authUser={this.authUser}
-                  onDelete={this.props.deleteBusiness}
+                  data={business}
                   clickedBusinessId={this.state.clickedBusinessId}
                   onClickEllipsisHandler={this.toggleBusinessDropdown(
                     business.id

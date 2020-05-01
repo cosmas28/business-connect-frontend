@@ -9,18 +9,17 @@ import "./BusinessCard.css";
 
 const renderHeader = ({
   clickedBusinessId,
-  id,
   onClickDropdownDeleteButton,
   onClickDropdownEditButton,
   onClickEllipsisHandler,
-  authorName
+  data
 }) => (
   <React.Fragment>
     <div className="header__left">
       <div className="header__left__avator">
         <FaUser size={40} color="#C0C0C0" />
       </div>
-      <h2>{authorName}</h2>
+      <h2>{data.user_name}</h2>
     </div>
     <div className="header__right">
       <button
@@ -29,7 +28,7 @@ const renderHeader = ({
       >
         <FaEllipsisH size={25} color="#DCDCDC" />
       </button>
-      <Dropdown status={clickedBusinessId === id ? "active" : "hide"}>
+      <Dropdown status={clickedBusinessId === data.id ? "active" : "hide"}>
         <NavBarLink
           iconName="edit"
           label="Edit"
@@ -83,21 +82,12 @@ const renderFooter = commentCount => (
 
 const BusinessCard = props => {
   const {
-    authUser,
-    onDelete,
-    business,
     clickedBusinessId,
     onClickEllipsisHandler,
     onClickDropdownDeleteButton,
-    onClickDropdownEditButton
+    onClickDropdownEditButton,
+    data
   } = props;
-  const businessId = business.id;
-  const authorName = business.user_name;
-  const name = business.name;
-  const category = business.category;
-  const location = business.location;
-  const summary = business.summary;
-  const accessToken = sessionStorage.getItem("accessToken");
 
   return (
     <div className="business-card">
@@ -105,21 +95,13 @@ const BusinessCard = props => {
         <div className="business-card__header">
           {renderHeader({
             clickedBusinessId,
-            businessId,
             onClickDropdownDeleteButton,
             onClickDropdownEditButton,
             onClickEllipsisHandler,
-            authorName
+            data
           })}
         </div>
-        <div className="business-card__content">
-          {renderContent({
-            category,
-            location,
-            name,
-            summary
-          })}
-        </div>
+        <div className="business-card__content">{renderContent(data)}</div>
         <div className="business-card__footer">{renderFooter(22)}</div>
       </div>
     </div>
@@ -127,13 +109,11 @@ const BusinessCard = props => {
 };
 
 BusinessCard.propTypes = {
-  authUser: PropTypes.string,
   clickedBusinessId: PropTypes.number,
   onClickDropdownDeleteButton: PropTypes.func.isRequired,
   onClickDropdownEditButton: PropTypes.func.isRequired,
   onClickEllipsisHandler: PropTypes.func.isRequired,
-  onDelete: PropTypes.func,
-  business: PropTypes.object
+  data: PropTypes.object
 };
 
 export default BusinessCard;
