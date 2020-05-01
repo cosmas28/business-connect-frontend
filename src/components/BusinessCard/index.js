@@ -12,14 +12,15 @@ const renderHeader = ({
   id,
   onClickDropdownDeleteButton,
   onClickDropdownEditButton,
-  onClickEllipsisHandler
+  onClickEllipsisHandler,
+  authorName
 }) => (
   <React.Fragment>
     <div className="header__left">
       <div className="header__left__avator">
         <FaUser size={40} color="#C0C0C0" />
       </div>
-      <h2>Cosmas Billa</h2>
+      <h2>{authorName}</h2>
     </div>
     <div className="header__right">
       <button
@@ -82,19 +83,20 @@ const renderFooter = commentCount => (
 
 const BusinessCard = props => {
   const {
-    category,
     authUser,
-    id,
-    location,
-    name,
     onDelete,
-    ownerId,
-    summary,
+    business,
     clickedBusinessId,
     onClickEllipsisHandler,
     onClickDropdownDeleteButton,
     onClickDropdownEditButton
   } = props;
+  const businessId = business.id;
+  const authorName = business.user_name;
+  const name = business.name;
+  const category = business.category;
+  const location = business.location;
+  const summary = business.summary;
   const accessToken = sessionStorage.getItem("accessToken");
 
   return (
@@ -103,10 +105,11 @@ const BusinessCard = props => {
         <div className="business-card__header">
           {renderHeader({
             clickedBusinessId,
-            id,
+            businessId,
             onClickDropdownDeleteButton,
             onClickDropdownEditButton,
-            onClickEllipsisHandler
+            onClickEllipsisHandler,
+            authorName
           })}
         </div>
         <div className="business-card__content">
@@ -125,17 +128,12 @@ const BusinessCard = props => {
 
 BusinessCard.propTypes = {
   authUser: PropTypes.string,
-  category: PropTypes.string,
   clickedBusinessId: PropTypes.number,
-  id: PropTypes.number,
-  location: PropTypes.string,
-  name: PropTypes.string,
   onClickDropdownDeleteButton: PropTypes.func.isRequired,
   onClickDropdownEditButton: PropTypes.func.isRequired,
   onClickEllipsisHandler: PropTypes.func.isRequired,
   onDelete: PropTypes.func,
-  ownerId: PropTypes.number,
-  summary: PropTypes.string
+  business: PropTypes.object
 };
 
 export default BusinessCard;

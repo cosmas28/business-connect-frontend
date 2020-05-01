@@ -101,7 +101,7 @@ export class Dashboard extends React.Component {
 
   render() {
     const authUser = sessionStorage.getItem("userId");
-
+    console.log(">>>>>>", this.props.businesses);
     return (
       <DashboardLayout
         pageTitle="Home"
@@ -116,14 +116,9 @@ export class Dashboard extends React.Component {
               return (
                 <BusinessCard
                   key={business.id}
+                  business={business}
                   authUser={this.authUser}
-                  name={business.name}
-                  category={business.category}
-                  location={business.location}
                   onDelete={this.props.deleteBusiness}
-                  summary={business.summary}
-                  id={business.id}
-                  ownerId={business.created_by}
                   clickedBusinessId={this.state.clickedBusinessId}
                   onClickEllipsisHandler={this.toggleBusinessDropdown(
                     business.id
