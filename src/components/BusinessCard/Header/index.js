@@ -5,6 +5,8 @@ import { FaEllipsisH, FaUser } from "react-icons/fa";
 import NavBarLink from "../../NavBarLink";
 import Dropdown from "../../Dropdown";
 
+import styles from "./Header.module.scss";
+
 export const Header = ({
   clickedBusinessId,
   onClickDropdownDeleteButton,
@@ -13,17 +15,17 @@ export const Header = ({
   businessId,
   authorName
 }) => (
-  <React.Fragment>
-    <div className="header__left">
-      <div className="header__left__avator">
-        <FaUser size={40} color="#C0C0C0" />
-      </div>
-      <h2>{authorName}</h2>
+  <div className={styles.header}>
+    <div className={styles.header__left}>
+      <span className={styles.header__left__avator}>
+        <FaUser size={20} color="#C0C0C0" />
+      </span>
+      <span className={styles.header__left__name}>{authorName}</span>
     </div>
-    <div className="header__right">
+    <div className={styles.header__right}>
       <button
         onClick={onClickEllipsisHandler}
-        className="header__right__button"
+        className={styles.header__right__button}
       >
         <FaEllipsisH size={25} color="#DCDCDC" />
       </button>
@@ -42,7 +44,7 @@ export const Header = ({
         />
       </Dropdown>
     </div>
-  </React.Fragment>
+  </div>
 );
 
 Header.propTypes = {

@@ -1,0 +1,24 @@
+.title {
+  font-size: 1.2rem;
+  font-weight: 300;
+}
+.details {
+  display: flex;
+  font-size: 1.1rem;
+  color: #663399;
+
+  &__location {
+    display: flex;
+    margin-left: 1rem;
+
+    &__icon {
+      padding-top: 0.16rem;
+    }
+  }
+}
+
+.summary {
+  font-size: 1rem;
+  font-weight: 200;
+  color: #808080;
+}

@@ -1,0 +1,45 @@
+.footer {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 1rem;
+  padding: 0.7rem 0 0.7rem 0;
+  border-top: 0.012rem solid #808080;
+}
+
+.comment {
+  order: 0;
+  text-align: left;
+
+  &__button {
+    display: flex;
+
+    &__icon {
+      padding-top: 0.1rem;
+    }
+
+    &__count {
+      padding-left: 0.3rem;
+      color: #663399;
+    }
+  }
+}
+
+.likes {
+  order: 1;
+  align-items: right;
+
+  &__button {
+    display: flex;
+    color: #663399;
+
+    &__icon {
+      padding-top: 0.1rem;
+      padding-left: 0.3rem;
+    }
+
+    &__count {
+      color: #663399;
+    }
+  }
+}

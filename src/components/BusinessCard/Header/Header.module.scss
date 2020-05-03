@@ -1,0 +1,37 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding-top: 0.7rem;
+  padding-bottom: 0.7rem;
+
+  &__left {
+    display: flex;
+    order: 0;
+    width: 84%;
+    text-align: left;
+
+    &__avator {
+      width: 2.3rem;
+      height: 2.3rem;
+      background: none;
+      margin-right: 0.4rem;
+      padding-top: 0.2rem;
+      border: 0.2rem solid #f0f0f5;
+      border-radius: 50%;
+      text-align: center;
+      color: #ffffff;
+    }
+
+    &__name {
+      font-weight: 400;
+      font-size: 1.3rem;
+    }
+  }
+
+  &__right {
+    order: 1;
+    width: 15%;
+    text-align: center;
+  }
+}

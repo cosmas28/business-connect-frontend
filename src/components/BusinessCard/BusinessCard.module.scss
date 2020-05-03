@@ -1,0 +1,22 @@
+.container {
+  width: 49.5%;
+  padding: 1% 1% 2% 0;
+
+  &__wrap {
+    background: #fff;
+    width: 100%;
+    padding: 0.31rem 0.7rem 0 1.9rem;
+    border-radius: 0.25rem;
+    box-shadow: 0 0.125rem 0.625rem 0 rgba(0, 0, 0, 0.1);
+  }
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+button:focus {
+  outline: none;
+}
