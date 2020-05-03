@@ -1,50 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { FaEllipsisH, FaComment, FaUser, FaMapMarkerAlt } from "react-icons/fa";
+import { FaComment, FaMapMarkerAlt, FaHeart } from "react-icons/fa";
 
-import NavBarLink from "../NavBarLink";
-import Dropdown from "../Dropdown";
+import { Header } from "./Header";
 
 import "./BusinessCard.css";
-
-const renderHeader = ({
-  clickedBusinessId,
-  onClickDropdownDeleteButton,
-  onClickDropdownEditButton,
-  onClickEllipsisHandler,
-  data
-}) => (
-  <React.Fragment>
-    <div className="header__left">
-      <div className="header__left__avator">
-        <FaUser size={40} color="#C0C0C0" />
-      </div>
-      <h2>{data.user_name}</h2>
-    </div>
-    <div className="header__right">
-      <button
-        onClick={onClickEllipsisHandler}
-        className="header__right__button"
-      >
-        <FaEllipsisH size={25} color="#DCDCDC" />
-      </button>
-      <Dropdown status={clickedBusinessId === data.id ? "active" : "hide"}>
-        <NavBarLink
-          iconName="edit"
-          label="Edit"
-          type="button"
-          onClickLink={onClickDropdownEditButton}
-        />
-        <NavBarLink
-          iconName="delete"
-          label="Delete"
-          type="button"
-          onClickLink={onClickDropdownDeleteButton}
-        />
-      </Dropdown>
-    </div>
-  </React.Fragment>
-);
 
 const renderContent = ({ name, category, summary, location }) => (
   <React.Fragment>
@@ -75,7 +35,9 @@ const renderFooter = commentCount => (
       </button>
     </div>
     <div className="read-more">
-      <button className="read-more__button">READ MORE</button>
+      <button className="read-more__button">
+        <FaHeart size={15} />
+      </button>
     </div>
   </React.Fragment>
 );
@@ -93,13 +55,14 @@ const BusinessCard = props => {
     <div className="business-card">
       <div className="business-card__wrap">
         <div className="business-card__header">
-          {renderHeader({
-            clickedBusinessId,
-            onClickDropdownDeleteButton,
-            onClickDropdownEditButton,
-            onClickEllipsisHandler,
-            data
-          })}
+          <Header
+            clickedBusinessId={clickedBusinessId}
+            onClickDropdownDeleteButton={onClickDropdownDeleteButton}
+            onClickDropdownEditButton={onClickDropdownEditButton}
+            authorName={data.user_name}
+            businessId={data.id}
+            onClickEllipsisHandler={onClickEllipsisHandler}
+          />
         </div>
         <div className="business-card__content">{renderContent(data)}</div>
         <div className="business-card__footer">{renderFooter(22)}</div>
