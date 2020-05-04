@@ -8,7 +8,7 @@ import Dropdown from "../../Dropdown";
 import styles from "./Header.module.scss";
 
 export const Header = ({
-  clickedBusinessId,
+  showDropdown,
   onClickDropdownDeleteButton,
   onClickDropdownEditButton,
   onClickEllipsisHandler,
@@ -29,7 +29,7 @@ export const Header = ({
       >
         <FaEllipsisH size={25} color="#DCDCDC" />
       </button>
-      <Dropdown status={clickedBusinessId === businessId ? "active" : "hide"}>
+      <Dropdown status={showDropdown ? "active" : "hide"}>
         <NavBarLink
           iconName="edit"
           label="Edit"
@@ -48,7 +48,7 @@ export const Header = ({
 );
 
 Header.propTypes = {
-  clickedBusinessId: PropTypes.number.isRequired,
+  showDropdown: PropTypes.bool.isRequired,
   onClickDropdownDeleteButton: PropTypes.func.isRequired,
   onClickDropdownEditButton: PropTypes.func.isRequired,
   authorName: PropTypes.string.isRequired,

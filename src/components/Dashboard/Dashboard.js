@@ -6,11 +6,9 @@ import JwPagination from "jw-react-pagination";
 import DashboardLayout from "../../components/DashboardLayout";
 import BusinessCard from "../BusinessCard";
 import BusinessPane from "../BusinessPane";
-import DeleteModal from "../DeleteModal";
 
 import {
   fetchBusinesses,
-  deleteBusiness,
   searchBusinesses,
   registerBusiness,
   updateBusiness
@@ -53,11 +51,6 @@ export class Dashboard extends React.Component {
       });
   };
 
-  toggleDeleteModal = () =>
-    this.setState({
-      showDeleteModal: !this.state.showDeleteModal
-    });
-
   toggleSidePane = (mode, action = "open") => () =>
     this.setState({
       showSidePane: !this.state.showSidePane,
@@ -79,12 +72,6 @@ export class Dashboard extends React.Component {
     this.setState({ pageOfItems });
   };
 
-  toggleBusinessDropdown = businessId => () =>
-    this.setState({
-      clickedBusinessId:
-        this.state.clickedBusinessId !== businessId ? businessId : null
-    });
-
   handleBusinessDropdownButton = (business, toggleMethod) => () =>
     this.setState(
       {
@@ -93,11 +80,6 @@ export class Dashboard extends React.Component {
       },
       () => toggleMethod()
     );
-
-  deleteConfirmedBusiness = () =>
-    this.props
-      .deleteBusiness(this.accessToken, this.state.selectedBusiness.id)
-      .then(() => this.toggleDeleteModal());
 
   render() {
     return (
@@ -115,17 +97,9 @@ export class Dashboard extends React.Component {
                 <BusinessCard
                   key={business.id}
                   data={business}
-                  clickedBusinessId={this.state.clickedBusinessId}
-                  onClickEllipsisHandler={this.toggleBusinessDropdown(
-                    business.id
-                  )}
                   onClickDropdownEditButton={this.handleBusinessDropdownButton(
                     business,
                     this.toggleSidePane("Edit")
-                  )}
-                  onClickDropdownDeleteButton={this.handleBusinessDropdownButton(
-                    business,
-                    this.toggleDeleteModal
                   )}
                 />
               );
@@ -147,12 +121,6 @@ export class Dashboard extends React.Component {
           businessToEdit={this.state.selectedBusiness}
           editBusiness={this.props.updateBusiness}
         />
-        <DeleteModal
-          businessName={this.state.selectedBusiness.name}
-          handleCancelButton={this.toggleDeleteModal}
-          handleOnDeleteButton={this.deleteConfirmedBusiness}
-          showDeleteModal={this.state.showDeleteModal}
-        />
       </DashboardLayout>
     );
   }
@@ -165,8 +133,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  deleteBusiness: (accessToken, id) =>
-    dispatch(deleteBusiness(accessToken, id)),
   fetchBusinesses: accessToken => dispatch(fetchBusinesses(accessToken)),
   registerBusiness: (accessToken, inputData) =>
     dispatch(registerBusiness(accessToken, inputData)),
