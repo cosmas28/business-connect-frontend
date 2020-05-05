@@ -22,19 +22,7 @@ export class Dashboard extends React.Component {
     this.authUser = sessionStorage.getItem("userId");
     this.accessToken = sessionStorage.getItem("accessToken");
     this.state = {
-      pageOfItems: [],
-      clickedBusinessId: null,
-      selectedBusiness: {
-        category: "",
-        created_by: "",
-        id: "",
-        location: "",
-        name: "",
-        summary: ""
-      },
-      showSidePane: false,
-      sidePaneMode: "Add",
-      showDeleteModal: false
+      pageOfItems: []
     };
   }
 
@@ -51,58 +39,25 @@ export class Dashboard extends React.Component {
       });
   };
 
-  toggleSidePane = (mode, action = "open") => () =>
+  toggleSidePane = () =>
     this.setState({
-      showSidePane: !this.state.showSidePane,
-      sidePaneMode: mode,
-      selectedBusiness:
-        action === "close"
-          ? {
-              category: "",
-              created_by: "",
-              id: "",
-              location: "",
-              name: "",
-              summary: ""
-            }
-          : this.state.selectedBusiness
+      showSidePane: !this.state.showSidePane
     });
 
   onChangePage = pageOfItems => {
     this.setState({ pageOfItems });
   };
 
-  handleBusinessDropdownButton = (business, toggleMethod) => () =>
-    this.setState(
-      {
-        selectedBusiness: business,
-        clickedBusinessId: null
-      },
-      () => toggleMethod()
-    );
-
   render() {
     return (
-      <DashboardLayout
-        pageTitle="Home"
-        toggleSidePane={this.toggleSidePane("Add")}
-      >
+      <DashboardLayout pageTitle="Home" toggleSidePane={this.toggleSidePane}>
         <main className="overview-page">
           <div className="business-card-wrapper">
             {!this.props.businesses && (
               <p>You have not registered a business.Please register one.</p>
             )}
             {this.state.pageOfItems.map(business => {
-              return (
-                <BusinessCard
-                  key={business.id}
-                  data={business}
-                  onClickDropdownEditButton={this.handleBusinessDropdownButton(
-                    business,
-                    this.toggleSidePane("Edit")
-                  )}
-                />
-              );
+              return <BusinessCard key={business.id} data={business} />;
             })}
           </div>
           <div>
@@ -114,12 +69,9 @@ export class Dashboard extends React.Component {
           </div>
         </main>
         <BusinessPane
-          mode={this.state.sidePaneMode}
-          handleCancelButton={this.toggleSidePane("Add", "close")}
+          onDone={this.toggleSidePane}
           showSidePane={this.state.showSidePane}
-          addBusiness={this.props.registerBusiness}
-          businessToEdit={this.state.selectedBusiness}
-          editBusiness={this.props.updateBusiness}
+          onSubmit={this.props.registerBusiness}
         />
       </DashboardLayout>
     );

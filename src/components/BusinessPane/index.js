@@ -8,28 +8,6 @@ import TextAreaBox from "../TextAreaBox";
 
 import "./BusinessPane.css";
 
-const renderSubmitButton = (mode, addModeHandler, editModeHandler) => {
-  if (mode === "Add") {
-    return (
-      <Button
-        typeColor="primary"
-        label="ADD IDEA"
-        disabled={""}
-        handleOnClick={addModeHandler}
-      />
-    );
-  }
-
-  return (
-    <Button
-      typeColor="primary"
-      label="EDIT IDEA"
-      disabled={""}
-      handleOnClick={editModeHandler}
-    />
-  );
-};
-
 class BusinessPane extends React.Component {
   constructor(props) {
     super(props);
@@ -42,28 +20,26 @@ class BusinessPane extends React.Component {
     };
   }
 
-  componentDidUpdate({ businessToEdit }) {
-    if (this.props.businessToEdit !== businessToEdit) {
-      const { name, summary, location, category } = this.props.businessToEdit;
-      this.setState({
-        category: category,
-        description: summary,
-        location: location,
-        name: name
-      });
+  componentDidMount() {
+    this.setBusinessToEdit();
+  }
+
+  componentDidUpdate({ business }) {
+    if (this.props.business !== business) {
+      this.setBusinessToEdit();
     }
   }
 
-  resetState = () =>
-    this.setState(
-      {
-        category: "education",
-        description: "",
-        location: "",
-        name: ""
-      },
-      () => this.props.handleCancelButton()
-    );
+  setBusinessToEdit = () => {
+    if (!this.props.business) return;
+    const { name, summary, location, category } = this.props.business;
+    this.setState({
+      category: category,
+      description: summary,
+      location: location,
+      name: name
+    });
+  };
 
   handleInputChange = event => {
     const { name, value } = event.target;
@@ -72,9 +48,10 @@ class BusinessPane extends React.Component {
     });
   };
 
-  handleAddBusiness = event => {
+  handleSubmit = event => {
     event.preventDefault();
     const { category, description, name, location } = this.state;
+    const { onSubmit, business } = this.props;
     const input = {
       category: category,
       location: location,
@@ -82,25 +59,23 @@ class BusinessPane extends React.Component {
       summary: description
     };
 
-    if (this.props.mode === "Add") {
-      this.props
-        .addBusiness(this.accessToken, input)
-        .then(() => this.resetState());
+    if (business) {
+      onSubmit(this.accessToken, business.id, input).then(
+        () => this.props.onDone
+      );
     } else {
-      this.props
-        .editBusiness(this.accessToken, this.props.businessToEdit.id, input)
-        .then(() => this.resetState());
+      onSubmit(this.accessToken, input).then(() => this.props.onDone());
     }
   };
 
   render() {
-    const { mode, showSidePane } = this.props;
+    const { showSidePane, business } = this.props;
     const { category, description, location, name } = this.state;
-    const title = mode === "Add" ? "ADD BUSINESS IDEA" : `Edit ${name}`;
+    const title = business ? `Edit ${name}` : "ADD BUSINESS IDEA";
 
     return (
       <SidePane
-        handleCancelButton={this.resetState}
+        handleCancelButton={this.props.onDone}
         title={title}
         showSidePane={showSidePane}
       >
@@ -146,11 +121,12 @@ class BusinessPane extends React.Component {
             handleOnChange={this.handleInputChange}
           />
           <div className="form-item">
-            {renderSubmitButton(
-              mode,
-              this.handleAddBusiness,
-              this.handleAddBusiness
-            )}
+            <Button
+              typeColor="primary"
+              label={business ? "EDIT IDEA" : "ADD IDEA"}
+              disabled={""}
+              handleOnClick={this.handleSubmit}
+            />
           </div>
         </form>
       </SidePane>
@@ -159,12 +135,10 @@ class BusinessPane extends React.Component {
 }
 
 BusinessPane.propTypes = {
-  addBusiness: PropTypes.func,
-  businessToEdit: PropTypes.object,
-  editBusiness: PropTypes.func,
-  handleCancelButton: PropTypes.func.isRequired,
-  showSidePane: PropTypes.bool.isRequired,
-  mode: PropTypes.string.isRequired
+  onSubmit: PropTypes.func.isRequired,
+  business: PropTypes.object,
+  onDone: PropTypes.func.isRequired,
+  showSidePane: PropTypes.bool.isRequired
 };
 
 export default BusinessPane;

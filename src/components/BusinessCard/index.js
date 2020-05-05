@@ -6,21 +6,26 @@ import { Header } from "./Header";
 import { Footer } from "./Footer";
 import { Content } from "./Content";
 import DeleteModal from "../DeleteModal";
+import BusinessPane from "../BusinessPane";
 
-import { deleteBusiness } from "../../actions/businessActions";
+import { deleteBusiness, updateBusiness } from "../../actions/businessActions";
 
 import styles from "./BusinessCard.module.scss";
 
 const BusinessCard = props => {
-  const { onClickDropdownEditButton, data } = props;
+  const { data } = props;
   const accessToken = sessionStorage.getItem("accessToken");
 
   const dispatch = useDispatch();
   const deleteBusinessAction = (accessToken, id) =>
     dispatch(deleteBusiness(accessToken, id));
 
+  const onUpdateBusiness = (accessToken, id, inputData) =>
+    dispatch(updateBusiness(accessToken, id, inputData));
+
   const [showDropdown, setDropdown] = useState(false);
   const [showDeleteModal, setDeleteModal] = useState(false);
+  const [showSidePane, setShowSidePane] = useState(false);
 
   const toggleDeleteModal = () => {
     setDeleteModal(!showDeleteModal);
@@ -28,10 +33,13 @@ const BusinessCard = props => {
   };
 
   const toggleDropdown = () => setDropdown(!showDropdown);
+
   const deleteConfirmedBusiness = useCallback(
     () => deleteBusinessAction(accessToken, data.id),
     [dispatch]
   );
+
+  const toggleSidePane = () => setShowSidePane(!showSidePane);
 
   return (
     <>
@@ -39,7 +47,7 @@ const BusinessCard = props => {
         <div className={styles.container__wrap}>
           <Header
             onClickDropdownDeleteButton={toggleDeleteModal}
-            onClickDropdownEditButton={onClickDropdownEditButton}
+            onClickDropdownEditButton={toggleSidePane}
             authorName={data.user_name}
             businessId={data.id}
             onClickEllipsisHandler={toggleDropdown}
@@ -60,12 +68,17 @@ const BusinessCard = props => {
         handleOnDeleteButton={deleteConfirmedBusiness}
         showDeleteModal={showDeleteModal}
       />
+      <BusinessPane
+        onDone={toggleSidePane}
+        showSidePane={showSidePane}
+        business={data}
+        onSubmit={onUpdateBusiness}
+      />
     </>
   );
 };
 
 BusinessCard.propTypes = {
-  onClickDropdownEditButton: PropTypes.func.isRequired,
   data: PropTypes.object
 };
 
