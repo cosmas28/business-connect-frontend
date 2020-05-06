@@ -12,16 +12,21 @@ import { deleteBusiness, updateBusiness } from "../../actions/businessActions";
 
 import styles from "./BusinessCard.module.scss";
 
-const BusinessCard = props => {
+const BusinessCardInner = props => {
   const { data } = props;
   const accessToken = sessionStorage.getItem("accessToken");
 
   const dispatch = useDispatch();
-  const deleteBusinessAction = (accessToken, id) =>
-    dispatch(deleteBusiness(accessToken, id));
+  const deleteBusinessAction = useCallback(
+    (accessToken, id) => dispatch(deleteBusiness(accessToken, id)),
+    [dispatch]
+  );
 
-  const onUpdateBusiness = (accessToken, id, inputData) =>
-    dispatch(updateBusiness(accessToken, id, inputData));
+  const onUpdateBusiness = useCallback(
+    (accessToken, id, inputData) =>
+      dispatch(updateBusiness(accessToken, id, inputData)),
+    [dispatch]
+  );
 
   const [showDropdown, setDropdown] = useState(false);
   const [showDeleteModal, setDeleteModal] = useState(false);
@@ -34,10 +39,8 @@ const BusinessCard = props => {
 
   const toggleDropdown = () => setDropdown(!showDropdown);
 
-  const deleteConfirmedBusiness = useCallback(
-    () => deleteBusinessAction(accessToken, data.id),
-    [dispatch]
-  );
+  const onDeleteBusines = (accessToken, id) => () =>
+    deleteBusinessAction(accessToken, id);
 
   const toggleSidePane = () => setShowSidePane(!showSidePane);
 
@@ -65,7 +68,7 @@ const BusinessCard = props => {
       <DeleteModal
         businessName={data.name}
         handleCancelButton={toggleDeleteModal}
-        handleOnDeleteButton={deleteConfirmedBusiness}
+        handleOnDeleteButton={onDeleteBusines(accessToken, data.id)}
         showDeleteModal={showDeleteModal}
       />
       <BusinessPane
@@ -78,8 +81,8 @@ const BusinessCard = props => {
   );
 };
 
-BusinessCard.propTypes = {
+BusinessCardInner.propTypes = {
   data: PropTypes.object
 };
 
-export default BusinessCard;
+export const BusinessCard = React.memo(BusinessCardInner);
