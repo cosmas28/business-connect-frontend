@@ -2,55 +2,44 @@ import React from "react";
 import PropTypes from "prop-types";
 import { FaEllipsisH, FaUser } from "react-icons/fa";
 
-import NavBarLink from "../../NavBarLink";
-import Dropdown from "../../Dropdown";
+import Tooltip from "../../common/Tooltip";
+import { Button } from "../../common/Button";
 
 import styles from "./Header.module.scss";
 
-export const Header = ({
-  showDropdown,
-  onClickDropdownDeleteButton,
-  onClickDropdownEditButton,
-  onClickEllipsisHandler,
-  businessId,
-  authorName
-}) => (
-  <div className={styles.header}>
-    <div className={styles.header__left}>
-      <span className={styles.header__left__avator}>
-        <FaUser size={20} color="#C0C0C0" />
-      </span>
-      <span className={styles.header__left__name}>{authorName}</span>
+export const Header = ({ onDelete, onEdit, authorName }) => {
+  const tooltipContent = () => (
+    <div className={styles.tooltip}>
+      <Button onClick={onEdit} iconName="edit" type="primary" label="Edit" />
+      <Button
+        label="Delete"
+        onClick={onDelete}
+        iconName="delete"
+        type="danger"
+      />
     </div>
-    <div className={styles.header__right}>
-      <button
-        onClick={onClickEllipsisHandler}
-        className={styles.header__right__button}
-      >
-        <FaEllipsisH size={25} color="#DCDCDC" />
-      </button>
-      <Dropdown status={showDropdown ? "active" : "hide"}>
-        <NavBarLink
-          iconName="edit"
-          label="Edit"
-          type="button"
-          onClickLink={onClickDropdownEditButton}
-        />
-        <NavBarLink
-          iconName="delete"
-          label="Delete"
-          type="button"
-          onClickLink={onClickDropdownDeleteButton}
-        />
-      </Dropdown>
+  );
+  return (
+    <div className={styles.header}>
+      <div className={styles.header__left}>
+        <span className={styles.header__left__avator}>
+          <FaUser size={20} color="#C0C0C0" />
+        </span>
+        <span className={styles.header__left__name}>{authorName}</span>
+      </div>
+      <div className={styles.header__right}>
+        <Tooltip placement="bottom" trigger="hover" tooltip={tooltipContent()}>
+          <FaEllipsisH size={25} color="#DCDCDC" />
+        </Tooltip>
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 Header.propTypes = {
   showDropdown: PropTypes.bool.isRequired,
-  onClickDropdownDeleteButton: PropTypes.func.isRequired,
-  onClickDropdownEditButton: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired,
+  onEdit: PropTypes.func.isRequired,
   authorName: PropTypes.string.isRequired,
   businessId: PropTypes.number.isRequired,
   onClickEllipsisHandler: PropTypes.func.isRequired

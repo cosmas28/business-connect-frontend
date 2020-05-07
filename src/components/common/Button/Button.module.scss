@@ -1,0 +1,19 @@
+.container {
+  display: flex;
+
+  & > :last-child {
+    margin-left: 0.5rem;
+  }
+}
+
+.danger {
+  color: #dc143c;
+}
+
+.primary {
+  color: #663399;
+}
+
+.secondary {
+  color: #d3d3d3;
+}

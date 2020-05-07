@@ -49,12 +49,10 @@ const BusinessCardInner = props => {
       <div className={styles.container}>
         <div className={styles.container__wrap}>
           <Header
-            onClickDropdownDeleteButton={toggleDeleteModal}
-            onClickDropdownEditButton={toggleSidePane}
+            onDelete={toggleDeleteModal}
+            onEdit={toggleSidePane}
             authorName={data.user_name}
             businessId={data.id}
-            onClickEllipsisHandler={toggleDropdown}
-            showDropdown={showDropdown}
           />
           <Content
             name={data.name}

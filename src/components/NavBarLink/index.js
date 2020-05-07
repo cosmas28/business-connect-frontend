@@ -1,25 +1,10 @@
 import React from "react";
-import { FaSignOutAlt, FaRegEdit, FaRegTrashAlt } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
-import {
-  IoMdHome,
-  IoIosAdd,
-  IoIosListBox,
-  IoIosSettings
-} from "react-icons/io";
 import PropTypes from "prop-types";
 
-import "./NavBarLink.css";
+import { Icons } from "../common/Icons";
 
-const Icons = {
-  add: <IoIosAdd color="#ffffff" size={26} />,
-  delete: <FaRegTrashAlt size={26} />,
-  edit: <FaRegEdit size={26} />,
-  home: <IoMdHome size={26} />,
-  ideas: <IoIosListBox size={26} />,
-  logout: <FaSignOutAlt size={26} />,
-  settings: <IoIosSettings size={26} />
-};
+import "./NavBarLink.css";
 
 const NavBarLink = props => {
   const { isActive, iconName, url, label, type, onClickLink } = props;
