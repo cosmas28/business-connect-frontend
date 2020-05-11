@@ -4,10 +4,10 @@ import { FaComment, FaHeart } from "react-icons/fa";
 
 import styles from "./Footer.module.scss";
 
-export const Footer = ({ totalComments, totalLikes }) => (
+export const Footer = ({ totalComments, totalLikes, onClickComment }) => (
   <div className={styles.footer}>
     <div className={styles.comment}>
-      <button className={styles.comment__button}>
+      <button onClick={onClickComment} className={styles.comment__button}>
         <div className={styles.comment__button__icon}>
           <FaComment size={15} color="#663399" />
         </div>
@@ -27,5 +27,6 @@ export const Footer = ({ totalComments, totalLikes }) => (
 
 Footer.propTypes = {
   totalComments: PropTypes.number,
-  totalLikes: PropTypes.number
+  totalLikes: PropTypes.number,
+  onClickComment: PropTypes.func
 };

@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
 import { Content } from "./Content";
+import { CommentModal } from "./CommentModal";
 import DeleteModal from "../DeleteModal";
 import BusinessPane from "../BusinessPane";
 
@@ -13,6 +14,11 @@ import { deleteBusiness, updateBusiness } from "../../actions/businessActions";
 import styles from "./BusinessCard.module.scss";
 
 const BusinessCardInner = props => {
+  const [showDropdown, setDropdown] = useState(false);
+  const [showDeleteModal, setDeleteModal] = useState(false);
+  const [showSidePane, setShowSidePane] = useState(false);
+  const [showCommentModal, setShowCommentModal] = useState(false);
+
   const { data } = props;
   const accessToken = sessionStorage.getItem("accessToken");
 
@@ -28,16 +34,14 @@ const BusinessCardInner = props => {
     [dispatch]
   );
 
-  const [showDropdown, setDropdown] = useState(false);
-  const [showDeleteModal, setDeleteModal] = useState(false);
-  const [showSidePane, setShowSidePane] = useState(false);
-
   const toggleDeleteModal = () => {
     setDeleteModal(!showDeleteModal);
     toggleDropdown();
   };
 
   const toggleDropdown = () => setDropdown(!showDropdown);
+
+  const toggleCommentModal = () => setShowCommentModal(!showCommentModal);
 
   const onDeleteBusines = (accessToken, id) => () =>
     deleteBusinessAction(accessToken, id);
@@ -52,7 +56,6 @@ const BusinessCardInner = props => {
             onDelete={toggleDeleteModal}
             onEdit={toggleSidePane}
             authorName={data.user_name}
-            businessId={data.id}
           />
           <Content
             name={data.name}
@@ -60,7 +63,11 @@ const BusinessCardInner = props => {
             summary={data.summary}
             location={data.location}
           />
-          <Footer totalComments={22} totalLikes={0} />
+          <Footer
+            onClickComment={toggleCommentModal}
+            totalComments={22}
+            totalLikes={0}
+          />
         </div>
       </div>
       <DeleteModal
@@ -74,6 +81,11 @@ const BusinessCardInner = props => {
         showSidePane={showSidePane}
         business={data}
         onSubmit={onUpdateBusiness}
+      />
+      <CommentModal
+        data={data}
+        showModal={showCommentModal}
+        onCancel={toggleCommentModal}
       />
     </>
   );

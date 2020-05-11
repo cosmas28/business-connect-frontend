@@ -13,7 +13,7 @@ export const Button = props => {
       onClick={onClick}
     >
       <span>{Icons[iconName]}</span>
-      <span>{label}</span>
+      {label && <span>{label}</span>}
     </button>
   );
 };

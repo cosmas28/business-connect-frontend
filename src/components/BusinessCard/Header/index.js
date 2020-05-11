@@ -27,20 +27,23 @@ export const Header = ({ onDelete, onEdit, authorName }) => {
         </span>
         <span className={styles.header__left__name}>{authorName}</span>
       </div>
-      <div className={styles.header__right}>
-        <Tooltip placement="bottom" trigger="hover" tooltip={tooltipContent()}>
-          <FaEllipsisH size={25} color="#DCDCDC" />
-        </Tooltip>
-      </div>
+      {onDelete && (
+        <div className={styles.header__right}>
+          <Tooltip
+            placement="bottom"
+            trigger="hover"
+            tooltip={tooltipContent()}
+          >
+            <FaEllipsisH size={25} color="#DCDCDC" />
+          </Tooltip>
+        </div>
+      )}
     </div>
   );
 };
 
 Header.propTypes = {
-  showDropdown: PropTypes.bool.isRequired,
-  onDelete: PropTypes.func.isRequired,
-  onEdit: PropTypes.func.isRequired,
-  authorName: PropTypes.string.isRequired,
-  businessId: PropTypes.number.isRequired,
-  onClickEllipsisHandler: PropTypes.func.isRequired
+  onDelete: PropTypes.func,
+  onEdit: PropTypes.func,
+  authorName: PropTypes.string.isRequired
 };

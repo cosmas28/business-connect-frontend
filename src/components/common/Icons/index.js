@@ -1,5 +1,10 @@
 import React from "react";
-import { FaSignOutAlt, FaPenSquare, FaRegTrashAlt } from "react-icons/fa";
+import {
+  FaSignOutAlt,
+  FaPenSquare,
+  FaRegTrashAlt,
+  FaTimes
+} from "react-icons/fa";
 import {
   IoMdHome,
   IoIosAdd,
@@ -14,5 +19,6 @@ export const Icons = {
   home: <IoMdHome size={26} />,
   ideas: <IoIosListBox size={26} />,
   logout: <FaSignOutAlt size={26} />,
-  settings: <IoIosSettings size={26} />
+  settings: <IoIosSettings size={26} />,
+  times: <FaTimes size={20} />
 };
