@@ -1,0 +1,26 @@
+.content {
+  text-align: center;
+
+  &__header {
+    margin-bottom: 1rem;
+    color: #dc143c;
+  }
+
+  &__warning {
+    font-weight: 300;
+  }
+
+  &__footer {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    font-weight: 600;
+
+    & > :first-child {
+      color: #a9a9a9;
+    }
+
+    & > :last-child {
+      color: #dc143c;
+    }
+  }
+}
